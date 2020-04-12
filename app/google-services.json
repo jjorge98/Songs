@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "80728697238",
+    "firebase_url": "https://songs-26c06.firebaseio.com",
+    "project_id": "songs-26c06",
+    "storage_bucket": "songs-26c06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80728697238:android:85646d5044411f0dea95b7",
+        "android_client_info": {
+          "package_name": "br.iesb.songs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80728697238-2pdpokqm979kgvb9h62v3nvnckmp8n92.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9t_GsMgf95f7y3ypzOGitdV5X7Buk-Us"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80728697238-2pdpokqm979kgvb9h62v3nvnckmp8n92.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
