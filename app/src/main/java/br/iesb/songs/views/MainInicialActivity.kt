@@ -1,8 +1,9 @@
-package br.iesb.songs
+package br.iesb.songs.views
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import br.iesb.songs.R
 import kotlinx.android.synthetic.main.activity_main_inicial.*
 
 class MainInicialActivity : AppCompatActivity() {

@@ -1,14 +1,19 @@
-package br.iesb.songs
+package br.iesb.songs.views
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import br.iesb.songs.R
+import br.iesb.songs.viewModel.LoginViewModel
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 
 class ForgotPasswordActivity : AppCompatActivity() {
-    private val auth : FirebaseAuth = FirebaseAuth.getInstance()
+    private val viewModel:LoginViewModel by lazy{
+        ViewModelProvider(this).get(LoginViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,29 +22,16 @@ class ForgotPasswordActivity : AppCompatActivity() {
         id_botao_recuperar.setOnClickListener{recuperarSenha()}
         id_voltar_menu.setOnClickListener{backMain()}
         id_voltar_login.setOnClickListener{backLogin()}
-
     }
 
     private fun recuperarSenha(){
         val email = id_email_recuperar.text.toString()
 
-        if(email.isEmpty()){
-            Toast.makeText(this, "E-mail obrigatório!", Toast.LENGTH_LONG).show()
-            return
-        } else{
-            val operation = auth.sendPasswordResetEmail(email)
-            operation.addOnCompleteListener{task ->
-                if(task.isSuccessful){
-                    Toast.makeText(this, "E-mail de recuperação de senha enviado com sucesso!", Toast.LENGTH_LONG).show()
-                    val intentMain = Intent(this, LoginActivity::class.java)
-                    startActivity(intentMain)
-                } else {
-                    val error = task.exception?.localizedMessage
-                        ?: "Algo deu errado ao enviar o e-mail de recuperação de senha. " +
-                        "Contate o adm do sistema!"
-
-                    Toast.makeText(this, error, Toast.LENGTH_LONG).show()
-                }
+        viewModel.recuperarSenha(email){result ->
+            Toast.makeText(this, result[1], Toast.LENGTH_LONG).show()
+            if(result[0] == "OK"){
+                val intentMain = Intent(this, LoginActivity::class.java)
+                startActivity(intentMain)
             }
         }
     }

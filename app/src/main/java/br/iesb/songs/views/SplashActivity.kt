@@ -1,9 +1,10 @@
-package br.iesb.songs
+package br.iesb.songs.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
 import android.os.Handler
+import br.iesb.songs.R
 
 class SplashActivity : AppCompatActivity() {
 

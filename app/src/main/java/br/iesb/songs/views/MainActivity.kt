@@ -1,8 +1,9 @@
-package br.iesb.songs
+package br.iesb.songs.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
+import br.iesb.songs.R
 import com.ogaclejapan.smarttablayout.SmartTabLayout
 
 class MainActivity : AppCompatActivity() {
