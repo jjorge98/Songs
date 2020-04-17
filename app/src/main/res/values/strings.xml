@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Songs</string>
-
-
     <string name="home_fragment">HOME FRAGMENT</string>
     <string name="favoritos_fragment">FAVORITOS FRAGMENT</string>
     <string name="pesquisa_fragment">PESQUISA FRAGMENT</string>
+    <string name="url">https://deezerdevs-deezer.p.rapidapi.com/</string>
+    <string name="searchText">Pesquisa</string>
+    <string name="inputSearch">Músicas, artistas, albuns</string>
+    <string name="holderSong">%1$s\n%2$s</string>
 </resources>

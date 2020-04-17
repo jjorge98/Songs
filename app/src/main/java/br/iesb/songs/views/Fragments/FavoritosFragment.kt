@@ -1,5 +1,6 @@
 package br.iesb.songs.views.Fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +12,7 @@ import br.iesb.songs.R
 /**
  * A simple [Fragment] subclass.
  */
-class FavoritosFragment : Fragment() {
+class FavoritosFragment(context: Context) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

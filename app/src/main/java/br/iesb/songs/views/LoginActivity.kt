@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
-import br.iesb.songs.viewModel.LoginViewModel
+import br.iesb.songs.view_model.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
         val password = id_senha_cadastrar.text.toString()
 
         viewModel.login(email, password) { result ->
-            Toast.makeText(this, result[1], Toast.LENGTH_LONG).show()
+            Toast.makeText(this, result[1], Toast.LENGTH_SHORT).show()
             if (result[0] == "OK") {
                 val intentLogin = Intent(this, PrincipalActivity::class.java)
                 startActivity(intentLogin)

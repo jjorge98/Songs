@@ -19,7 +19,7 @@ class PrincipalActivity : AppCompatActivity() {
         favoritoBtn.setOnClickListener { mViewPager.currentItem = 1 }
         pesquisaBtn.setOnClickListener { mViewPager.currentItem = 2 }
 
-        mPagerAdapter = PagerViewAdapter(supportFragmentManager)
+        mPagerAdapter = PagerViewAdapter(supportFragmentManager, applicationContext)
         mViewPager.adapter = mPagerAdapter
         mViewPager.offscreenPageLimit = 3
 

@@ -6,8 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
-import br.iesb.songs.viewModel.LoginViewModel
-import com.google.firebase.auth.FirebaseAuth
+import br.iesb.songs.view_model.LoginViewModel
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 
 class ForgotPasswordActivity : AppCompatActivity() {

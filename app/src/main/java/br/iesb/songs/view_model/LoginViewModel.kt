@@ -1,8 +1,6 @@
-package br.iesb.songs.viewModel
+package br.iesb.songs.view_model
 
 import android.app.Application
-import android.app.SharedElementCallback
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import br.iesb.songs.interactor.LoginInteractor
 
