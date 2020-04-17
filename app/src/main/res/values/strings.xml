@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Songs</string>
+
+
+    <string name="home_fragment">HOME FRAGMENT</string>
+    <string name="favoritos_fragment">FAVORITOS FRAGMENT</string>
+    <string name="pesquisa_fragment">PESQUISA FRAGMENT</string>
+</resources>
