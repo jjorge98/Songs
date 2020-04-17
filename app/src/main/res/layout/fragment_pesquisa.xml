@@ -4,13 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/trans_clarinho">
+    android:background="@android:color/black">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/searchText"
+        android:drawableLeft="@drawable/ic_lupa"
+        android:textAlignment="textStart"
+        android:textColor="#fff"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/inputSearch"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_lupa"
+        android:background="@drawable/input_pesquisa"
         android:ems="10"
         android:hint="@string/inputSearch"
         android:inputType="textPersonName"
@@ -19,20 +34,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="411dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/searchText"
-        android:textAlignment="center"
-        android:textColor="#000"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/searchButton"
@@ -48,6 +49,7 @@
         android:id="@+id/searchRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/trans_cinza"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
