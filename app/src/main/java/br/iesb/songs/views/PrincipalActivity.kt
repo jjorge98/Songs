@@ -6,6 +6,7 @@ import android.widget.ImageButton
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import br.iesb.songs.R
+import br.iesb.songs.views.Adapter.PagerViewAdapter
 
 class PrincipalActivity : AppCompatActivity() {
     private lateinit var mViewPager: ViewPager
@@ -33,7 +34,7 @@ class PrincipalActivity : AppCompatActivity() {
         mViewPager.offscreenPageLimit = 5
 
 
-        mViewPager.addOnAdapterChangeListener(object : ViewPager.OnPageChangeListener{
+        mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {
 
             }
