@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.login(email, password) { result ->
             Toast.makeText(this, result[1], Toast.LENGTH_LONG).show()
             if (result[0] == "OK") {
-                val intentLogin = Intent(this, MainActivity::class.java)
+                val intentLogin = Intent(this, PrincipalActivity::class.java)
                 startActivity(intentLogin)
             }
         }

@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/trans_clarinho"
-   >
+    android:background="@color/trans_roxo"
+    >
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="28sp"
+        android:text="@string/pesquisa_fragment"
+        android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:gravity="center"
-        android:text="@string/home_fragment" />
+        android:textSize="28sp" />
 
 </FrameLayout>
