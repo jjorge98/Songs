@@ -7,12 +7,18 @@ import br.iesb.songs.views.Fragments.FavoritosFragment
 import br.iesb.songs.views.Fragments.HomeFragment
 import br.iesb.songs.views.Fragments.PesquisaFragment
 
-internal class PagerViewAdapter (fm:FragmentManager?) : FragmentPagerAdapter(fm!!){
+internal class PagerViewAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm!!) {
     override fun getItem(position: Int): Fragment {
-        return when(position){
-            0 -> { HomeFragment() }
-            1 -> { FavoritosFragment() }
-            2 -> { PesquisaFragment() }
+        return when (position) {
+            0 -> {
+                HomeFragment()
+            }
+            1 -> {
+                FavoritosFragment()
+            }
+            2 -> {
+                PesquisaFragment()
+            }
             else -> HomeFragment()
         }
     }
