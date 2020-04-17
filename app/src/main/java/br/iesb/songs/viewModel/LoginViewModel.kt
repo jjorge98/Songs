@@ -53,6 +53,24 @@ class LoginViewModel(val app: Application) : AndroidViewModel(app) {
                     "Algo deu errado ao fazer o login. Contate o adm do sistema!"
                 )
                 callback(resultado)
+            } else if ("badly" in result) {
+                val resultado = arrayOf(
+                    "ERROR",
+                    "O formato do e-mail está errado. Por favor, verifique e tente novamente!"
+                )
+                callback(resultado)
+            } else if ("record corresponding" in result) {
+                val resultado = arrayOf(
+                    "ERROR",
+                    "O e-mail informado não está cadastrado no sistema. Por favor contate o adm do sistema para cadastro!"
+                )
+                callback(resultado)
+            } else if ("password is invalid" in result) {
+                val resultado = arrayOf(
+                    "ERROR",
+                    "Senha inválida. Por favor, verifique e tente novamente!"
+                )
+                callback(resultado)
             } else {
                 val resultado = arrayOf("ERROR", result)
                 callback(resultado)
