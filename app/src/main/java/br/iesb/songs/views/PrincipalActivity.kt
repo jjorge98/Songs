@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import br.iesb.songs.R
-import br.iesb.songs.views.Adapter.PagerViewAdapter
+import br.iesb.songs.views.adapter.PagerViewAdapter
 import kotlinx.android.synthetic.main.activity_principal.*
 
 class PrincipalActivity : AppCompatActivity() {

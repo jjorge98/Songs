@@ -2,21 +2,26 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/musicCard"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#000"
+        android:visibility="visible">
 
 
         <TextView
             android:id="@+id/song"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/background"
-            android:paddingLeft="5dp"
-            android:textColor="#fff"
+            android:layout_height="wrap_content"
+            android:background="@drawable/adapter_line"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="#000"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

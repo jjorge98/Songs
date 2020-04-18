@@ -37,10 +37,9 @@ class DeezerRepository(context: Context, url: String) : RetrofitInit(context, ur
                         link = m.link,
                         duration = m.duration,
                         preview = m.preview,
-                        coverImg = m.album?.coverSmall,
+                        coverImg = m.album?.cover,
                         artist = m.artist?.name
                     )
-
 
                     result.add(new)
                 }

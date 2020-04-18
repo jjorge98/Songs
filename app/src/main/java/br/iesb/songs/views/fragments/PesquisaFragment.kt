@@ -1,4 +1,4 @@
-package br.iesb.songs.views.Fragments
+package br.iesb.songs.views.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.iesb.songs.R
 import br.iesb.songs.view_model.DeezerViewModel
-import br.iesb.songs.views.Adapter.MusicAdapter
+import br.iesb.songs.views.adapter.MusicAdapter
 import kotlinx.android.synthetic.main.fragment_pesquisa.*
 
 /**
@@ -28,25 +28,25 @@ class PesquisaFragment (context: Context) : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        configureRecyclerView()
-        searchList()
-        searchButton.setOnClickListener { searchList() }
-
         return inflater.inflate(R.layout.fragment_pesquisa, container, false)
     }
 
-    private fun configureRecyclerView() {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         searchRecyclerView.layoutManager = LinearLayoutManager(context)
+        searchList()
+        searchButton.setOnClickListener { searchList() }
     }
 
     private fun searchList() {
         val find: String = inputSearch.text.toString()
 
         viewModel.musicSet.observe(viewLifecycleOwner, Observer { music ->
-            val adapter = MusicAdapter(music, activity)
+            val adapter = this.context?.let { MusicAdapter(it, music, activity) }
             searchRecyclerView.adapter = adapter
         })
 
         viewModel.search(find)
     }
+
 }

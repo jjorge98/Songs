@@ -1,12 +1,12 @@
-package br.iesb.songs.views.Adapter
+package br.iesb.songs.views.adapter
 
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import br.iesb.songs.views.Fragments.FavoritosFragment
-import br.iesb.songs.views.Fragments.HomeFragment
-import br.iesb.songs.views.Fragments.PesquisaFragment
+import br.iesb.songs.views.fragments.FavoritosFragment
+import br.iesb.songs.views.fragments.HomeFragment
+import br.iesb.songs.views.fragments.PesquisaFragment
 
 internal class PagerViewAdapter(fm: FragmentManager?, private val context: Context) :
     FragmentPagerAdapter(fm!!) {
