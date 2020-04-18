@@ -1,15 +1,19 @@
 package br.iesb.songs.views
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import br.iesb.songs.R
+import br.iesb.songs.data_class.Music
 import br.iesb.songs.views.adapter.PagerViewAdapter
 import kotlinx.android.synthetic.main.activity_principal.*
 
 class PrincipalActivity : AppCompatActivity() {
     private lateinit var mPagerAdapter: PagerAdapter
+    private lateinit var webIntent: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,5 +62,17 @@ class PrincipalActivity : AppCompatActivity() {
             pesquisaBtn.setImageResource(R.drawable.ic_search_menu_clarin)
             favoritoBtn.setImageResource(R.drawable.ic_favorite_menu)
         }
+    }
+
+    fun implicitIntent(link: String){
+        webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+        startActivity(webIntent)
+    }
+
+    fun directArtist(music: Music){
+        val intent = Intent(this, ArtistsActivity::class.java)
+        intent.putExtra("artistName", music.artist)
+        intent.putExtra("artistID", music.artistID)
+        startActivity(intent)
     }
 }

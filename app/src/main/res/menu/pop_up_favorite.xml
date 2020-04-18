@@ -2,16 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/favoriteSong"
-        android:title="Favoritar Música"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/listenDeezer"
         android:title="Escutar no Deezer"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/seeAlbum"
-        android:title="Ver album"
         app:showAsAction="never" />
     <item
         android:id="@+id/seeArtist"

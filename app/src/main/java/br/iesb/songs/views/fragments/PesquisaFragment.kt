@@ -34,7 +34,6 @@ class PesquisaFragment (context: Context) : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         searchRecyclerView.layoutManager = LinearLayoutManager(context)
-        searchList()
         searchButton.setOnClickListener { searchList() }
     }
 
@@ -42,11 +41,10 @@ class PesquisaFragment (context: Context) : Fragment() {
         val find: String = inputSearch.text.toString()
 
         viewModel.musicSet.observe(viewLifecycleOwner, Observer { music ->
-            val adapter = this.context?.let { MusicAdapter(it, music, activity, viewModel) }
+            val adapter = this.context?.let { MusicAdapter(it, music, activity, viewModel, "SEARCH") }
             searchRecyclerView.adapter = adapter
         })
 
         viewModel.search(find)
     }
-
 }

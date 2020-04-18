@@ -5,6 +5,8 @@
     <string name="pesquisa_fragment">PESQUISA FRAGMENT</string>
     <string name="url">https://deezerdevs-deezer.p.rapidapi.com/</string>
     <string name="searchText">Busca</string>
+    <string name="favoriteText">Favoritos</string>
     <string name="inputSearch">Músicas, artistas, albuns</string>
     <string name="holderSong">%1$s\n%2$s</string>
+    <string name="artist">Músicas de %1$s</string>
 </resources>

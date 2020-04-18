@@ -7,7 +7,7 @@
     android:background="@android:color/black">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewSearch"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -27,7 +27,7 @@
         android:id="@+id/inputSearch"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/input_pesquisa"
         android:drawableLeft="@drawable/ic_lupa"
         android:drawablePadding="-15dp"
@@ -40,25 +40,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSearch" />
 
     <Button
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/button_purple_gradient"
         android:text="Pesquisar"
         app:layout_constraintBottom_toTopOf="@+id/searchRecyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/inputSearch"
+        tools:layout_editor_absoluteX="161dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchRecyclerView"
-        android:layout_width="0dp"
+        android:layout_width="411dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

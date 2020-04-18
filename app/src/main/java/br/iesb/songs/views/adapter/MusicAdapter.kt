@@ -8,17 +8,24 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.view_model.DeezerViewModel
+import br.iesb.songs.views.PrincipalActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.music_adapter.view.*
 
-class MusicAdapter(private val context: Context, private val musicSet: Array<Music>, private val activity: FragmentActivity?, private val viewModel: DeezerViewModel) : RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
+class MusicAdapter(
+    private val context: Context,
+    private val musicSet: Array<Music>,
+    private val activity: FragmentActivity?,
+    private val viewModel: DeezerViewModel,
+    private val menuType: String
+) : RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
     private var id = 0
+    private var verify: String = ""
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -35,6 +42,11 @@ class MusicAdapter(private val context: Context, private val musicSet: Array<Mus
 
     override fun onBindViewHolder(holder: MusicViewHolder, position: Int) {
         val music = musicSet[position]
+        if (music.id != null) {
+            viewModel.verifyFav(music.id) {
+                verify = it
+            }
+        }
         holder.song.text = activity?.getString(R.string.holderSong, music.title, music.artist)
         holder.song.setOnClickListener {
             viewModel.getId { result -> id = result }
@@ -47,16 +59,28 @@ class MusicAdapter(private val context: Context, private val musicSet: Array<Mus
     private fun showPopup(holder: MusicViewHolder, music: Music) {
         val popup = PopupMenu(context, holder.itemView)
         val inflater: MenuInflater = popup.menuInflater
-        inflater.inflate(R.menu.pop_up_menu, popup.menu)
+
+        if (menuType == "SEARCH") {
+            inflater.inflate(R.menu.pop_up_search, popup.menu)
+        } else if (menuType == "FAVORITE") {
+            inflater.inflate(R.menu.pop_up_favorite, popup.menu)
+        } else {
+            inflater.inflate(R.menu.pop_up_search, popup.menu)
+        }
+
         popup.setOnMenuItemClickListener { itemSelected ->
             if (itemSelected?.itemId == R.id.favoriteSong) {
-                viewModel.favorite(music, id)
+                if (verify != "exists") {
+                    viewModel.favorite(music, id)
+                }
                 return@setOnMenuItemClickListener true
             } else if (itemSelected?.itemId == R.id.listenDeezer) {
-                return@setOnMenuItemClickListener true
-            } else if (itemSelected?.itemId == R.id.seeAlbum) {
+                if (music.link != null) {
+                    PrincipalActivity().implicitIntent(music.link)
+                }
                 return@setOnMenuItemClickListener true
             } else {
+                PrincipalActivity().directArtist(music)
                 return@setOnMenuItemClickListener true
             }
         }

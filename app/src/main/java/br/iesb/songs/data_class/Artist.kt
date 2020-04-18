@@ -1,9 +1,9 @@
 package br.iesb.songs.data_class
 
 data class Artist(
-    val id: Int,
-    val name: String,
-    val link: String,
-    val picture: String,
-    val tracklist: String
+    val id: Int? = null,
+    val name: String? = null,
+    val link: String? = null,
+    val picture: String? = null,
+    val tracklist: Array<Music>
 )
