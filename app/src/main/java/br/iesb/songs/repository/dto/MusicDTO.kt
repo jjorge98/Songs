@@ -6,7 +6,6 @@ data class MusicDTO(
     val id: Int? = null,
     val readable: String? = null,
     val title: String? = null,
-    @SerializedName("title_short")
     val link: String? = null,
     val duration: Int? = null,
     val rank: Long? = null,

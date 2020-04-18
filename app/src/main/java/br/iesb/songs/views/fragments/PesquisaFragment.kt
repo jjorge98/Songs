@@ -42,7 +42,7 @@ class PesquisaFragment (context: Context) : Fragment() {
         val find: String = inputSearch.text.toString()
 
         viewModel.musicSet.observe(viewLifecycleOwner, Observer { music ->
-            val adapter = this.context?.let { MusicAdapter(it, music, activity) }
+            val adapter = this.context?.let { MusicAdapter(it, music, activity, viewModel) }
             searchRecyclerView.adapter = adapter
         })
 

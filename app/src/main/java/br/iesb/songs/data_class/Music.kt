@@ -7,5 +7,7 @@ data class Music(
     val duration: Int? = null,
     val preview: String? = null,
     val coverImg: String? = null,
-    val artist: String? = null
+    val artist: String? = null,
+    val artistID: Int? = null,
+    val albumID: Int? = null
 )

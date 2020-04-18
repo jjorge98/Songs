@@ -11,4 +11,18 @@ class DeezerInteractor(private val context: Context) {
     fun search(find: String, callback: (musicSet: Array<Music>) -> Unit) {
         repository.search(find, callback)
     }
+
+    fun getId(callback: (id: Int) -> Unit){
+        repository.getId{result ->
+            if(result == null){
+                callback(1)
+            } else{
+                callback(result.plus(1))
+            }
+        }
+    }
+
+    fun favorite(fav: Music, id: Int){
+        repository.favorite(fav, id)
+    }
 }
