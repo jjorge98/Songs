@@ -1,6 +1,8 @@
 package br.iesb.songs.views.adapter
 
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.View
@@ -52,8 +54,18 @@ class MusicAdapter(
         val popup = PopupMenu(context, holder.itemView)
         val inflater: MenuInflater = popup.menuInflater
         inflater.inflate(R.menu.pop_up_menu, popup.menu)
+        popup.setOnMenuItemClickListener{itemSelected ->
+            if(itemSelected?.itemId == R.id.favoriteSong){
+                Log.w(TAG, "$holder")
+                return@setOnMenuItemClickListener true
+            } else{
+                return@setOnMenuItemClickListener true
+            }
+        }
         popup.show()
     }
+
+
 
     class MusicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val song: TextView = itemView.song
