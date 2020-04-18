@@ -14,6 +14,11 @@ class LoginActivity : AppCompatActivity() {
         ViewModelProvider(this).get(LoginViewModel::class.java)
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.signOut()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)

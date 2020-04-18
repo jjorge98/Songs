@@ -7,6 +7,10 @@ class LoginInteractor(private val context: Context) {
     //variável que chama o repository
     val repository = LoginRepository(context)
 
+    fun signOut(){
+        repository.signOut()
+    }
+
     //função de recuperar senha que recebe um email e um callback
     fun recuperarSenha(email: String, callback: (result: String?) -> Unit) {
         //Faz a verificação necessária (regras de negócio)

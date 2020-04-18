@@ -8,6 +8,10 @@ class LoginViewModel(val app: Application) : AndroidViewModel(app) {
     //variável que chama o interactor
     val interactor = LoginInteractor(app.applicationContext)
 
+    fun signOut(){
+        interactor.signOut()
+    }
+
     //função de recuperar senha que recebe o email e um callback
     fun recuperarSenha(email: String, callback: (result: Array<String>) -> Unit) {
         //como não tem nenhuma verificação responsável pela view model, já chama a função do interactor

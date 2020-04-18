@@ -5,7 +5,11 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginRepository(context: Context) {
     //variável que pega a instancia do firebase auth
-    val auth = FirebaseAuth.getInstance()
+    private val auth = FirebaseAuth.getInstance()
+
+    fun signOut(){
+        auth.signOut()
+    }
 
     //função de recuperação de senha que recebe um email e um callback
     fun recuperarSenha(email: String, callback: (result: String?) -> Unit) {
