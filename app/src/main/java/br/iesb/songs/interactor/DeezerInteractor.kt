@@ -6,14 +6,14 @@ import br.iesb.songs.data_class.Artist
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.repository.DeezerRepository
 
-class DeezerInteractor(private val context: Context) {
+class DeezerInteractor(context: Context) {
     private val repository = DeezerRepository(context, context.getString(R.string.url))
 
     fun search(find: String, callback: (musicSet: Array<Music>) -> Unit) {
         repository.search(find, callback)
     }
 
-    fun artist(id: Int, callback: (artist: Artist) -> Unit){
+    fun artist(id: Int?, callback: (music: Array<Music>) -> Unit){
         repository.artist(id, callback)
     }
 

@@ -1,9 +1,8 @@
 package br.iesb.songs.repository
 
 import android.content.Context
-import br.iesb.songs.data_class.Artist
 import br.iesb.songs.data_class.Music
-import br.iesb.songs.repository.dto.ArtistMusicDTO
+import br.iesb.songs.repository.dto.ArtistDTO
 import br.iesb.songs.repository.dto.MusicListDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -15,6 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface DeezerService {
@@ -25,15 +25,18 @@ interface DeezerService {
         @Header("x-rapidapi-key") key: String = "ab2b40b599msh9fbe1da77c7e51ap1dbd17jsnb46ee7ad8fb6"
     ): Call<MusicListDTO>
 
-    @GET("artist")
+    @GET("artist/{id}")
     fun artist(
-        @Query("id") id: Int,
+        @Path("id") id: Int?,
         @Header("x-rapidapi-host") host: String = "deezerdevs-deezer.p.rapidapi.com",
         @Header("x-rapidapi-key") key: String = "ab2b40b599msh9fbe1da77c7e51ap1dbd17jsnb46ee7ad8fb6"
-    ): Call<ArtistMusicDTO>
+    ): Call<ArtistDTO>
+
+    @GET("top?limit=50")
+    fun tracklist(): Call<MusicListDTO>
 }
 
-class DeezerRepository(context: Context, url: String) : RetrofitInit(context, url) {
+class DeezerRepository(private val context: Context, url: String) : RetrofitInit(context, url) {
     private val service = retrofit.create(DeezerService::class.java)
     private val database = FirebaseDatabase.getInstance()
     private val auth = FirebaseAuth.getInstance()
@@ -59,7 +62,8 @@ class DeezerRepository(context: Context, url: String) : RetrofitInit(context, ur
                         coverImg = m.album?.cover,
                         albumID = m.album?.id,
                         artist = m.artist?.name,
-                        artistID = m.artist?.id
+                        artistID = m.artist?.id,
+                        artistImage = m.artist?.picture
                     )
 
                     result.add(new)
@@ -70,42 +74,23 @@ class DeezerRepository(context: Context, url: String) : RetrofitInit(context, ur
         })
     }
 
-    fun artist(id: Int, callback: (backArtist: Artist) -> Unit) {
-        service.artist(id).enqueue(object : Callback<ArtistMusicDTO> {
-            override fun onFailure(call: Call<ArtistMusicDTO>, t: Throwable) {
-                callback(Artist(tracklist = arrayOf()))
+    fun artist(id: Int?, callback: (musicCall: Array<Music>) -> Unit) {
+        service.artist(id).enqueue(object : Callback<ArtistDTO> {
+            override fun onFailure(call: Call<ArtistDTO>, t: Throwable) {
+                callback(arrayOf())
             }
 
-            override fun onResponse(
-                call: Call<ArtistMusicDTO>,
-                response: Response<ArtistMusicDTO>
-            ) {
-                val result = mutableListOf<Music>()
+            override fun onResponse(call: Call<ArtistDTO>, response: Response<ArtistDTO>) {
                 val artist = response.body()
 
-                artist?.tracklist?.forEach { m ->
-                    val new = Music(
-                        id = m.id,
-                        title = m.title,
-                        link = m.link,
-                        duration = m.duration,
-                        preview = m.preview,
-                        coverImg = m.album?.cover,
-                        albumID = m.album?.id,
-                        artist = m.artist?.name,
-                        artistID = m.artist?.id
-                    )
-                    result.add(new)
+                if (artist?.tracklist != null) {
+                    val result = mutableListOf<Music>()
+                    tracklistHTTP(artist.tracklist) { song ->
+                        result.add(song)
+                        callback(result.toTypedArray())
+                    }
                 }
 
-                val newArtist = Artist(
-                    id = artist?.id,
-                    name = artist?.name,
-                    link = artist?.link,
-                    picture = artist?.picture,
-                    tracklist = result.toTypedArray()
-                )
-                callback(newArtist)
             }
         })
     }
@@ -179,5 +164,38 @@ class DeezerRepository(context: Context, url: String) : RetrofitInit(context, ur
 
         favorites.setValue(fav)
         ids.setValue(id)
+    }
+
+    private fun tracklistHTTP(track: String, callback: (result: Music) -> Unit) {
+        val r = RetrofitInit(context, track.replace("top?limit=50", ""))
+        val s = r.retrofit.create(DeezerService::class.java)
+        s.tracklist().enqueue(object : Callback<MusicListDTO> {
+            override fun onFailure(call: Call<MusicListDTO>, t: Throwable) {
+                //
+            }
+
+            override fun onResponse(
+                call: Call<MusicListDTO>,
+                response: Response<MusicListDTO>
+            ) {
+                val musics = response.body()?.data
+
+                musics?.forEach { m ->
+                    val new = Music(
+                        id = m.id,
+                        title = m.title,
+                        link = m.link,
+                        duration = m.duration,
+                        preview = m.preview,
+                        coverImg = m.album?.cover,
+                        albumID = m.album?.id,
+                        artist = m.artist?.name,
+                        artistID = m.artist?.id,
+                        artistImage = m.artist?.picMedium
+                    )
+                    callback(new)
+                }
+            }
+        })
     }
 }

@@ -11,7 +11,6 @@ import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.view_model.LoginViewModel
 import br.iesb.songs.views.adapter.MusicAdapter
 import kotlinx.android.synthetic.main.activity_favorite_list.*
-import kotlinx.android.synthetic.main.activity_favorite_list.favoritesRecyclerViewFavList
 
 class FavoriteListActivity : AppCompatActivity() {
     private val viewModelD: DeezerViewModel by lazy {
@@ -26,7 +25,6 @@ class FavoriteListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favorite_list)
 
-        favoriteFloatingFavList.setOnClickListener { favorites() }
         searchFloatingFavList.setOnClickListener { search() }
         logOutFloatingFavList.setOnClickListener { logout() }
 
@@ -34,22 +32,28 @@ class FavoriteListActivity : AppCompatActivity() {
         favoritesList()
     }
 
-    private fun initRecyclerView(){
+    override fun onResume() {
+        super.onResume()
+        viewModelL.verifyLogin { result ->
+            if (result == 0) {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
+
+    private fun initRecyclerView() {
         favoritesRecyclerViewFavList.layoutManager = LinearLayoutManager(this)
     }
 
     private fun favoritesList() {
         viewModelD.allFavorites.observe(this, Observer { music ->
-            val adapter = MusicAdapter(this, music, this, viewModelD, "FAVORITE")
+            val adapter =
+                MusicAdapter(this, music, this, viewModelD, "FAVORITE")
             favoritesRecyclerViewFavList.adapter = adapter
         })
 
         viewModelD.favoritesList()
-    }
-
-    private fun favorites() {
-        val intent = Intent(this, FavoriteListActivity::class.java)
-        startActivity(intent)
     }
 
     private fun search() {

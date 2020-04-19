@@ -44,4 +44,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewArtist" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/favoriteFloatingArtists"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/trans_roxo"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_heart"
+        android:tooltipText="@string/favorite"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/searchFloatingArtists"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/searchFloatingArtists"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/trans_roxo"
+        android:tooltipText="@string/searchText"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_magnifying_glass"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/logOutFloatingArtists"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/logOutFloatingArtists"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/trans_roxo"
+        android:contentDescription="@string/logout"
+        android:src="@drawable/ic_logout"
+        android:tooltipText="@string/logout"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

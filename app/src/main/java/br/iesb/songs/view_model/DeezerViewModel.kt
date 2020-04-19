@@ -15,7 +15,6 @@ class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
 
     val musicSet = MutableLiveData<Array<Music>>()
     val allFavorites = MutableLiveData<Array<Music>>()
-    val artists = MutableLiveData<Artist>()
 
     fun search(find: String) {
         interactor.search(find) { result ->
@@ -23,9 +22,9 @@ class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun artist(id: Int){
+    fun artist(id: Int?){
         interactor.artist(id){result ->
-            artists.value = result
+            musicSet.value = result
         }
     }
 

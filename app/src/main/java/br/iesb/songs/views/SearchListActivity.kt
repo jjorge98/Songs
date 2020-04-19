@@ -29,14 +29,22 @@ class SearchListActivity : AppCompatActivity() {
         buttonSearchList.setOnClickListener { searchList() }
 
         favoriteFloatingSearchList.setOnClickListener { favorites() }
-        searchFloatingSearchList.setOnClickListener { search() }
         logOutFloatingSearchList.setOnClickListener { logout() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModelL.verifyLogin { result ->
+            if (result == 0) {
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun initRecyclerView(){
         recyclerViewSearchList.layoutManager = LinearLayoutManager(this)
     }
-
 
     private fun searchList() {
         val find: String = inputSearchList.text.toString()
@@ -52,11 +60,6 @@ class SearchListActivity : AppCompatActivity() {
 
     private fun favorites() {
         val intent = Intent(this, FavoriteListActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun search() {
-        val intent = Intent(this, SearchListActivity::class.java)
         startActivity(intent)
     }
 
