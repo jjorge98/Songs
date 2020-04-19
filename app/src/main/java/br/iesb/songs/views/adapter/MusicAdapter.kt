@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.view_model.DeezerViewModel
-import br.iesb.songs.views.PrincipalActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.music_adapter.view.*
 
@@ -76,11 +75,12 @@ class MusicAdapter(
                 return@setOnMenuItemClickListener true
             } else if (itemSelected?.itemId == R.id.listenDeezer) {
                 if (music.link != null) {
-                    PrincipalActivity().implicitIntent(music.link)
+
+//                  TODO:  PrincipalActivity().implicitIntent(music.link)
                 }
                 return@setOnMenuItemClickListener true
             } else {
-                PrincipalActivity().directArtist(music)
+//                TODO: PrincipalActivity().directArtist(music)
                 return@setOnMenuItemClickListener true
             }
         }

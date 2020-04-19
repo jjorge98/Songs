@@ -40,6 +40,23 @@ data class ArtistDTO(
     val picBig: String? = null,
     @SerializedName("picture_xl")
     val picXL: String? = null,
+    val tracklist: String? = null,
+    val type: String? = null
+)
+
+data class ArtistMusicDTO(
+    val id: Int? = null,
+    val name: String? = null,
+    val link: String? = null,
+    val picture: String? = null,
+    @SerializedName("picture_small")
+    val picSmal: String? = null,
+    @SerializedName("picture_medium")
+    val picMedium: String? = null,
+    @SerializedName("picture_big")
+    val picBig: String? = null,
+    @SerializedName("picture_xl")
+    val picXL: String? = null,
     val tracklist: Array<MusicDTO>? = null,
     val type: String? = null
 )

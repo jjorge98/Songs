@@ -3,7 +3,7 @@ package br.iesb.songs.repository
 import android.content.Context
 import br.iesb.songs.data_class.Artist
 import br.iesb.songs.data_class.Music
-import br.iesb.songs.repository.dto.ArtistDTO
+import br.iesb.songs.repository.dto.ArtistMusicDTO
 import br.iesb.songs.repository.dto.MusicListDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -13,8 +13,9 @@ import com.google.firebase.database.ValueEventListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.*
-import java.net.MulticastSocket
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Query
 
 interface DeezerService {
     @GET("search")
@@ -29,7 +30,7 @@ interface DeezerService {
         @Query("id") id: Int,
         @Header("x-rapidapi-host") host: String = "deezerdevs-deezer.p.rapidapi.com",
         @Header("x-rapidapi-key") key: String = "ab2b40b599msh9fbe1da77c7e51ap1dbd17jsnb46ee7ad8fb6"
-    ): Call<ArtistDTO>
+    ): Call<ArtistMusicDTO>
 }
 
 class DeezerRepository(context: Context, url: String) : RetrofitInit(context, url) {
@@ -70,12 +71,15 @@ class DeezerRepository(context: Context, url: String) : RetrofitInit(context, ur
     }
 
     fun artist(id: Int, callback: (backArtist: Artist) -> Unit) {
-        service.artist(id).enqueue(object : Callback<ArtistDTO> {
-            override fun onFailure(call: Call<ArtistDTO>, t: Throwable) {
+        service.artist(id).enqueue(object : Callback<ArtistMusicDTO> {
+            override fun onFailure(call: Call<ArtistMusicDTO>, t: Throwable) {
                 callback(Artist(tracklist = arrayOf()))
             }
 
-            override fun onResponse(call: Call<ArtistDTO>, response: Response<ArtistDTO>) {
+            override fun onResponse(
+                call: Call<ArtistMusicDTO>,
+                response: Response<ArtistMusicDTO>
+            ) {
                 val result = mutableListOf<Music>()
                 val artist = response.body()
 

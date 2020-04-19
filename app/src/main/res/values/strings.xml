@@ -9,4 +9,7 @@
     <string name="inputSearch">Músicas, artistas, albuns</string>
     <string name="holderSong">%1$s\n%2$s</string>
     <string name="artist">Músicas de %1$s</string>
+    <string name="logout">Sair</string>
+    <string name="profile">Perfil</string>
+    <string name="favorite">Músicas favoritas</string>
 </resources>
