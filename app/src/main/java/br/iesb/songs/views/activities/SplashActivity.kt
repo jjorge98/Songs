@@ -8,8 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
 
-//TODO: Remover algum item dos favoritos
-//TODO: Arrumar os favoritos. Verificar se já existe no banco
 class SplashActivity : AppCompatActivity() {
     private val viewModel: LoginViewModel by lazy{
         ViewModelProvider(this).get(LoginViewModel::class.java)
