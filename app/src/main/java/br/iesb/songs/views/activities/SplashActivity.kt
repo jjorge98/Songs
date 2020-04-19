@@ -1,13 +1,13 @@
-package br.iesb.songs.views
+package br.iesb.songs.views.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
 import android.os.Handler
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
+
 //TODO: Remover algum item dos favoritos
 //TODO: Arrumar os favoritos. Verificar se já existe no banco
 class SplashActivity : AppCompatActivity() {

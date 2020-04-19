@@ -1,4 +1,4 @@
-package br.iesb.songs.views
+package br.iesb.songs.views.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -34,7 +34,7 @@ class FavoriteListActivity : AppCompatActivity() {
         super.onResume()
         viewModelL.verifyLogin { result ->
             if (result == 0) {
-                val intent = Intent(this, LoginActivity::class.java)
+                val intent = Intent(this, MainInicialActivity::class.java)
                 startActivity(intent)
             }
         }

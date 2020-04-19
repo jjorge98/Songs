@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
-    tools:context=".views.SearchListActivity">
+    tools:context=".views.activities.SearchListActivity">
 
     <TextView
         android:id="@+id/searchText"

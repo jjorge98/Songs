@@ -118,7 +118,6 @@ class DeezerRepository(private val context: Context, url: String) : RetrofitInit
 
                 callback(result.toTypedArray())
             }
-
         })
     }
 

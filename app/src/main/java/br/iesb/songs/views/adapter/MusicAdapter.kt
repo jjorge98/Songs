@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.view_model.DeezerViewModel
-import br.iesb.songs.views.ArtistsActivity
-import br.iesb.songs.views.FavoriteListActivity
+import br.iesb.songs.views.activities.ArtistsActivity
+import br.iesb.songs.views.activities.FavoriteListActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.music_adapter.view.*
 
@@ -30,10 +30,7 @@ class MusicAdapter(
 ) : RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
     private var verify: String = ""
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): MusicViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.music_adapter, parent, false)
         return MusicViewHolder(view)

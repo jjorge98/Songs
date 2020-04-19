@@ -19,14 +19,6 @@ class LoginRepository(context: Context) {
         }
     }
 
-//    firebase.auth().onAuthStateChanged(function(user) {
-//        if (user) {
-//            // User is signed in.
-//        } else {
-//            // No user is signed in.
-//        }
-//    });
-
     //função de recuperação de senha que recebe um email e um callback
     fun recuperarSenha(email: String, callback: (result: String?) -> Unit) {
         //variável que recebe a operação de enviar email de resetar senha

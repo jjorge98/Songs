@@ -1,8 +1,7 @@
-package br.iesb.songs.views
+package br.iesb.songs.views.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -39,6 +38,16 @@ class ArtistsActivity : AppCompatActivity() {
 
         artistSongsRecyclerView.layoutManager = LinearLayoutManager(this.applicationContext)
         songsList()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModelL.verifyLogin { result ->
+            if (result == 0) {
+                val intent = Intent(this, MainInicialActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun songsList() {
