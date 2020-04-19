@@ -2,6 +2,7 @@ package br.iesb.songs.views
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,11 +18,9 @@ class ArtistsActivity : AppCompatActivity() {
     private val viewModelD: DeezerViewModel by lazy {
         ViewModelProvider(this).get(DeezerViewModel::class.java)
     }
-
     private val viewModelL: LoginViewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
     }
-
     private var artist: String? = null
     private var idArtist: String? = null
 

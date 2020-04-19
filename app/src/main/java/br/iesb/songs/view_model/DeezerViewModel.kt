@@ -34,12 +34,13 @@ class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun getId(callback: (id: Int) -> Unit){
-        interactor.getId(callback)
+
+    fun favorite(fav: Music){
+        interactor.favorite(fav)
     }
 
-    fun favorite(fav: Music, id: Int){
-        interactor.favorite(fav, id)
+    fun removeFavorite(id: Int?){
+        interactor.removeFavorite(id)
     }
 
     fun verifyFav(musicId: Int, callback: (verified: String) -> Unit){

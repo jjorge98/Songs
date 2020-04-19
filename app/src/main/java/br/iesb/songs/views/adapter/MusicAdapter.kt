@@ -17,6 +17,7 @@ import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.views.ArtistsActivity
+import br.iesb.songs.views.FavoriteListActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.music_adapter.view.*
 
@@ -27,7 +28,6 @@ class MusicAdapter(
     private val viewModel: DeezerViewModel,
     private val menuType: String
 ) : RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
-    private var id = 0
     private var verify: String = ""
 
     override fun onCreateViewHolder(
@@ -45,18 +45,18 @@ class MusicAdapter(
 
     override fun onBindViewHolder(holder: MusicViewHolder, position: Int) {
         val music = musicSet[position]
-        if (music.id != null) {
-            viewModel.verifyFav(music.id) {
-                verify = it
-            }
-        }
+
         holder.song.text = activity?.getString(R.string.holderSong, music.title, music.artist)
         holder.song.setOnClickListener {
-            viewModel.getId { result -> id = result }
+            if (music.id != null) {
+                viewModel.verifyFav(music.id) {
+                    verify = it
+                }
+            }
             showPopup(holder, music)
         }
 
-        Picasso.get().load(music.coverImg).into(holder.cover);
+        Picasso.get().load(music.coverImg).into(holder.cover)
     }
 
     private fun showPopup(holder: MusicViewHolder, music: Music) {
@@ -72,9 +72,20 @@ class MusicAdapter(
         }
 
         popup.setOnMenuItemClickListener { itemSelected ->
-            if (itemSelected?.itemId == R.id.favoriteSong) {
+            if (itemSelected?.itemId == R.id.removeFavorite) {
+                viewModel.removeFavorite(music.id)
+                val intent = Intent(context.applicationContext, FavoriteListActivity::class.java)
+                context.startActivity(intent)
+                return@setOnMenuItemClickListener true
+            } else if (itemSelected?.itemId == R.id.favoriteSong) {
                 if (verify != "exists") {
-                    viewModel.favorite(music, id)
+                    viewModel.favorite(music)
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Essa música já está nos favoritos!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 return@setOnMenuItemClickListener true
             } else if (itemSelected?.itemId == R.id.listenDeezer) {
@@ -99,7 +110,6 @@ class MusicAdapter(
         }
         popup.show()
     }
-
 
     class MusicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val song: TextView = itemView.song

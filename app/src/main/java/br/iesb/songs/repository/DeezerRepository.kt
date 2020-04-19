@@ -86,6 +86,7 @@ class DeezerRepository(private val context: Context, url: String) : RetrofitInit
                 if (artist?.tracklist != null) {
                     val result = mutableListOf<Music>()
                     tracklistHTTP(artist.tracklist) { song ->
+                        song.artistImage = artist.picBig
                         result.add(song)
                         callback(result.toTypedArray())
                     }
@@ -121,49 +122,34 @@ class DeezerRepository(private val context: Context, url: String) : RetrofitInit
         })
     }
 
-    fun getId(callback: (id: Int?) -> Unit) {
-        val ids = database.getReference("$uid/ids/favorites")
-
-        ids.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-                //
-            }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                val result = p0.getValue(Int::class.java)
-                callback(result)
-            }
-
-        })
-
-    }
-
     fun verifyFav(musicId: Int, callback: (id: Int?) -> Unit) {
-        val favs = database.getReference("$uid/favorites")
+        val a = database.reference
+        val query = a.child("$uid/favorites").orderByChild("id").equalTo(musicId.toDouble())
 
-        val query = favs.orderByChild("id").equalTo("$musicId")
-
-        query.addValueEventListener(object : ValueEventListener {
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 //
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                val music = snapshot.getValue(Music::class.java)
-
-                if (music != null) {
-                    callback(music.id)
+                snapshot.children.forEach { result ->
+                    val id = result.child("id").getValue(Int::class.java)
+                    callback(id)
                 }
             }
         })
     }
 
-    fun favorite(fav: Music, id: Int) {
-        val favorites = database.getReference("$uid/favorites/$id")
-        val ids = database.getReference("$uid/ids/favorites")
+    fun removeFavorite(musicId: Int?) {
+        if (musicId != null) {
+            val remove = database.getReference("$uid/favorites/$musicId")
+            remove.removeValue()
+        }
+    }
 
+    fun favorite(fav: Music) {
+        val favorites = database.getReference("$uid/favorites/${fav.id}")
         favorites.setValue(fav)
-        ids.setValue(id)
     }
 
     private fun tracklistHTTP(track: String, callback: (result: Music) -> Unit) {

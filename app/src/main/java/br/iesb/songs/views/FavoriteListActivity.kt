@@ -16,7 +16,6 @@ class FavoriteListActivity : AppCompatActivity() {
     private val viewModelD: DeezerViewModel by lazy {
         ViewModelProvider(this).get(DeezerViewModel::class.java)
     }
-
     private val viewModelL: LoginViewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
     }
@@ -28,7 +27,6 @@ class FavoriteListActivity : AppCompatActivity() {
         searchFloatingFavList.setOnClickListener { search() }
         logOutFloatingFavList.setOnClickListener { logout() }
 
-        initRecyclerView()
         favoritesList()
     }
 
@@ -42,11 +40,9 @@ class FavoriteListActivity : AppCompatActivity() {
         }
     }
 
-    private fun initRecyclerView() {
-        favoritesRecyclerViewFavList.layoutManager = LinearLayoutManager(this)
-    }
-
     private fun favoritesList() {
+        favoritesRecyclerViewFavList.layoutManager = LinearLayoutManager(this)
+
         viewModelD.allFavorites.observe(this, Observer { music ->
             val adapter =
                 MusicAdapter(this, music, this, viewModelD, "FAVORITE")

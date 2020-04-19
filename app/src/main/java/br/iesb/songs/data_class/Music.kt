@@ -10,5 +10,5 @@ data class Music(
     val artist: String? = null,
     val artistID: Int? = null,
     val albumID: Int? = null,
-    val artistImage: String? = null
+    var artistImage: String? = null
 )

@@ -21,18 +21,12 @@ class DeezerInteractor(context: Context) {
         repository.favoritesList(callback)
     }
 
-    fun getId(callback: (id: Int) -> Unit) {
-        repository.getId { result ->
-            if (result == null) {
-                callback(1)
-            } else {
-                callback(result.plus(1))
-            }
-        }
+    fun favorite(fav: Music) {
+        repository.favorite(fav)
     }
 
-    fun favorite(fav: Music, id: Int) {
-        repository.favorite(fav, id)
+    fun removeFavorite(id: Int?){
+        repository.removeFavorite(id)
     }
 
     fun verifyFav(musicId: Int?, callback: (id: Int) -> Unit) {

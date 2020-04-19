@@ -8,8 +8,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
-//TODO: Escutar no deezer. Fazer intent implicita
-//TODO: Função ver artista
 //TODO: Remover algum item dos favoritos
 //TODO: Arrumar os favoritos. Verificar se já existe no banco
 class SplashActivity : AppCompatActivity() {
