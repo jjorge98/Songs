@@ -1,4 +1,4 @@
-package br.iesb.songs.views
+package br.iesb.songs.views.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

@@ -4,62 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
-    tools:context=".views.activities.ArtistsActivity">
-
-    <ImageView
-        android:id="@+id/artistImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewArtist"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="@android:color/black">
 
     <TextView
-        android:id="@+id/textViewArtist"
+        android:id="@+id/favoritesText"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="sans-serif-black"
+        android:text="@string/favoriteText"
         android:textAlignment="center"
         android:textColor="#fff"
         android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/artistSongsRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/artistImage" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/artistSongsRecyclerView"
+        android:id="@+id/favoritesRecyclerViewFavList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewArtist" />
+        app:layout_constraintTop_toBottomOf="@+id/favoritesText" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/favoriteFloatingArtists"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="20dp"
-        android:backgroundTint="@color/trans_roxo"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_heart"
-        android:tooltipText="@string/favorite"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/searchFloatingArtists"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/searchFloatingArtists"
+        android:id="@+id/searchFloatingFavList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
@@ -69,11 +42,11 @@
         android:contentDescription="@string/app_name"
         android:src="@drawable/ic_magnifying_glass"
         app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/logOutFloatingArtists"
+        app:layout_constraintBottom_toTopOf="@+id/logOutFloatingFavList"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/logOutFloatingArtists"
+        android:id="@+id/logOutFloatingFavList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"

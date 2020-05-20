@@ -6,10 +6,10 @@ import br.iesb.songs.interactor.LoginInteractor
 
 class LoginViewModel(val app: Application) : AndroidViewModel(app) {
     //variável que chama o interactor
-    val interactor = LoginInteractor(app.applicationContext)
+    private val interactor = LoginInteractor(app.applicationContext)
 
-    fun signOut(){
-        interactor.signOut()
+    fun verifyLogin(callback: (result: Int) -> Unit){
+        interactor.verifyLogin(callback)
     }
 
     //função de recuperar senha que recebe o email e um callback
@@ -114,5 +114,9 @@ class LoginViewModel(val app: Application) : AndroidViewModel(app) {
                 callback(resultado)
             }
         }
+    }
+
+    fun signOut(){
+        interactor.signOut()
     }
 }
