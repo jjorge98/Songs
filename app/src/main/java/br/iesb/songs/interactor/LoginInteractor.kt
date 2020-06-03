@@ -5,10 +5,10 @@ import br.iesb.songs.repository.LoginRepository
 
 class LoginInteractor(private val context: Context) {
     //variável que chama o repository
-    private val repository = LoginRepository(context)
+    val repository = LoginRepository(context)
 
-    fun verifyLogin(callback: (result: Int) -> Unit){
-        repository.verifyLogin(callback)
+    fun signOut(){
+        repository.signOut()
     }
 
     //função de recuperar senha que recebe um email e um callback
@@ -60,9 +60,5 @@ class LoginInteractor(private val context: Context) {
             // já fazer o feedback pra view model
             repository.register(email, password, callback)
         }
-    }
-
-    fun signOut(){
-        repository.signOut()
     }
 }

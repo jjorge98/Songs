@@ -6,14 +6,14 @@ import br.iesb.songs.data_class.Artist
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.repository.DeezerRepository
 
-class DeezerInteractor(context: Context) {
+class DeezerInteractor(private val context: Context) {
     private val repository = DeezerRepository(context, context.getString(R.string.url))
 
     fun search(find: String, callback: (musicSet: Array<Music>) -> Unit) {
         repository.search(find, callback)
     }
 
-    fun artist(id: Int?, callback: (music: Array<Music>) -> Unit){
+    fun artist(id: Int, callback: (artist: Artist) -> Unit){
         repository.artist(id, callback)
     }
 
@@ -21,12 +21,18 @@ class DeezerInteractor(context: Context) {
         repository.favoritesList(callback)
     }
 
-    fun favorite(fav: Music) {
-        repository.favorite(fav)
+    fun getId(callback: (id: Int) -> Unit) {
+        repository.getId { result ->
+            if (result == null) {
+                callback(1)
+            } else {
+                callback(result.plus(1))
+            }
+        }
     }
 
-    fun removeFavorite(id: Int?){
-        repository.removeFavorite(id)
+    fun favorite(fav: Music, id: Int) {
+        repository.favorite(fav, id)
     }
 
     fun verifyFav(musicId: Int?, callback: (id: Int) -> Unit) {

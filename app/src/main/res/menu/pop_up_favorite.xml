@@ -9,9 +9,4 @@
         android:id="@+id/seeArtist"
         android:title="Ver artista"
         app:showAsAction="never" />
-
-    <item
-        android:id="@+id/removeFavorite"
-        android:title="Remover favorito"
-        app:showAsAction="never" />
 </menu>

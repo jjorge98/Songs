@@ -1,22 +1,14 @@
 package br.iesb.songs.repository
 
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginRepository(context: Context) {
     //variável que pega a instancia do firebase auth
     private val auth = FirebaseAuth.getInstance()
 
-    fun verifyLogin(callback: (result: Int) -> Unit){
-        auth.addAuthStateListener {v ->
-            if(v.currentUser == null){
-                callback(0)
-            } else{
-                callback(1)
-            }
-        }
+    fun signOut(){
+        auth.signOut()
     }
 
     //função de recuperação de senha que recebe um email e um callback
@@ -38,7 +30,6 @@ class LoginRepository(context: Context) {
 
     //função de login que recebe um email, uma senha e um callback
     fun login(email: String, password: String, callback: (result: String?) -> Unit) {
-        Log.w(TAG, "${auth.currentUser}")
         //variável que recebe a operação de login
         val operation = auth.signInWithEmailAndPassword(email, password)
 
@@ -69,9 +60,5 @@ class LoginRepository(context: Context) {
                 callback(error)
             }
         }
-    }
-
-    fun signOut(){
-        auth.signOut()
     }
 }

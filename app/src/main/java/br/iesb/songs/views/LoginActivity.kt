@@ -1,9 +1,9 @@
-package br.iesb.songs.views.activities
+package br.iesb.songs.views
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
@@ -14,10 +14,16 @@ class LoginActivity : AppCompatActivity() {
         ViewModelProvider(this).get(LoginViewModel::class.java)
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.signOut()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         setSupportActionBar(findViewById(R.id.action_bar))
+
         id_button_entrar.setOnClickListener { login() }
         id_recuperar_senha.setOnClickListener { forgotPassword() }
         id_volttar_menu_inicial.setOnClickListener { backMenu() }
@@ -30,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.login(email, password) { result ->
             Toast.makeText(this, result[1], Toast.LENGTH_SHORT).show()
             if (result[0] == "OK") {
-                val intentLogin = Intent(this, FavoriteListActivity::class.java)
+                val intentLogin = Intent(this, PrincipalActivity::class.java)
                 startActivity(intentLogin)
             }
         }

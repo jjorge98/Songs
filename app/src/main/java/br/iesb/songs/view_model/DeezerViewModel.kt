@@ -1,8 +1,10 @@
 package br.iesb.songs.view_model
 
 import android.app.Application
+import android.app.SharedElementCallback
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import br.iesb.songs.data_class.Artist
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.interactor.DeezerInteractor
 
@@ -11,6 +13,7 @@ class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
 
     val musicSet = MutableLiveData<Array<Music>>()
     val allFavorites = MutableLiveData<Array<Music>>()
+    val artists = MutableLiveData<Artist>()
 
     fun search(find: String) {
         interactor.search(find) { result ->
@@ -18,25 +21,24 @@ class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun artist(id: Int?){
+    fun artist(id: Int){
         interactor.artist(id){result ->
-            musicSet.value = result
+            artists.value = result
         }
     }
 
     fun favoritesList(){
-        interactor.favoritesList(){ result ->
+        interactor.favoritesList(){result ->
             allFavorites.value = result
         }
     }
 
-
-    fun favorite(fav: Music){
-        interactor.favorite(fav)
+    fun getId(callback: (id: Int) -> Unit){
+        interactor.getId(callback)
     }
 
-    fun removeFavorite(id: Int?){
-        interactor.removeFavorite(id)
+    fun favorite(fav: Music, id: Int){
+        interactor.favorite(fav, id)
     }
 
     fun verifyFav(musicId: Int, callback: (verified: String) -> Unit){
