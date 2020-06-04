@@ -11,13 +11,17 @@ import br.iesb.songs.R
 import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.views.adapter.MusicAdapter
 import kotlinx.android.synthetic.main.activity_artists.*
+import com.squareup.picasso.Picasso
+
 
 class ArtistsActivity : AppCompatActivity() {
-    private lateinit var artist: String
-    private lateinit var idArtist: String
+
     private val viewModel: DeezerViewModel by lazy{
         ViewModelProvider(this).get(DeezerViewModel::class.java)
     }
+
+    private var artist: String? = null
+    private var idArtist: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +37,14 @@ class ArtistsActivity : AppCompatActivity() {
     }
 
     private fun songsList(){
-        viewModel.artists.observe(this, Observer {artist ->
-            val adapter = this.applicationContext?.let { MusicAdapter(it, artist.tracklist, this, viewModel, "SEARCH") }
+        viewModel.musicSet.observe(this, Observer { music ->
+            if (music.isNotEmpty()) {
+                Picasso.get().load(music[0].artistImage).into(artistImage);
+            }
+            val adapter = MusicAdapter(this, music, this, viewModel, "SEARCH")
             artistSongsRecyclerView.adapter = adapter
         })
+
+        viewModel.artist(idArtist?.toInt())
     }
 }

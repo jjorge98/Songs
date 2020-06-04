@@ -7,7 +7,7 @@
     android:background="@android:color/black">
 
     <TextView
-        android:id="@+id/textViewFavorites"
+        android:id="@+id/favoritesText"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -17,21 +17,20 @@
         android:textColor="#fff"
         android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/favoritesRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favoritesRecyclerView"
-        android:layout_width="409dp"
+        android:id="@+id/favoritesRecyclerViewFavList"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFavorites" />
+        app:layout_constraintTop_toBottomOf="@+id/favoritesText" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

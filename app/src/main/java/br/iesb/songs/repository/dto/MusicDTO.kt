@@ -1,5 +1,3 @@
-package br.iesb.songs.repository.dto
-
 import com.google.gson.annotations.SerializedName
 
 data class MusicDTO(
@@ -40,7 +38,7 @@ data class ArtistDTO(
     val picBig: String? = null,
     @SerializedName("picture_xl")
     val picXL: String? = null,
-    val tracklist: Array<MusicDTO>? = null,
+    val tracklist: String? = null,
     val type: String? = null
 )
 
@@ -59,4 +57,3 @@ data class AlbumDTO(
     val tracklist: String? = null,
     val type: String? = null
 )
-

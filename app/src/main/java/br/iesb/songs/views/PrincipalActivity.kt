@@ -9,19 +9,28 @@ import androidx.viewpager.widget.ViewPager
 import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.views.adapter.PagerViewAdapter
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import br.iesb.songs.view_model.LoginViewModel
 import kotlinx.android.synthetic.main.activity_principal.*
 
 class PrincipalActivity : AppCompatActivity() {
     private lateinit var mPagerAdapter: PagerAdapter
     private lateinit var webIntent: Intent
 
+    private val viewModelL: LoginViewModel by lazy {
+        ViewModelProvider(this).get(LoginViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
 
-        homeBtn.setOnClickListener { mViewPager.currentItem = 0 }
-        favoritoBtn.setOnClickListener { mViewPager.currentItem = 1 }
-        pesquisaBtn.setOnClickListener { mViewPager.currentItem = 2 }
+        favoritoBtn.setOnClickListener { mViewPager.currentItem = 0 }
+        pesquisaBtn.setOnClickListener { mViewPager.currentItem = 1 }
+        localizacaoBtn.setOnClickListener { mViewPager.currentItem = 2 }
+        LogoutBtn.setOnClickListener { logout() }
 
         mPagerAdapter = PagerViewAdapter(supportFragmentManager, applicationContext)
         mViewPager.adapter = mPagerAdapter
@@ -43,24 +52,38 @@ class PrincipalActivity : AppCompatActivity() {
 
         //default
         mViewPager.currentItem = 0
-        homeBtn.setImageResource(R.drawable.ic_home_menu_clarin)
+        favoritoBtn.setImageResource(R.drawable.ic_favorite_menu_clarin)
+    }
+    override fun onResume() {
+        super.onResume()
+        viewModelL.verifyLogin { result ->
+            if (result == 0) {
+                val intent = Intent(this, MainInicialActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun changingTabs(position: Int) {
         if (position == 0) {
-            homeBtn.setImageResource(R.drawable.ic_home_menu_clarin)
+            favoritoBtn.setImageResource(R.drawable.ic_favorite_menu_clarin)
             pesquisaBtn.setImageResource(R.drawable.ic_search_menu)
-            favoritoBtn.setImageResource(R.drawable.ic_favorite_menu)
+            localizacaoBtn.setImageResource(R.drawable.ic_location_menu)
+            LogoutBtn.setImageResource(R.drawable.ic_logout)
+
         }
         if (position == 1) {
-            homeBtn.setImageResource(R.drawable.ic_home_menu)
-            pesquisaBtn.setImageResource(R.drawable.ic_search_menu)
-            favoritoBtn.setImageResource(R.drawable.ic_favorite_menu_clarin)
+            favoritoBtn.setImageResource(R.drawable.ic_favorite_menu)
+            pesquisaBtn.setImageResource(R.drawable.ic_search_menu_clarin)
+            localizacaoBtn.setImageResource(R.drawable.ic_location_menu)
+            LogoutBtn.setImageResource(R.drawable.ic_logout)
+
         }
         if (position == 2) {
-            homeBtn.setImageResource(R.drawable.ic_home_menu)
-            pesquisaBtn.setImageResource(R.drawable.ic_search_menu_clarin)
             favoritoBtn.setImageResource(R.drawable.ic_favorite_menu)
+            pesquisaBtn.setImageResource(R.drawable.ic_search_menu)
+            localizacaoBtn.setImageResource(R.drawable.ic_location_menu_clarin)
+            LogoutBtn.setImageResource(R.drawable.ic_logout)
         }
     }
 
@@ -73,6 +96,12 @@ class PrincipalActivity : AppCompatActivity() {
         val intent = Intent(this, ArtistsActivity::class.java)
         intent.putExtra("artistName", music.artist)
         intent.putExtra("artistID", music.artistID)
+        startActivity(intent)
+    }
+
+    private fun logout() {
+        viewModelL.signOut()
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 }

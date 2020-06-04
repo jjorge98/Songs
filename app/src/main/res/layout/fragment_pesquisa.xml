@@ -18,48 +18,39 @@
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/inputSearch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/inputSearch"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:background="@drawable/input_pesquisa"
-        android:drawableLeft="@drawable/ic_lupa"
+
         android:drawablePadding="-15dp"
         android:ems="10"
         android:hint="@string/inputSearch"
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/searchButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/searchRecyclerView"
         app:layout_constraintTop_toBottomOf="@+id/textViewSearch" />
 
-    <Button
+    <ImageView
         android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/button_purple_gradient"
-        android:text="Pesquisar"
-        app:layout_constraintBottom_toTopOf="@+id/searchRecyclerView"
-        app:layout_constraintTop_toBottomOf="@+id/inputSearch"
-        tools:layout_editor_absoluteX="161dp" />
+        android:layout_width="33dp"
+        android:layout_height="47dp"
+        android:layout_margin="8dp"
+        android:padding="2dp"
+        android:src="@drawable/ic_lupa"
+        app:layout_constraintBottom_toBottomOf="@+id/inputSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/inputSearch"
+        tools:ignore="contentDescription" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchRecyclerView"
         android:layout_width="411dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchButton" />
+        app:layout_constraintTop_toBottomOf="@+id/inputSearch" />
 </androidx.constraintlayout.widget.ConstraintLayout>
