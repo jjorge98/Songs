@@ -1,5 +1,6 @@
 package br.iesb.songs.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.iesb.songs.R
 import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.views.adapter.MusicAdapter
+import br.iesb.songs.views.fragments.FavoritosFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_artists.*
 
@@ -31,6 +33,7 @@ class ArtistsActivity : AppCompatActivity() {
 
         initRecyclerView()
         songsList()
+        BackListaFavoritosFloating.setOnClickListener { backListFavoritos() }
     }
 
     private fun initRecyclerView() {
@@ -56,5 +59,10 @@ class ArtistsActivity : AppCompatActivity() {
 
     private fun songsList() {
         viewModel.artist(idArtist?.toInt())
+    }
+
+    private fun backListFavoritos() {
+        val intentMain = Intent(this, PrincipalActivity::class.java)
+        startActivity(intentMain)
     }
 }

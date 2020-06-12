@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import br.iesb.songs.views.fragments.FavoritosFragment
 import br.iesb.songs.views.fragments.LocationFragment
 import br.iesb.songs.views.fragments.PesquisaFragment
+import br.iesb.songs.views.fragments.PlaylistFragment
 
 internal class PagerViewAdapter(fm: FragmentManager?, private val context: Context) :
     FragmentPagerAdapter(fm!!) {
@@ -19,6 +20,9 @@ internal class PagerViewAdapter(fm: FragmentManager?, private val context: Conte
                 PesquisaFragment(context)
             }
             2 -> {
+                PlaylistFragment(context)
+            }
+            3 -> {
                 LocationFragment(context)
             }
             else -> FavoritosFragment(context)
@@ -26,7 +30,7 @@ internal class PagerViewAdapter(fm: FragmentManager?, private val context: Conte
     }
 
     override fun getCount(): Int {
-        return 3;
+        return 4;
     }
 
 

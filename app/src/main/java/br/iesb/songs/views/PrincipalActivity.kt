@@ -34,7 +34,7 @@ class PrincipalActivity : AppCompatActivity() {
 
         mPagerAdapter = PagerViewAdapter(supportFragmentManager, applicationContext)
         mViewPager.adapter = mPagerAdapter
-        mViewPager.offscreenPageLimit = 3
+        mViewPager.offscreenPageLimit = 4
 
         mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
@@ -68,6 +68,7 @@ class PrincipalActivity : AppCompatActivity() {
         if (position == 0) {
             favoritoBtn.setImageResource(R.drawable.ic_favorite_menu_clarin)
             pesquisaBtn.setImageResource(R.drawable.ic_search_menu)
+            playlistBtn.setImageResource(R.drawable.ic_playlist_play)
             localizacaoBtn.setImageResource(R.drawable.ic_location_menu)
             LogoutBtn.setImageResource(R.drawable.ic_logout)
 
@@ -75,13 +76,23 @@ class PrincipalActivity : AppCompatActivity() {
         if (position == 1) {
             favoritoBtn.setImageResource(R.drawable.ic_favorite_menu)
             pesquisaBtn.setImageResource(R.drawable.ic_search_menu_clarin)
+            playlistBtn.setImageResource(R.drawable.ic_playlist_play)
             localizacaoBtn.setImageResource(R.drawable.ic_location_menu)
             LogoutBtn.setImageResource(R.drawable.ic_logout)
 
         }
+
         if (position == 2) {
             favoritoBtn.setImageResource(R.drawable.ic_favorite_menu)
             pesquisaBtn.setImageResource(R.drawable.ic_search_menu)
+            playlistBtn.setImageResource(R.drawable.ic_playlist_play_clarin)
+            localizacaoBtn.setImageResource(R.drawable.ic_location_menu)
+            LogoutBtn.setImageResource(R.drawable.ic_logout)
+        }
+        if (position == 3) {
+            favoritoBtn.setImageResource(R.drawable.ic_favorite_menu)
+            pesquisaBtn.setImageResource(R.drawable.ic_search_menu)
+            playlistBtn.setImageResource(R.drawable.ic_playlist_play)
             localizacaoBtn.setImageResource(R.drawable.ic_location_menu_clarin)
             LogoutBtn.setImageResource(R.drawable.ic_logout)
         }

@@ -19,6 +19,7 @@ class MainInicialActivity : AppCompatActivity() {
 
         id_cadastrar.setOnClickListener { cadastrar() }
         id_login.setOnClickListener { login() }
+        id_chatbot.setOnClickListener { chatbot() }
 
     }
 
@@ -37,5 +38,10 @@ class MainInicialActivity : AppCompatActivity() {
                 startActivity(intentLogin)
             }
         }
+    }
+
+    private fun chatbot() {
+        val operation = Intent(this, ChatbotActivity::class.java)
+        startActivity(operation)
     }
 }
