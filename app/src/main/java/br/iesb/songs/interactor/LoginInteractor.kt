@@ -61,4 +61,7 @@ class LoginInteractor(private val context: Context) {
             repository.register(email, password, callback)
         }
     }
+    fun verifyLogin(callback: (result: Int) -> Unit){
+        repository.verifyLogin(callback)
+    }
 }

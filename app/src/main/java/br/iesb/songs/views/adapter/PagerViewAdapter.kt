@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import br.iesb.songs.views.fragments.FavoritosFragment
-import br.iesb.songs.views.fragments.HomeFragment
+import br.iesb.songs.views.fragments.LocationFragment
 import br.iesb.songs.views.fragments.PesquisaFragment
 
 internal class PagerViewAdapter(fm: FragmentManager?, private val context: Context) :
@@ -13,15 +13,15 @@ internal class PagerViewAdapter(fm: FragmentManager?, private val context: Conte
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
-                HomeFragment(context)
-            }
-            1 -> {
                 FavoritosFragment(context)
             }
-            2 -> {
+            1 -> {
                 PesquisaFragment(context)
             }
-            else -> HomeFragment(context)
+            2 -> {
+                LocationFragment(context)
+            }
+            else -> FavoritosFragment(context)
         }
     }
 

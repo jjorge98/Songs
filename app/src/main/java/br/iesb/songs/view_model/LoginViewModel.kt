@@ -115,4 +115,7 @@ class LoginViewModel(val app: Application) : AndroidViewModel(app) {
             }
         }
     }
+    fun verifyLogin(callback: (result: Int) -> Unit){
+        interactor.verifyLogin(callback)
+    }
 }
