@@ -8,9 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.iesb.songs.R
 
-/**
- * A simple [Fragment] subclass.
- */
 class LocationFragment (context: Context) : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

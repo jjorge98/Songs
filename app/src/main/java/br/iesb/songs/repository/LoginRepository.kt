@@ -61,6 +61,7 @@ class LoginRepository(context: Context) {
             }
         }
     }
+
     fun verifyLogin(callback: (result: Int) -> Unit){
         auth.addAuthStateListener {v ->
             if(v.currentUser == null){

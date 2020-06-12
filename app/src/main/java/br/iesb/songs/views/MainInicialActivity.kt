@@ -1,30 +1,41 @@
 package br.iesb.songs.views
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
+import br.iesb.songs.view_model.LoginViewModel
 import kotlinx.android.synthetic.main.activity_main_inicial.*
 
 class MainInicialActivity : AppCompatActivity() {
+    private val viewModelL: LoginViewModel by lazy {
+        ViewModelProvider(this).get(LoginViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_inicial)
 
-        id_cadastrar.setOnClickListener{cadastrar()}
-        id_login.setOnClickListener{login()}
+        id_cadastrar.setOnClickListener { cadastrar() }
+        id_login.setOnClickListener { login() }
 
     }
 
-    private fun cadastrar(){
+    private fun cadastrar() {
         val operation = Intent(this, RegisterActivity::class.java)
         startActivity(operation)
     }
 
-    private fun login(){
-        val operation = Intent(this, LoginActivity::class.java)
-        startActivity(operation)
+    private fun login() {
+        viewModelL.verifyLogin { response ->
+            if (response == 0) {
+                val operation = Intent(this, LoginActivity::class.java)
+                startActivity(operation)
+            } else {
+                val intentLogin = Intent(this, PrincipalActivity::class.java)
+                startActivity(intentLogin)
+            }
+        }
     }
-
 }

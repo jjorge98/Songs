@@ -9,11 +9,12 @@ import br.iesb.songs.interactor.DeezerInteractor
 class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
     private val interactor = DeezerInteractor(app.applicationContext)
 
-    val musicSet = MutableLiveData<Array<Music>>()
-    val allFavorites = MutableLiveData<Array<Music>>()
+    val musicSet = MutableLiveData<MutableSet<Music>>()
+    val allFavorites = MutableLiveData<MutableSet<Music>>()
 
     fun search(find: String) {
         interactor.search(find) { result ->
+            musicSet.value?.clear()
             musicSet.value = result
         }
     }
@@ -26,6 +27,7 @@ class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
 
     fun favoritesList(){
         interactor.favoritesList(){ result ->
+            musicSet.value?.clear()
             allFavorites.value = result
         }
     }

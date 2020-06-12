@@ -57,7 +57,7 @@ class PrincipalActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         viewModelL.verifyLogin { result ->
-            if (result == 0) {
+                if (result == 0) {
                 val intent = Intent(this, MainInicialActivity::class.java)
                 startActivity(intent)
             }
@@ -101,7 +101,7 @@ class PrincipalActivity : AppCompatActivity() {
 
     private fun logout() {
         viewModelL.signOut()
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, MainInicialActivity::class.java)
         startActivity(intent)
     }
 }

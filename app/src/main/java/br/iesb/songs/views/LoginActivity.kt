@@ -1,9 +1,9 @@
 package br.iesb.songs.views
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
@@ -12,11 +12,6 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity() {
     private val viewModel: LoginViewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.signOut()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,4 +47,3 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intentBackMenu)
     }
 }
-

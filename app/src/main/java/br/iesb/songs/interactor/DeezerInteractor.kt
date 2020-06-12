@@ -9,15 +9,15 @@ import br.iesb.songs.repository.DeezerRepository
 class DeezerInteractor(context: Context) {
     private val repository = DeezerRepository(context, context.getString(R.string.url))
 
-    fun search(find: String, callback: (musicSet: Array<Music>) -> Unit) {
+    fun search(find: String, callback: (musicSet: MutableSet<Music>) -> Unit) {
         repository.search(find, callback)
     }
 
-    fun artist(id: Int?, callback: (music: Array<Music>) -> Unit){
+    fun artist(id: Int?, callback: (music: MutableSet<Music>) -> Unit){
         repository.artist(id, callback)
     }
 
-    fun favoritesList(callback: (musicSet: Array<Music>) -> Unit) {
+    fun favoritesList(callback: (musicSet: MutableSet<Music>) -> Unit) {
         repository.favoritesList(callback)
     }
 

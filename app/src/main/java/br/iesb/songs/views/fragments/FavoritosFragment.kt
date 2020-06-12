@@ -17,9 +17,6 @@ import br.iesb.songs.views.MainInicialActivity
 import br.iesb.songs.views.adapter.MusicAdapter
 import kotlinx.android.synthetic.main.fragment_favoritos.*
 
-/**
- * A simple [Fragment] subclass.
- */
 class FavoritosFragment(context: Context) : Fragment() {
     private val viewModel: DeezerViewModel by lazy {
         ViewModelProvider(this).get(DeezerViewModel::class.java)
@@ -48,21 +45,28 @@ class FavoritosFragment(context: Context) : Fragment() {
         }
     }
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        favoritesRecyclerViewFavList.layoutManager = LinearLayoutManager(context)
+
+        initRecyclerView()
+
         favoritesList()
     }
 
-    private fun favoritesList() {
-        favoritesRecyclerViewFavList.layoutManager = LinearLayoutManager(this.context)
+    private fun initRecyclerView(){
+        favoritesRecyclerViewFavList.layoutManager = LinearLayoutManager(context)
+
+        val adapter = this.context?.let { MusicAdapter(it, mutableListOf(), activity, viewModel, "FAVORITE")}
+        favoritesRecyclerViewFavList.adapter = adapter
 
         viewModel.allFavorites.observe(viewLifecycleOwner, Observer { music ->
-            val adapter = this.context?.let { MusicAdapter(it, music, activity, viewModel, "FAVORITE")}
-            favoritesRecyclerViewFavList.adapter = adapter
+            adapter?.musicSet?.clear()
+            adapter?.musicSet = music.toMutableList()
+            adapter?.notifyDataSetChanged()
         })
+    }
 
+    private fun favoritesList() {
         viewModel.favoritesList()
     }
 }

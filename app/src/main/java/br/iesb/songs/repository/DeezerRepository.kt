@@ -42,14 +42,14 @@ class DeezerRepository(private val context: Context, url: String) : RetrofitInit
     private val auth = FirebaseAuth.getInstance()
     private val uid = auth.uid
 
-    fun search(find: String, callback: (musicSet: Array<Music>) -> Unit) {
+    fun search(find: String, callback: (musicSet: MutableSet<Music>) -> Unit) {
         service.search(find).enqueue(object : Callback<MusicListDTO> {
             override fun onFailure(call: Call<MusicListDTO>, t: Throwable) {
-                callback(arrayOf())
+                callback(mutableSetOf())
             }
 
             override fun onResponse(call: Call<MusicListDTO>, response: Response<MusicListDTO>) {
-                val result = mutableListOf<Music>()
+                val result = mutableSetOf<Music>()
                 val musics = response.body()?.data
 
                 musics?.forEach { m ->
@@ -69,36 +69,35 @@ class DeezerRepository(private val context: Context, url: String) : RetrofitInit
                     result.add(new)
                 }
 
-                callback(result.toTypedArray())
+                callback(result)
             }
         })
     }
 
-    fun artist(id: Int?, callback: (musicCall: Array<Music>) -> Unit) {
+    fun artist(id: Int?, callback: (musicCall: MutableSet<Music>) -> Unit) {
         service.artist(id).enqueue(object : Callback<ArtistDTO> {
             override fun onFailure(call: Call<ArtistDTO>, t: Throwable) {
-                callback(arrayOf())
+                callback(mutableSetOf())
             }
 
             override fun onResponse(call: Call<ArtistDTO>, response: Response<ArtistDTO>) {
                 val artist = response.body()
 
                 if (artist?.tracklist != null) {
-                    val result = mutableListOf<Music>()
+                    val result = mutableSetOf<Music>()
                     tracklistHTTP(artist.tracklist) { song ->
                         song.artistImage = artist.picBig
                         result.add(song)
-                        callback(result.toTypedArray())
+                        callback(result)
                     }
                 }
-
             }
         })
     }
 
-    fun favoritesList(callback: (musicSet: Array<Music>) -> Unit) {
+    fun favoritesList(callback: (musicSet: MutableSet<Music>) -> Unit) {
         val query = database.getReference("$uid/favorites")
-        val result = mutableListOf<Music>()
+        val result = mutableSetOf<Music>()
 
         query.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -116,7 +115,7 @@ class DeezerRepository(private val context: Context, url: String) : RetrofitInit
                     }
                 }
 
-                callback(result.toTypedArray())
+                callback(result)
             }
         })
     }
@@ -148,6 +147,7 @@ class DeezerRepository(private val context: Context, url: String) : RetrofitInit
 
     fun favorite(fav: Music) {
         val favorites = database.getReference("$uid/favorites/${fav.id}")
+
         favorites.setValue(fav)
     }
 

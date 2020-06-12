@@ -3,6 +3,7 @@ package br.iesb.songs.views.adapter
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.View
@@ -17,13 +18,12 @@ import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.views.ArtistsActivity
-import br.iesb.songs.views.fragments.FavoritosFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.music_adapter.view.*
 
 class MusicAdapter(
     private val context: Context,
-    private val musicSet: Array<Music>,
+    var musicSet: MutableList<Music>,
     private val activity: FragmentActivity?,
     private val viewModel: DeezerViewModel,
     private val menuType: String
@@ -71,8 +71,12 @@ class MusicAdapter(
         popup.setOnMenuItemClickListener { itemSelected ->
             if (itemSelected?.itemId == R.id.removeFavorite) {
                 viewModel.removeFavorite(music.id)
-                val intent = Intent(context.applicationContext, FavoritosFragment::class.java)
-                context.startActivity(intent)
+
+                Handler().postDelayed({
+                    musicSet.remove(music)
+                    notifyDataSetChanged()
+                }, 2000)
+
                 return@setOnMenuItemClickListener true
             } else if (itemSelected?.itemId == R.id.favoriteSong) {
                 if (verify != "exists") {
