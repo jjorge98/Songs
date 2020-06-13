@@ -36,6 +36,11 @@ class MusicAdapter(
     private var verify: String = ""
     private val manager =
         principalView?.supportFragmentManager ?: artistView?.supportFragmentManager
+    private val thisActivity = if (principalView != null) {
+        "principal"
+    } else {
+        "artist"
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicViewHolder {
         val view =
@@ -118,7 +123,7 @@ class MusicAdapter(
                 return@setOnMenuItemClickListener true
             } else if (itemSelected?.itemId == R.id.addPlaylist) {
 
-                val playlistFragment = SelectPlaylistDialogFragment(manager, music)
+                val playlistFragment = SelectPlaylistDialogFragment(manager, music, thisActivity)
 
                 val transaction = manager?.beginTransaction()
                 transaction?.add(playlistFragment, "playlistFragment")

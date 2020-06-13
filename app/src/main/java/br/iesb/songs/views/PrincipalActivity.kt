@@ -1,16 +1,15 @@
 package br.iesb.songs.views
 
 import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import br.iesb.songs.R
-import br.iesb.songs.data_class.Music
-import br.iesb.songs.views.adapter.PagerViewAdapter
-import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.view_model.LoginViewModel
+import br.iesb.songs.views.adapter.PagerViewAdapter
 import kotlinx.android.synthetic.main.activity_principal.*
 
 class PrincipalActivity : AppCompatActivity() {
@@ -38,12 +37,14 @@ class PrincipalActivity : AppCompatActivity() {
         mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }
+
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
             }
+
             override fun onPageSelected(position: Int) {
                 changingTabs(position)
             }
@@ -53,10 +54,11 @@ class PrincipalActivity : AppCompatActivity() {
         mViewPager.currentItem = 0
         favoritoBtn.setImageResource(R.drawable.ic_favorite_menu_clarin)
     }
+
     override fun onResume() {
         super.onResume()
         viewModelL.verifyLogin { result ->
-                if (result == 0) {
+            if (result == 0) {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }

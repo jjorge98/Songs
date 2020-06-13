@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.iesb.songs.R
 import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.views.adapter.MusicAdapter
-import br.iesb.songs.views.fragments.FavoritosFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_artists.*
 
@@ -26,6 +25,14 @@ class ArtistsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_artists)
         val intent = this.intent
+
+        backArtistActivity.setOnClickListener {
+            supportFragmentManager.findFragmentByTag("newPlaylist")?.let { it1 ->
+                supportFragmentManager.beginTransaction().remove(
+                    it1
+                ).commit()
+            }
+        }
 
         artist = intent.getStringExtra("artist")
         idArtist = intent.getStringExtra("artistID")
@@ -44,7 +51,7 @@ class ArtistsActivity : AppCompatActivity() {
 
         viewModel.musicSet.observe(this, Observer { music ->
             val newMusic = music.toMutableList()
-            newMusic.forEach{
+            newMusic.forEach {
                 Log.w("TAG", "$it")
             }
             if (music.isNotEmpty()) {

@@ -24,6 +24,8 @@ class LoginActivity : AppCompatActivity() {
         id_button_entrar.setOnClickListener { login() }
         id_recuperar_senha.setOnClickListener { forgotPassword() }
         id_volttar_menu_inicial.setOnClickListener { backMenu() }
+
+        TODO("Put dismiss keyboard in every activity with input")
     }
 
     private fun login() {

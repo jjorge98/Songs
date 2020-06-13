@@ -18,7 +18,8 @@ import kotlinx.android.synthetic.main.fragment_select_playlist_dialog.*
 
 class SelectPlaylistDialogFragment(
     private val manager: FragmentManager?,
-    private val music: Music
+    private val music: Music,
+    private val activeActivity: String
 ) : DialogFragment() {
     private lateinit var playlistName: String
     private var verify: String = ""
@@ -95,8 +96,14 @@ class SelectPlaylistDialogFragment(
     }
 
     private fun newPlaylist(setPlaylists: MutableSet<String>) {
+        val id = if(activeActivity == "principal"){
+            R.id.backPrincipalActivity
+        } else {
+            R.id.backArtistActivity
+        }
+
         manager?.beginTransaction()
-            ?.add(R.id.backFavoriteFragment, NewPlaylistFragment(setPlaylists), "newPlaylist")
+            ?.add(id, NewPlaylistFragment(setPlaylists), "newPlaylist")
             ?.commit()
         this.dismiss()
     }
