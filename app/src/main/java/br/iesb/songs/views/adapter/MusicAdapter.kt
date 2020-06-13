@@ -18,17 +18,24 @@ import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.views.ArtistsActivity
+import br.iesb.songs.views.PrincipalActivity
+import br.iesb.songs.views.fragments.SelectPlaylistDialogFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.music_adapter.view.*
+
 
 class MusicAdapter(
     private val context: Context,
     var musicSet: MutableList<Music>,
     private val activity: FragmentActivity?,
     private val viewModel: DeezerViewModel,
-    private val menuType: String
+    private val menuType: String,
+    principalView: PrincipalActivity?,
+    artistView: ArtistsActivity?
 ) : RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
     private var verify: String = ""
+    private val manager =
+        principalView?.supportFragmentManager ?: artistView?.supportFragmentManager
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicViewHolder {
         val view =
@@ -44,9 +51,15 @@ class MusicAdapter(
         val music = musicSet[position]
 
         holder.song.text = activity?.getString(R.string.holderSong, music.title, music.artist)
-        holder.song.setOnClickListener {
+        holder.itemView.setOnClickListener {
+            manager?.findFragmentByTag("newPlaylist")?.let { it1 ->
+                manager.beginTransaction().remove(
+                    it1
+                ).commit()
+            }
+
             if (music.id != null) {
-                viewModel.verifyFav(music.id) {
+                viewModel.verifyPlaylist(music.id, "favorites") {
                     verify = it
                 }
             }
@@ -80,7 +93,9 @@ class MusicAdapter(
                 return@setOnMenuItemClickListener true
             } else if (itemSelected?.itemId == R.id.favoriteSong) {
                 if (verify != "exists") {
-                    viewModel.favorite(music)
+                    viewModel.addPlaylist(music, "favorites") { response ->
+                        Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     Toast.makeText(
                         context,
@@ -100,6 +115,15 @@ class MusicAdapter(
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+                return@setOnMenuItemClickListener true
+            } else if (itemSelected?.itemId == R.id.addPlaylist) {
+
+                val playlistFragment = SelectPlaylistDialogFragment(manager, music)
+
+                val transaction = manager?.beginTransaction()
+                transaction?.add(playlistFragment, "playlistFragment")
+                transaction?.commit()
+
                 return@setOnMenuItemClickListener true
             } else {
                 val intent = Intent(context.applicationContext, ArtistsActivity::class.java)

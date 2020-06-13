@@ -1,4 +1,4 @@
-package br.iesb.songs.views
+package br.iesb.songs.views.Login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
+import br.iesb.songs.views.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -33,14 +34,14 @@ class RegisterActivity : AppCompatActivity() {
         viewModel.register(email, password, confirmaPassword) { result ->
             Toast.makeText(this, result[1], Toast.LENGTH_LONG).show()
             if (result[0] == "OK") {
-                val intentLogin = Intent(this, MainInicialActivity::class.java)
+                val intentLogin = Intent(this, MainActivity::class.java)
                 startActivity(intentLogin)
             }
         }
     }
 
     private fun backMenu() {
-        val intentBackMenu = Intent(this, MainInicialActivity::class.java)
+        val intentBackMenu = Intent(this, MainActivity::class.java)
         startActivity(intentBackMenu)
     }
 

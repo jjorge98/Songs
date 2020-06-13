@@ -1,4 +1,4 @@
-package br.iesb.songs.views
+package br.iesb.songs.views.Login
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
+import br.iesb.songs.views.MainActivity
+import br.iesb.songs.views.PrincipalActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -43,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun backMenu() {
-        val intentBackMenu = Intent(this, MainInicialActivity::class.java)
+        val intentBackMenu = Intent(this, MainActivity::class.java)
         startActivity(intentBackMenu)
     }
 }

@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
+import br.iesb.songs.views.Login.LoginActivity
+import br.iesb.songs.views.Login.RegisterActivity
 import kotlinx.android.synthetic.main.activity_main_inicial.*
 
-class MainInicialActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private val viewModelL: LoginViewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
     }

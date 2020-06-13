@@ -1,4 +1,4 @@
-package br.iesb.songs.views
+package br.iesb.songs.views.Login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
+import br.iesb.songs.views.MainActivity
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 
 class ForgotPasswordActivity : AppCompatActivity() {
@@ -36,7 +37,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
     }
 
     private fun backMain(){
-        val intentMain = Intent(this, MainInicialActivity::class.java)
+        val intentMain = Intent(this, MainActivity::class.java)
         startActivity(intentMain)
     }
 

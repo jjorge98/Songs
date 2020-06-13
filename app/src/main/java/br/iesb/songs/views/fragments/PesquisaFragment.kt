@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.iesb.songs.R
 import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.view_model.LoginViewModel
-import br.iesb.songs.views.MainInicialActivity
+import br.iesb.songs.views.MainActivity
+import br.iesb.songs.views.PrincipalActivity
 import br.iesb.songs.views.adapter.MusicAdapter
 import kotlinx.android.synthetic.main.fragment_pesquisa.*
 
-class PesquisaFragment(context: Context) : Fragment() {
+class PesquisaFragment(context: Context, private val principalView: PrincipalActivity) :
+    Fragment() {
     private val viewModel: DeezerViewModel by lazy {
         ViewModelProvider(this).get(DeezerViewModel::class.java)
     }
@@ -40,7 +42,7 @@ class PesquisaFragment(context: Context) : Fragment() {
         super.onResume()
         viewModelL.verifyLogin { result ->
             if (result == 0) {
-                val intent = Intent(context, MainInicialActivity::class.java)
+                val intent = Intent(context, MainActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -56,7 +58,17 @@ class PesquisaFragment(context: Context) : Fragment() {
 
     private fun initRecyclerView() {
         searchRecyclerView.layoutManager = LinearLayoutManager(context)
-        val adapter = this.context?.let { MusicAdapter(it, mutableListOf(), activity, viewModel, "SEARCH") }
+        val adapter = this.context?.let {
+            MusicAdapter(
+                it,
+                mutableListOf(),
+                activity,
+                viewModel,
+                "SEARCH",
+                principalView,
+                null
+            )
+        }
         searchRecyclerView.adapter = adapter
 
         viewModel.musicSet.observe(viewLifecycleOwner, Observer { music ->

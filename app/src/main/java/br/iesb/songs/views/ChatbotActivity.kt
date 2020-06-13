@@ -3,7 +3,6 @@ package br.iesb.songs.views
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
-import android.os.Handler
 import br.iesb.songs.R
 
 import kotlinx.android.synthetic.main.activity_chatbot.*
@@ -19,7 +18,7 @@ class ChatbotActivity : AppCompatActivity() {
     }
 
     private fun backListFavoritos() {
-        val intentMain = Intent(this, MainInicialActivity::class.java)
+        val intentMain = Intent(this, MainActivity::class.java)
         startActivity(intentMain)
     }
 

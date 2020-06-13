@@ -9,4 +9,18 @@
     <string name="inputSearch">Músicas, artistas, albuns</string>
     <string name="holderSong">%1$s\n%2$s</string>
     <string name="artist">Músicas de %1$s</string>
+    <string name="addPlaylist">Adicionar a playlist</string>
+    <string name="seeArtist">Ver artista</string>
+    <string name="listenDeezer">Escutar no Deezer</string>
+    <string name="favoriteMusic">Favoritar música</string>
+    <string name="removeFavorite">Remover favorito</string>
+    <string name="selectPlaylist">Selecione a playlist que quer adicionar:</string>
+    <string name="save">Salvar</string>
+    <string name="createPlaylist">Criar Playlist</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="playlistName">Nome da playlist</string>
+    <string name="cancel">Cancelar</string>
+
 </resources>

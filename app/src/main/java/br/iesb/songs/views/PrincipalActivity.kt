@@ -9,9 +9,7 @@ import androidx.viewpager.widget.ViewPager
 import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.views.adapter.PagerViewAdapter
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import br.iesb.songs.view_model.LoginViewModel
 import kotlinx.android.synthetic.main.activity_principal.*
 
@@ -29,10 +27,11 @@ class PrincipalActivity : AppCompatActivity() {
 
         favoritoBtn.setOnClickListener { mViewPager.currentItem = 0 }
         pesquisaBtn.setOnClickListener { mViewPager.currentItem = 1 }
-        localizacaoBtn.setOnClickListener { mViewPager.currentItem = 2 }
+        playlistBtn.setOnClickListener { mViewPager.currentItem = 2 }
+        localizacaoBtn.setOnClickListener { mViewPager.currentItem = 3 }
         LogoutBtn.setOnClickListener { logout() }
 
-        mPagerAdapter = PagerViewAdapter(supportFragmentManager, applicationContext)
+        mPagerAdapter = PagerViewAdapter(supportFragmentManager, applicationContext, this)
         mViewPager.adapter = mPagerAdapter
         mViewPager.offscreenPageLimit = 4
 
@@ -58,7 +57,7 @@ class PrincipalActivity : AppCompatActivity() {
         super.onResume()
         viewModelL.verifyLogin { result ->
                 if (result == 0) {
-                val intent = Intent(this, MainInicialActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -98,21 +97,9 @@ class PrincipalActivity : AppCompatActivity() {
         }
     }
 
-    fun implicitIntent(link: String){
-        webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
-        startActivity(webIntent)
-    }
-
-    fun directArtist(music: Music){
-        val intent = Intent(this, ArtistsActivity::class.java)
-        intent.putExtra("artistName", music.artist)
-        intent.putExtra("artistID", music.artistID)
-        startActivity(intent)
-    }
-
     private fun logout() {
         viewModelL.signOut()
-        val intent = Intent(this, MainInicialActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 }

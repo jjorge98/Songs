@@ -3,14 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/favoriteSong"
-        android:title="Favoritar Música"
+        android:title="@string/favoriteMusic"
         app:showAsAction="never" />
     <item
         android:id="@+id/listenDeezer"
-        android:title="Escutar no Deezer"
+        android:title="@string/listenDeezer"
         app:showAsAction="never" />
     <item
         android:id="@+id/seeArtist"
-        android:title="Ver artista"
+        android:title="@string/seeArtist"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/addPlaylist"
+        android:title="@string/addPlaylist"
         app:showAsAction="never" />
 </menu>

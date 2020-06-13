@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.iesb.songs.R
 
-class PlaylistFragment (context: Context) : Fragment() {
+class PlaylistFragment(context: Context) : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -16,5 +16,4 @@ class PlaylistFragment (context: Context) : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_playlist, container, false)
     }
-
 }
