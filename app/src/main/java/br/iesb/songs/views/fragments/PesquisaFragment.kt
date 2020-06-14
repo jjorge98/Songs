@@ -17,6 +17,7 @@ import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.view_model.LoginViewModel
 import br.iesb.songs.views.PrincipalActivity
 import br.iesb.songs.views.adapter.MusicAdapter
+import kotlinx.android.synthetic.main.fragment_favoritos.*
 import kotlinx.android.synthetic.main.fragment_pesquisa.*
 
 class PesquisaFragment(context: Context, private val principalView: PrincipalActivity) :
@@ -72,6 +73,13 @@ class PesquisaFragment(context: Context, private val principalView: PrincipalAct
             adapter?.musicSet?.clear()
             adapter?.musicSet = music.toMutableList()
             adapter?.notifyDataSetChanged()
+
+            if(adapter?.itemCount == 0){
+                textToGoSearch.visibility = View.VISIBLE
+            } else{
+                textToGoSearch.visibility = View.GONE
+            }
+
         })
     }
 
