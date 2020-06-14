@@ -14,7 +14,7 @@
         android:right="10dp"
         android:top="7dp" />
 
-    <solid android:color="@color/colorPrimary"/>
+    <solid android:color="@color/trans_roxo"/>
 
 
 </shape>

@@ -76,6 +76,13 @@ class FavoritosFragment(context: Context, private val principalView: PrincipalAc
             adapter?.musicSet?.clear()
             adapter?.musicSet = music.toMutableList()
             adapter?.notifyDataSetChanged()
+
+            if(adapter?.itemCount == 0){
+                textToGo.visibility = View.VISIBLE
+            } else{
+                textToGo.visibility = View.GONE
+            }
+
         })
     }
 
