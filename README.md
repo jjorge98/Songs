@@ -10,8 +10,18 @@
 
 ## DESCRIÇÃO DO PROJETO
 
+<p align="justify"> O software apresentado é uma ferramenta que permite ao usuário  ouvir música por meeio do Deezer, plataforma de serviço streaming de áudio, implementado na linguagem Kotlin com especificação para Android.
+    Tendo em vista que o projeto é voltado para a disciplina de Programação para dispositivos móveis do curso de Ciência da Computação do IESB, não foi exigido grande viabilidade da aplicação.</p>
 
 ## MENU E FUNCIONALIDADES
+
+<p align="justify"> O aplicativo Songs é inicializado no menu principal, no qual é necessário fazer um cadastro para ter acesso ao aplicativo, conforme <b><a href="https://user-images.githubusercontent.com/48803004/84548533-33333d00-acdc-11ea-95ef-e63d58b01e64.jpeg">Tela Inicial<a></b>. Caso seja necessário, a opção de ajuda estará disponível para compreenção de navegação no aplicativo. </p>
+   
+<p align="justify">Ao efetuar o Login, o usuário pode verificar sua lista de favoritos, buscar músicas, criar uma playlist e encontrar no mapa usuários que estão escutando a mesma música que você. </p>
+
+<p align="justify"><b>Para ouvir a música:</b> Ao clicar na musíca em seus favoritos, existirá a opção "Escutar no Deezer", pois assim o aplicativo lhe permitirá ouvir a música.</p>
+
+<p align="justify"><b> :warning: &nbsp;&nbsp; Observação:</b> Não é possível escutar a música no próprio aplicativo, apenas no Deezer.</p>
 
 ## FERRAMENTAS
 
@@ -57,3 +67,4 @@ git checkout master
 ## DESENVOLVEDORES
 <p align="justify"> :octocat: <a href="https://github.com/MilenaNobre"> Milena Nobre </a> </p>
 <p align="justify"> :octocat: <a href="https://github.com/jjorge98"> Jorge Júnior </a> </p>
+<p align="justify"> :octocat: <a href="https://github.com/Geovascordeiro"> Geovana Cordeiro</a> </p>
