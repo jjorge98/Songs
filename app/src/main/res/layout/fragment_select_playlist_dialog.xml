@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.fragments.SelectPlaylistDialogFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/backSelectPlaylist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/greyDarken4">
+
+
+        <TextView
+            android:id="@+id/titleSelectPlaylist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/gabriela"
+            android:text="@string/selectPlaylist"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/noPlaylistSelectPlaylist"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinnerSelectPlaylist"
+            android:layout_width="350dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/inputs"
+            android:paddingStart="3dp"
+            android:paddingEnd="3dp"
+            app:layout_constraintBottom_toTopOf="@+id/createSelectPlaylist"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/noPlaylistSelectPlaylist" />
+
+        <Button
+            android:id="@+id/saveSelectPlaylist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/adapter_line"
+            android:fontFamily="@font/gabriela"
+            android:text="@string/save"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createSelectPlaylist" />
+
+        <TextView
+            android:id="@+id/noPlaylistSelectPlaylist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/gabriela"
+            android:text="Você não possui nenhuma playlist. Deseja criar uma?"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/spinnerSelectPlaylist"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleSelectPlaylist" />
+
+        <Button
+            android:id="@+id/createSelectPlaylist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/adapter_line"
+            android:fontFamily="@font/gabriela"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/createPlaylist"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/saveSelectPlaylist"
+            app:layout_constraintEnd_toStartOf="@+id/cancelSelectPlaylist"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerSelectPlaylist" />
+
+        <Button
+            android:id="@+id/cancelSelectPlaylist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/adapter_line"
+            android:fontFamily="@font/gabriela"
+            android:text="@string/cancel"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/createSelectPlaylist"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/createSelectPlaylist"
+            app:layout_constraintTop_toTopOf="@+id/createSelectPlaylist" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

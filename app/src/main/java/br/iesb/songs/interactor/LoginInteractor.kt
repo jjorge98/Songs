@@ -7,7 +7,7 @@ class LoginInteractor(private val context: Context) {
     //variável que chama o repository
     val repository = LoginRepository(context)
 
-    fun signOut(){
+    fun signOut() {
         repository.signOut()
     }
 
@@ -61,7 +61,16 @@ class LoginInteractor(private val context: Context) {
             repository.register(email, password, callback)
         }
     }
-    fun verifyLogin(callback: (result: Int) -> Unit){
+
+    fun verifyLogin(callback: (result: Int) -> Unit) {
         repository.verifyLogin(callback)
+    }
+
+    fun updateName(name: String, callback: (String?) -> Unit) {
+        if (name.isEmpty()) {
+            callback("EMPTY")
+        } else {
+            repository.updateName(name, callback)
+        }
     }
 }

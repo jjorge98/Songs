@@ -1,5 +1,6 @@
 package br.iesb.songs.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -25,23 +26,33 @@ class ArtistsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_artists)
         val intent = this.intent
 
+        backArtistActivity.setOnClickListener {
+            supportFragmentManager.findFragmentByTag("newPlaylist")?.let { it1 ->
+                supportFragmentManager.beginTransaction().remove(
+                    it1
+                ).commit()
+            }
+        }
+
         artist = intent.getStringExtra("artist")
         idArtist = intent.getStringExtra("artistID")
         textViewArtist.text = getString(R.string.artist, artist)
 
         initRecyclerView()
         songsList()
+        BackListaFavoritosFloating.setOnClickListener { backListFavoritos() }
     }
 
     private fun initRecyclerView() {
-        val adapter = MusicAdapter(this, mutableListOf(), this, viewModel, "SEARCH")
+        val adapter =
+            MusicAdapter(this, mutableListOf(), this, viewModel, "SEARCH", null, null, this)
 
         artistSongsRecyclerView.layoutManager = LinearLayoutManager(this.applicationContext)
         artistSongsRecyclerView.adapter = adapter
 
         viewModel.musicSet.observe(this, Observer { music ->
             val newMusic = music.toMutableList()
-            newMusic.forEach{
+            newMusic.forEach {
                 Log.w("TAG", "$it")
             }
             if (music.isNotEmpty()) {
@@ -56,5 +67,10 @@ class ArtistsActivity : AppCompatActivity() {
 
     private fun songsList() {
         viewModel.artist(idArtist?.toInt())
+    }
+
+    private fun backListFavoritos() {
+        val intentMain = Intent(this, PrincipalActivity::class.java)
+        startActivity(intentMain)
     }
 }

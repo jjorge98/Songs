@@ -6,19 +6,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
-import kotlinx.android.synthetic.main.activity_main_inicial.*
+import br.iesb.songs.views.login.LoginActivity
+import br.iesb.songs.views.login.RegisterActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainInicialActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private val viewModelL: LoginViewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_inicial)
+        setContentView(R.layout.activity_main)
 
         id_cadastrar.setOnClickListener { cadastrar() }
         id_login.setOnClickListener { login() }
+        id_chatbot.setOnClickListener { chatbot() }
 
     }
 
@@ -37,5 +40,10 @@ class MainInicialActivity : AppCompatActivity() {
                 startActivity(intentLogin)
             }
         }
+    }
+
+    private fun chatbot() {
+        val operation = Intent(this, ChatbotActivity::class.java)
+        startActivity(operation)
     }
 }

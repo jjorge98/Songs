@@ -1,12 +1,16 @@
-package br.iesb.songs.views
+package br.iesb.songs.views.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
+import br.iesb.songs.views.MainActivity
+import br.iesb.songs.views.PrincipalActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -22,6 +26,11 @@ class LoginActivity : AppCompatActivity() {
         id_button_entrar.setOnClickListener { login() }
         id_recuperar_senha.setOnClickListener { forgotPassword() }
         id_volttar_menu_inicial.setOnClickListener { backMenu() }
+
+        backLogin.setOnTouchListener { _, _ ->
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        }
     }
 
     private fun login() {
@@ -43,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun backMenu() {
-        val intentBackMenu = Intent(this, MainInicialActivity::class.java)
+        val intentBackMenu = Intent(this, MainActivity::class.java)
         startActivity(intentBackMenu)
     }
 }

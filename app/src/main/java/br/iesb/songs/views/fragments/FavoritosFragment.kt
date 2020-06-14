@@ -3,21 +3,23 @@ package br.iesb.songs.views.fragments
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.iesb.songs.R
 import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.view_model.LoginViewModel
-import br.iesb.songs.views.MainInicialActivity
+import br.iesb.songs.views.MainActivity
+import br.iesb.songs.views.PrincipalActivity
 import br.iesb.songs.views.adapter.MusicAdapter
 import kotlinx.android.synthetic.main.fragment_favoritos.*
 
-class FavoritosFragment(context: Context) : Fragment() {
+class FavoritosFragment(context: Context, private val principalView: PrincipalActivity) :
+    Fragment() {
     private val viewModel: DeezerViewModel by lazy {
         ViewModelProvider(this).get(DeezerViewModel::class.java)
     }
@@ -39,7 +41,7 @@ class FavoritosFragment(context: Context) : Fragment() {
         super.onResume()
         viewModelL.verifyLogin { result ->
             if (result == 0) {
-                val intent = Intent(this.context, MainInicialActivity::class.java)
+                val intent = Intent(this.context, MainActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -53,13 +55,24 @@ class FavoritosFragment(context: Context) : Fragment() {
         favoritesList()
     }
 
-    private fun initRecyclerView(){
+    private fun initRecyclerView() {
         favoritesRecyclerViewFavList.layoutManager = LinearLayoutManager(context)
 
-        val adapter = this.context?.let { MusicAdapter(it, mutableListOf(), activity, viewModel, "FAVORITE")}
+        val adapter = this.context?.let {
+            MusicAdapter(
+                it,
+                mutableListOf(),
+                activity,
+                viewModel,
+                "FAVORITE",
+                "favorites",
+                principalView,
+                null
+            )
+        }
         favoritesRecyclerViewFavList.adapter = adapter
 
-        viewModel.allFavorites.observe(viewLifecycleOwner, Observer { music ->
+        viewModel.allSongs.observe(viewLifecycleOwner, Observer { music ->
             adapter?.musicSet?.clear()
             adapter?.musicSet = music.toMutableList()
             adapter?.notifyDataSetChanged()
@@ -67,6 +80,6 @@ class FavoritosFragment(context: Context) : Fragment() {
     }
 
     private fun favoritesList() {
-        viewModel.favoritesList()
+        viewModel.playlist("favorites")
     }
 }

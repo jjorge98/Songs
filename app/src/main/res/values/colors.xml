@@ -4,18 +4,12 @@
     <color name="colorPrimaryDark">#000</color>
     <color name="colorAccent">#ffffff</color>
 
-    //transparente Color
-
-    <color name="trans_roxo">#9050B6</color>
+    <color name="trans_roxo">#4a148c</color>
     <color name="trans_clarinho">#E0BFF3</color>
     <color name="trans_rosa">#D1209F</color>
     <color name="trans_rosabb">#D0A9D5</color>
     <color name="trans_cinza">#5D5C63</color>
-
-
-
-
-
-
-
+    <color name="red">#c62828</color>
+    <color name="green">#1b5e20</color>
+    <color name="greyDarken4">#212121</color>
 </resources>

@@ -2,51 +2,37 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/backArtistActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
-    tools:context=".views.ArtistsActivity">
-
-    <ImageView
-        android:id="@+id/artistImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewArtist"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="@android:color/black"
+    tools:context=".views.fragments.PlaylistSongsFragment">
 
     <TextView
-        android:id="@+id/textViewArtist"
-        android:layout_width="411dp"
+        android:id="@+id/namePlaylistSongs"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="sans-serif-black"
         android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="30sp"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/artistSongsRecyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/playlistSongsRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/artistImage" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/artistSongsRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="24dp"
+        android:id="@+id/playlistSongsRecyclerView"
+        android:layout_width="409dp"
+        android:layout_height="527dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewArtist" />
+        app:layout_constraintTop_toBottomOf="@+id/namePlaylistSongs" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/BackListaFavoritosFloating"
+        android:id="@+id/closePlaylistSongs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
@@ -54,7 +40,6 @@
         android:backgroundTint="@color/trans_roxo"
         android:src="@drawable/ic_arrow_back"
         app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        app:layout_constraintStart_toStartOf="@+id/namePlaylistSongs"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

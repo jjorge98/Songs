@@ -1,13 +1,16 @@
 package br.iesb.songs.repository
 
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 
 class LoginRepository(context: Context) {
     //variável que pega a instancia do firebase auth
     private val auth = FirebaseAuth.getInstance()
 
-    fun signOut(){
+    fun signOut() {
         auth.signOut()
     }
 
@@ -52,9 +55,9 @@ class LoginRepository(context: Context) {
 
         //Coloca o listener para quando completar, a gente verificar se teve sucesso ou falha
         operation.addOnCompleteListener { task ->
-            if(task.isSuccessful){
+            if (task.isSuccessful) {
                 callback("OK")
-            } else{
+            } else {
                 //variável de erro pode ser nula, caso não encontre a mensagem de erro da tarefa
                 val error = task.exception?.localizedMessage
                 callback(error)
@@ -62,12 +65,26 @@ class LoginRepository(context: Context) {
         }
     }
 
-    fun verifyLogin(callback: (result: Int) -> Unit){
-        auth.addAuthStateListener {v ->
-            if(v.currentUser == null){
+    fun verifyLogin(callback: (result: Int) -> Unit) {
+        auth.addAuthStateListener { v ->
+            if (v.currentUser == null) {
                 callback(0)
-            } else{
+            } else {
                 callback(1)
+            }
+        }
+    }
+
+    fun updateName(name: String, callback: (result: String?) -> Unit) {
+        auth.currentUser.let { user ->
+            val request = UserProfileChangeRequest.Builder().setDisplayName(name).build()
+            user?.updateProfile(request)?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    callback("OK")
+                } else {
+                    val error = task.exception?.localizedMessage
+                    callback(error)
+                }
             }
         }
     }

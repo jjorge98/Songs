@@ -18,6 +18,8 @@ import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.views.ArtistsActivity
+import br.iesb.songs.views.PrincipalActivity
+import br.iesb.songs.views.fragments.SelectPlaylistDialogFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.music_adapter.view.*
 
@@ -26,9 +28,19 @@ class MusicAdapter(
     var musicSet: MutableList<Music>,
     private val activity: FragmentActivity?,
     private val viewModel: DeezerViewModel,
-    private val menuType: String
+    private val menuType: String,
+    private val playlist: String?,
+    principalView: PrincipalActivity?,
+    artistView: ArtistsActivity?
 ) : RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
     private var verify: String = ""
+    private val manager =
+        principalView?.supportFragmentManager ?: artistView?.supportFragmentManager
+    private val thisActivity = if (principalView != null) {
+        "principal"
+    } else {
+        "artist"
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicViewHolder {
         val view =
@@ -44,9 +56,15 @@ class MusicAdapter(
         val music = musicSet[position]
 
         holder.song.text = activity?.getString(R.string.holderSong, music.title, music.artist)
-        holder.song.setOnClickListener {
+        holder.itemView.setOnClickListener {
+            manager?.findFragmentByTag("newPlaylist")?.let { it1 ->
+                manager.beginTransaction().remove(
+                    it1
+                ).commit()
+            }
+
             if (music.id != null) {
-                viewModel.verifyFav(music.id) {
+                viewModel.verifyPlaylist(music.id, "favorites") {
                     verify = it
                 }
             }
@@ -60,8 +78,8 @@ class MusicAdapter(
         val popup = PopupMenu(context, holder.itemView)
         val inflater: MenuInflater = popup.menuInflater
 
-        if (menuType == "SEARCH") {
-            inflater.inflate(R.menu.pop_up_search, popup.menu)
+        if (menuType == "PLAYLIST") {
+            inflater.inflate(R.menu.pop_up_playlist, popup.menu)
         } else if (menuType == "FAVORITE") {
             inflater.inflate(R.menu.pop_up_favorite, popup.menu)
         } else {
@@ -70,7 +88,7 @@ class MusicAdapter(
 
         popup.setOnMenuItemClickListener { itemSelected ->
             if (itemSelected?.itemId == R.id.removeFavorite) {
-                viewModel.removeFavorite(music.id)
+                viewModel.removeFromPlaylist("favorites", music.id)
 
                 Handler().postDelayed({
                     musicSet.remove(music)
@@ -80,7 +98,9 @@ class MusicAdapter(
                 return@setOnMenuItemClickListener true
             } else if (itemSelected?.itemId == R.id.favoriteSong) {
                 if (verify != "exists") {
-                    viewModel.favorite(music)
+                    viewModel.addPlaylist(music, "favorites") { response ->
+                        Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     Toast.makeText(
                         context,
@@ -99,6 +119,25 @@ class MusicAdapter(
                         "Não foi possível abrir o Deezer!",
                         Toast.LENGTH_SHORT
                     ).show()
+                }
+                return@setOnMenuItemClickListener true
+            } else if (itemSelected?.itemId == R.id.addPlaylist) {
+
+                val playlistFragment = SelectPlaylistDialogFragment(manager, music, thisActivity)
+
+                val transaction = manager?.beginTransaction()
+                transaction?.add(playlistFragment, "playlistFragment")
+                transaction?.commit()
+
+                return@setOnMenuItemClickListener true
+            } else if (itemSelected?.itemId == R.id.removeFrom) {
+                if (playlist != null) {
+                    viewModel.removeFromPlaylist(playlist, music.id)
+
+                    Handler().postDelayed({
+                        musicSet.remove(music)
+                        notifyDataSetChanged()
+                    }, 2000)
                 }
                 return@setOnMenuItemClickListener true
             } else {
