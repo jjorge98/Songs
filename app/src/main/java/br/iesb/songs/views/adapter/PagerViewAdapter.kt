@@ -25,7 +25,7 @@ internal class PagerViewAdapter(
                 PesquisaFragment(context, view)
             }
             2 -> {
-                PlaylistFragment(context)
+                PlaylistFragment(context, view)
             }
             3 -> {
                 LocationFragment(context)

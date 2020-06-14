@@ -2,7 +2,9 @@ package br.iesb.songs.repository
 
 import ArtistDTO
 import MusicListDTO
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.util.Log
 import br.iesb.songs.data_class.Music
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -208,5 +210,34 @@ class DeezerRepository(private val context: Context, url: String) : RetrofitInit
         val reference = database.getReference("$uid/playlists")
 
         reference.push().setValue(name)
+    }
+
+    fun deletePlaylist(playlist: String) {
+        val reference = database.getReference("$uid/$playlist")
+        val playlistsNode = database.getReference("$uid/playlists")
+
+        reference.removeValue()
+
+        playlistsNode.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                //
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val list = p0.children
+
+                val key = run stop@{
+                    list.forEach { datasnap ->
+                        if(datasnap.getValue(String::class.java) == playlist) return@stop datasnap.key
+                    }
+                }
+
+                if(key != Unit){
+                    val playlistReference = database.getReference("$uid/playlists/$key")
+                    playlistReference.removeValue()
+                }
+            }
+
+        })
     }
 }

@@ -81,4 +81,8 @@ class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
             }
         }
     }
+
+    fun deletePlaylist(playlist: String){
+        interactor.deletePlaylist(playlist)
+    }
 }

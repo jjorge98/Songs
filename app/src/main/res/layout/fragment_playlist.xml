@@ -6,14 +6,28 @@
     android:layout_height="match_parent"
     android:background="@android:color/black">
 
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/playlistsText"
+        android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:text="PLAYLIST"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/playlists"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/playlistsRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playlistsText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

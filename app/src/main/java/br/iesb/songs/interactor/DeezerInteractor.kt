@@ -61,4 +61,8 @@ class DeezerInteractor(context: Context) {
             }
         }
     }
+
+    fun deletePlaylist(playlist: String){
+        repository.deletePlaylist(playlist)
+    }
 }
