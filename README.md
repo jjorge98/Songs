@@ -10,8 +10,8 @@
 
 ## DESCRIÇÃO DO PROJETO
 
-<p align="justify"> O software apresentado é uma ferramenta que permite ao usuário  ouvir música por meeio do Deezer, plataforma de serviço streaming de áudio, implementado na linguagem Kotlin com especificação para Android.
-    Tendo em vista que o projeto é voltado para a disciplina de Programação para dispositivos móveis do curso de Ciência da Computação do IESB, não foi exigido grande viabilidade da aplicação.</p>
+<p align="justify"> O software apresentado é uma ferramenta que permite ao usuário ouvir música por meio do Deezer, plataforma de serviço streaming de áudio, implementado na linguagem Kotlin com especificação para Android.
+    Tendo em vista que o projeto é voltado para a disciplina de Programação para dispositivos móveis do curso de Ciência da Computação do IESB, o que não foi exigido grande viabilidade da aplicação.</p>
 
 ## MENU E FUNCIONALIDADES
 
