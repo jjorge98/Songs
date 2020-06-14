@@ -44,7 +44,8 @@ class ArtistsActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        val adapter = MusicAdapter(this, mutableListOf(), this, viewModel, "SEARCH", null, this)
+        val adapter =
+            MusicAdapter(this, mutableListOf(), this, viewModel, "SEARCH", null, null, this)
 
         artistSongsRecyclerView.layoutManager = LinearLayoutManager(this.applicationContext)
         artistSongsRecyclerView.adapter = adapter

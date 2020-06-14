@@ -17,16 +17,18 @@ class DeezerInteractor(context: Context) {
         repository.artist(id, callback)
     }
 
-    fun favoritesList(callback: (musicSet: MutableSet<Music>) -> Unit) {
-        repository.favoritesList(callback)
+    fun playlist(playlist: String, callback: (musicSet: MutableSet<Music>) -> Unit) {
+        repository.playlist(playlist, callback)
     }
 
     fun addPlaylist(music: Music, playlist: String) {
         repository.addPlaylist(music, playlist)
     }
 
-    fun removeFavorite(id: Int?) {
-        repository.removeFavorite(id)
+    fun removeFromPlaylist(playlist: String, id: Int?) {
+        if (id != null) {
+            repository.removeFromPlaylist(playlist, id)
+        }
     }
 
     fun verifyPlaylist(musicId: Int?, playlist: String, callback: (id: Int) -> Unit) {
@@ -62,7 +64,7 @@ class DeezerInteractor(context: Context) {
         }
     }
 
-    fun deletePlaylist(playlist: String){
+    fun deletePlaylist(playlist: String) {
         repository.deletePlaylist(playlist)
     }
 }

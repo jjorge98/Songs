@@ -65,13 +65,14 @@ class FavoritosFragment(context: Context, private val principalView: PrincipalAc
                 activity,
                 viewModel,
                 "FAVORITE",
+                "favorites",
                 principalView,
                 null
             )
         }
         favoritesRecyclerViewFavList.adapter = adapter
 
-        viewModel.allFavorites.observe(viewLifecycleOwner, Observer { music ->
+        viewModel.allSongs.observe(viewLifecycleOwner, Observer { music ->
             adapter?.musicSet?.clear()
             adapter?.musicSet = music.toMutableList()
             adapter?.notifyDataSetChanged()
@@ -79,6 +80,6 @@ class FavoritosFragment(context: Context, private val principalView: PrincipalAc
     }
 
     private fun favoritesList() {
-        viewModel.favoritesList()
+        viewModel.playlist("favorites")
     }
 }

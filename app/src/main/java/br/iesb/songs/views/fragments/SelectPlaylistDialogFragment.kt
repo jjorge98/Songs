@@ -103,7 +103,7 @@ class SelectPlaylistDialogFragment(
         }
 
         manager?.beginTransaction()
-            ?.add(id, NewPlaylistFragment(setPlaylists), "newPlaylist")
+            ?.add(id, NewPlaylistFragment(setPlaylists, music), "newPlaylist")
             ?.commit()
         this.dismiss()
     }

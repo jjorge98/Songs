@@ -8,7 +8,7 @@ import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
 import br.iesb.songs.views.login.LoginActivity
 import br.iesb.songs.views.login.RegisterActivity
-import kotlinx.android.synthetic.main.activity_main_inicial.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private val viewModelL: LoginViewModel by lazy {
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_inicial)
+        setContentView(R.layout.activity_main)
 
         id_cadastrar.setOnClickListener { cadastrar() }
         id_login.setOnClickListener { login() }

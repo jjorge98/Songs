@@ -21,5 +21,9 @@
     <string name="cancel">Cancelar</string>
     <string name="playlists">Playlists</string>
     <string name="deleteConfirmation">Deseja mesmo excluir a playlist?</string>
+    <string name="login">LOGIN</string>
+    <string name="whatCanIHelpYou">Em que posso ajudar?</string>
+    <string name="register">CADASTRE-SE</string>
+    <string name="removeFromPlaylist">Remover da playlist</string>
 
 </resources>

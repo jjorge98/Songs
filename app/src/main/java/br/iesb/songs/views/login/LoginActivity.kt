@@ -1,7 +1,9 @@
 package br.iesb.songs.views.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -25,7 +27,10 @@ class LoginActivity : AppCompatActivity() {
         id_recuperar_senha.setOnClickListener { forgotPassword() }
         id_volttar_menu_inicial.setOnClickListener { backMenu() }
 
-        TODO("Put dismiss keyboard in every activity with input")
+        backLogin.setOnTouchListener { _, _ ->
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        }
     }
 
     private fun login() {

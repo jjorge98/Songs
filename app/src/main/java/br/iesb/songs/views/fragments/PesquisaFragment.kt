@@ -1,11 +1,12 @@
 package br.iesb.songs.views.fragments
 
+import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.iesb.songs.R
 import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.view_model.LoginViewModel
-import br.iesb.songs.views.MainActivity
 import br.iesb.songs.views.PrincipalActivity
 import br.iesb.songs.views.adapter.MusicAdapter
 import kotlinx.android.synthetic.main.fragment_pesquisa.*
@@ -38,22 +38,18 @@ class PesquisaFragment(context: Context, private val principalView: PrincipalAct
         return inflater.inflate(R.layout.fragment_pesquisa, container, false)
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModelL.verifyLogin { result ->
-            if (result == 0) {
-                val intent = Intent(context, MainActivity::class.java)
-                startActivity(intent)
-            }
-        }
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         initRecyclerView()
 
         searchButton.setOnClickListener { searchList() }
+
+        backSearchFragment.setOnTouchListener { _, _ ->
+            val inputMethodManager: InputMethodManager =
+                requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
+        }
     }
 
     private fun initRecyclerView() {
@@ -65,6 +61,7 @@ class PesquisaFragment(context: Context, private val principalView: PrincipalAct
                 activity,
                 viewModel,
                 "SEARCH",
+                null,
                 principalView,
                 null
             )

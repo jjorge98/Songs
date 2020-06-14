@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.iesb.songs.R
 import br.iesb.songs.views.PrincipalActivity
 import br.iesb.songs.views.fragments.DeleteConfirmationDialogFragment
+import br.iesb.songs.views.fragments.PlaylistSongsFragment
 import kotlinx.android.synthetic.main.playlist_adapter.view.*
 
 class PlaylistsAdapter(var playlists: MutableList<String>, private val view: PrincipalActivity) :
@@ -28,7 +29,7 @@ class PlaylistsAdapter(var playlists: MutableList<String>, private val view: Pri
         val playlist = playlists[position]
 
         holder.name.text = playlist
-        holder.itemView.setOnClickListener { showPlaylistSongs() }
+        holder.itemView.setOnClickListener { showPlaylistSongs(playlist) }
         holder.deleteButton.setOnClickListener { deletePlaylist(playlist) }
     }
 
@@ -41,8 +42,11 @@ class PlaylistsAdapter(var playlists: MutableList<String>, private val view: Pri
         transaction1.commit()
     }
 
-    private fun showPlaylistSongs() {
-        TODO("Do fragment that will contain every song of a playlist")
+    private fun showPlaylistSongs(playlist: String) {
+        val manager = view.supportFragmentManager
+        manager.beginTransaction()
+            .add(R.id.backPrincipalActivity, PlaylistSongsFragment(playlist, view), "playlistSongs")
+            .commit()
     }
 
     class PlaylistViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

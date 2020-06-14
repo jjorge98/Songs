@@ -10,10 +10,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
+import br.iesb.songs.data_class.Music
 import br.iesb.songs.view_model.DeezerViewModel
 import kotlinx.android.synthetic.main.fragment_new_playlist.*
 
-class NewPlaylistFragment(private val setPlaylists: MutableSet<String>) : Fragment() {
+class NewPlaylistFragment(private val setPlaylists: MutableSet<String>, private val music: Music) :
+    Fragment() {
     private val viewModelD: DeezerViewModel by lazy {
         ViewModelProvider(this).get(DeezerViewModel::class.java)
     }
@@ -57,7 +59,10 @@ class NewPlaylistFragment(private val setPlaylists: MutableSet<String>) : Fragme
             Toast.makeText(this.context, response[1], Toast.LENGTH_SHORT).show()
 
             if (response[0] == "OK") {
-                dismiss()
+                viewModelD.addPlaylist(music, name) { responseMusicAdded ->
+                    Toast.makeText(context, responseMusicAdded, Toast.LENGTH_SHORT).show()
+                    dismiss()
+                }
             }
         }
     }

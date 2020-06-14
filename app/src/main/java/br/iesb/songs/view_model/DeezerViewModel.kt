@@ -11,7 +11,7 @@ class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
     val playlists = MutableLiveData<MutableSet<String>>()
 
     val musicSet = MutableLiveData<MutableSet<Music>>()
-    val allFavorites = MutableLiveData<MutableSet<Music>>()
+    val allSongs = MutableLiveData<MutableSet<Music>>()
 
     fun search(find: String) {
         interactor.search(find) { result ->
@@ -26,10 +26,10 @@ class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun favoritesList() {
-        interactor.favoritesList() { result ->
-            musicSet.value?.clear()
-            allFavorites.value = result
+    fun playlist(playlist: String) {
+        allSongs.value?.clear()
+        interactor.playlist(playlist) { result ->
+            allSongs.value = result
         }
     }
 
@@ -40,8 +40,8 @@ class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
         callback(text)
     }
 
-    fun removeFavorite(id: Int?) {
-        interactor.removeFavorite(id)
+    fun removeFromPlaylist(playlist: String, id: Int?) {
+        interactor.removeFromPlaylist(playlist, id)
     }
 
     fun verifyPlaylist(musicId: Int, playlist: String, callback: (verified: String) -> Unit) {
@@ -82,7 +82,7 @@ class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun deletePlaylist(playlist: String){
+    fun deletePlaylist(playlist: String) {
         interactor.deletePlaylist(playlist)
     }
 }

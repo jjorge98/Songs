@@ -2,9 +2,7 @@ package br.iesb.songs.repository
 
 import ArtistDTO
 import MusicListDTO
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.util.Log
 import br.iesb.songs.data_class.Music
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -97,8 +95,8 @@ class DeezerRepository(private val context: Context, url: String) : RetrofitInit
         })
     }
 
-    fun favoritesList(callback: (musicSet: MutableSet<Music>) -> Unit) {
-        val query = database.getReference("$uid/favorites")
+    fun playlist(playlist: String, callback: (musicSet: MutableSet<Music>) -> Unit) {
+        val query = database.getReference("$uid/$playlist")
         val result = mutableSetOf<Music>()
 
         query.addValueEventListener(object : ValueEventListener {
@@ -140,11 +138,9 @@ class DeezerRepository(private val context: Context, url: String) : RetrofitInit
         })
     }
 
-    fun removeFavorite(musicId: Int?) {
-        if (musicId != null) {
-            val remove = database.getReference("$uid/favorites/$musicId")
-            remove.removeValue()
-        }
+    fun removeFromPlaylist(playlist: String, musicId: Int) {
+        val remove = database.getReference("$uid/$playlist/$musicId")
+        remove.removeValue()
     }
 
     fun addPlaylist(music: Music, playlist: String) {
@@ -228,11 +224,11 @@ class DeezerRepository(private val context: Context, url: String) : RetrofitInit
 
                 val key = run stop@{
                     list.forEach { datasnap ->
-                        if(datasnap.getValue(String::class.java) == playlist) return@stop datasnap.key
+                        if (datasnap.getValue(String::class.java) == playlist) return@stop datasnap.key
                     }
                 }
 
-                if(key != Unit){
+                if (key != Unit) {
                     val playlistReference = database.getReference("$uid/playlists/$key")
                     playlistReference.removeValue()
                 }

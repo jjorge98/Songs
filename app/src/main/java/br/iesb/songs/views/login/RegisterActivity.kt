@@ -1,8 +1,10 @@
 package br.iesb.songs.views.login
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
@@ -23,6 +25,11 @@ class RegisterActivity : AppCompatActivity() {
 
         id_butao_cadastrar.setOnClickListener { newAccount() }
         id_voltar_menu.setOnClickListener { backMenu() }
+
+        backRegister.setOnTouchListener { _, _ ->
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        }
     }
 
 

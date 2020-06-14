@@ -23,13 +23,13 @@ import br.iesb.songs.views.fragments.SelectPlaylistDialogFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.music_adapter.view.*
 
-
 class MusicAdapter(
     private val context: Context,
     var musicSet: MutableList<Music>,
     private val activity: FragmentActivity?,
     private val viewModel: DeezerViewModel,
     private val menuType: String,
+    private val playlist: String?,
     principalView: PrincipalActivity?,
     artistView: ArtistsActivity?
 ) : RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
@@ -78,8 +78,8 @@ class MusicAdapter(
         val popup = PopupMenu(context, holder.itemView)
         val inflater: MenuInflater = popup.menuInflater
 
-        if (menuType == "SEARCH") {
-            inflater.inflate(R.menu.pop_up_search, popup.menu)
+        if (menuType == "PLAYLIST") {
+            inflater.inflate(R.menu.pop_up_playlist, popup.menu)
         } else if (menuType == "FAVORITE") {
             inflater.inflate(R.menu.pop_up_favorite, popup.menu)
         } else {
@@ -88,7 +88,7 @@ class MusicAdapter(
 
         popup.setOnMenuItemClickListener { itemSelected ->
             if (itemSelected?.itemId == R.id.removeFavorite) {
-                viewModel.removeFavorite(music.id)
+                viewModel.removeFromPlaylist("favorites", music.id)
 
                 Handler().postDelayed({
                     musicSet.remove(music)
@@ -129,6 +129,16 @@ class MusicAdapter(
                 transaction?.add(playlistFragment, "playlistFragment")
                 transaction?.commit()
 
+                return@setOnMenuItemClickListener true
+            } else if (itemSelected?.itemId == R.id.removeFrom) {
+                if (playlist != null) {
+                    viewModel.removeFromPlaylist(playlist, music.id)
+
+                    Handler().postDelayed({
+                        musicSet.remove(music)
+                        notifyDataSetChanged()
+                    }, 2000)
+                }
                 return@setOnMenuItemClickListener true
             } else {
                 val intent = Intent(context.applicationContext, ArtistsActivity::class.java)
