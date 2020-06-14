@@ -15,8 +15,8 @@
 
 ## MENU E FUNCIONALIDADES
 
-<p align="justify"> O aplicativo Songs é inicializado no menu principal, no qual é necessário fazer um cadastro para ter acesso ao aplicativo, conforme <b><a href="https://user-images.githubusercontent.com/48803004/84602154-9c8d8a00-ae5b-11ea-9c85-10539f2d54d8.jpegg">Tela Inicial<a></b>. Caso seja necessário, a opção de ajuda estará disponível para compreenção de navegação no aplicativo. </p>
-   
+<p align="justify"> O aplicativo Songs é inicializado no menu principal, no qual é necessário fazer um cadastro para ter acesso ao aplicativo, conforme <b><a href="https://user-images.githubusercontent.com/48803004/84602193-f1310500-ae5b-11ea-944f-83ab91dbda21.jpeg">Tela Inicial<a></b>. Caso seja necessário, a opção de ajuda estará disponível para compreenção de navegação no aplicativo. </p>
+    
 <p align="justify">Ao efetuar o Login, o usuário pode verificar sua lista de favoritos, buscar músicas, criar uma playlist e encontrar no mapa usuários que estão escutando a mesma música que você. </p>
 
 <p align="justify"><b>Para ouvir a música:</b> Ao clicar na musíca em seus favoritos, existirá a opção "Escutar no Deezer", pois assim o aplicativo lhe permitirá ouvir a música.</p>
