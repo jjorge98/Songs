@@ -8,7 +8,7 @@ class LoginViewModel(val app: Application) : AndroidViewModel(app) {
     //variável que chama o interactor
     val interactor = LoginInteractor(app.applicationContext)
 
-    fun signOut(){
+    fun signOut() {
         interactor.signOut()
     }
 
@@ -115,7 +115,23 @@ class LoginViewModel(val app: Application) : AndroidViewModel(app) {
             }
         }
     }
-    fun verifyLogin(callback: (result: Int) -> Unit){
+
+    fun verifyLogin(callback: (result: Int) -> Unit) {
         interactor.verifyLogin(callback)
+    }
+
+    fun updateName(name: String, callback: (String) -> Unit) {
+        interactor.updateName(name) { response ->
+            if (response == "OK") {
+                val text = "Nome salvo com sucesso!"
+                callback(text)
+            } else if (response == "EMPTY") {
+                val text = "Por favor, preencha seu nome!"
+                callback(text)
+            } else {
+                val text = response ?: "Ocorreu um erro ao salvar seu nome. Por favor, tente novamente mais tarde"
+                callback(text)
+            }
+        }
     }
 }

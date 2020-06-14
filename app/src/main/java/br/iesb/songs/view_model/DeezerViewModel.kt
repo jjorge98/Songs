@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.interactor.DeezerInteractor
-import kotlinx.coroutines.flow.callbackFlow
 
 class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
     private val interactor = DeezerInteractor(app.applicationContext)
@@ -37,7 +36,7 @@ class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
     fun addPlaylist(music: Music, playlist: String, callback: (String) -> Unit) {
         interactor.addPlaylist(music, playlist)
 
-        val text = "Música \"${music.title}\" adicionada aos favoritos."
+        val text = "Música \"${music.title}\" adicionada com sucesso."
         callback(text)
     }
 
@@ -72,8 +71,9 @@ class DeezerViewModel(val app: Application) : AndroidViewModel(app) {
             if (response == "EMPTY") {
                 val result = arrayOf("ERROR", "Por favor, preencha o nome da playlist!")
                 callback(result)
-            } else if(response == "EQUAL"){
-                val result = arrayOf("ERROR", "O nome de playlist já existe. Por favor informe um novo!")
+            } else if (response == "EQUAL") {
+                val result =
+                    arrayOf("ERROR", "O nome de playlist já existe. Por favor informe um novo!")
                 callback(result)
             } else {
                 val result = arrayOf("OK", "Playlist criada com sucesso!")

@@ -10,7 +10,7 @@
         android:id="@+id/backSelectPlaylist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/trans_cinza">
+        android:background="#212121">
 
 
         <TextView
@@ -53,9 +53,10 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/adapter_line"
+            android:fontFamily="@font/gabriela"
             android:text="@string/save"
             android:textAlignment="center"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -88,11 +89,12 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/adapter_line"
+            android:fontFamily="@font/gabriela"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="@string/createPlaylist"
             android:textAlignment="center"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/saveSelectPlaylist"
             app:layout_constraintEnd_toStartOf="@+id/cancelSelectPlaylist"
@@ -105,9 +107,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/adapter_line"
+            android:fontFamily="@font/gabriela"
             android:text="@string/cancel"
             android:textAlignment="center"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/createSelectPlaylist"
             app:layout_constraintEnd_toEndOf="parent"

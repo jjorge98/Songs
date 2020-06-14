@@ -1,4 +1,4 @@
-package br.iesb.songs.views.Login
+package br.iesb.songs.views.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

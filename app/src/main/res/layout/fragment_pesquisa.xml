@@ -16,7 +16,7 @@
         android:text="@string/searchText"
         android:textAlignment="center"
         android:textColor="#fff"
-        android:textSize="30dp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/inputSearch"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,12 +26,12 @@
 
     <EditText
         android:id="@+id/inputSearch"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/input_pesquisa"
-
         android:drawablePadding="-15dp"
         android:ems="10"
+        android:hapticFeedbackEnabled="false"
         android:hint="@string/inputSearch"
         android:inputType="textPersonName"
         android:textAlignment="center"
