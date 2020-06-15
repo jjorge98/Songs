@@ -25,5 +25,6 @@
     <string name="whatCanIHelpYou">Em que posso ajudar?</string>
     <string name="register">CADASTRE-SE</string>
     <string name="removeFromPlaylist">Remover da playlist</string>
+    <string name="title_activity_share_playlist_maps">Map</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package br.iesb.songs.views.fragments
+package br.iesb.songs.views.fragments.dialog_fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.view_model.DeezerViewModel
+import br.iesb.songs.views.fragments.NewPlaylistFragment
 import kotlinx.android.synthetic.main.fragment_select_playlist_dialog.*
 
 class SelectPlaylistDialogFragment(
@@ -103,7 +104,11 @@ class SelectPlaylistDialogFragment(
         }
 
         manager?.beginTransaction()
-            ?.add(id, NewPlaylistFragment(setPlaylists, music), "newPlaylist")
+            ?.add(id,
+                NewPlaylistFragment(
+                    setPlaylists,
+                    music
+                ), "newPlaylist")
             ?.commit()
         this.dismiss()
     }

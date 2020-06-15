@@ -2,7 +2,9 @@ package br.iesb.songs.repository
 
 import ArtistDTO
 import MusicListDTO
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.util.Log
 import br.iesb.songs.data_class.Music
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -123,16 +125,23 @@ class DeezerRepository(private val context: Context, url: String) : RetrofitInit
     fun verifyPlaylist(musicId: Int, playlist: String, callback: (id: Int?) -> Unit) {
         val a = database.reference
         val query = a.child("$uid/$playlist").orderByChild("id").equalTo(musicId.toDouble())
+        Log.w(TAG, "$musicId, $playlist")
 
-        query.addListenerForSingleValueEvent(object : ValueEventListener {
+        query.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 //
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
+                var i = 0
                 snapshot.children.forEach { result ->
+                    i++
                     val id = result.child("id").getValue(Int::class.java)
                     callback(id)
+                }
+
+                if (i == 0) {
+                    callback(null)
                 }
             }
         })

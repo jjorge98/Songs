@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/greyDarken4"
-    tools:context=".views.fragments.DeleteConfirmationDialogFragment">
+    tools:context=".views.fragments.dialog_fragment.DeleteConfirmationDialogFragment">
 
     <TextView
         android:id="@+id/titleDeleteConfirmation"

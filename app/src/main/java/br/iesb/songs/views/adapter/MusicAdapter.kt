@@ -19,7 +19,7 @@ import br.iesb.songs.data_class.Music
 import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.views.ArtistsActivity
 import br.iesb.songs.views.PrincipalActivity
-import br.iesb.songs.views.fragments.SelectPlaylistDialogFragment
+import br.iesb.songs.views.fragments.dialog_fragment.SelectPlaylistDialogFragment
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.music_adapter.view.*
 
@@ -123,7 +123,12 @@ class MusicAdapter(
                 return@setOnMenuItemClickListener true
             } else if (itemSelected?.itemId == R.id.addPlaylist) {
 
-                val playlistFragment = SelectPlaylistDialogFragment(manager, music, thisActivity)
+                val playlistFragment =
+                    SelectPlaylistDialogFragment(
+                        manager,
+                        music,
+                        thisActivity
+                    )
 
                 val transaction = manager?.beginTransaction()
                 transaction?.add(playlistFragment, "playlistFragment")

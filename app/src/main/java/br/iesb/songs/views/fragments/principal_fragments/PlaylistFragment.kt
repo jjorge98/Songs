@@ -1,4 +1,4 @@
-package br.iesb.songs.views.fragments
+package br.iesb.songs.views.fragments.principal_fragments
 
 import android.content.Context
 import android.os.Bundle

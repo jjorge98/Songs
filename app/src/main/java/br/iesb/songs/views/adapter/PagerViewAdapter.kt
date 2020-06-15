@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import br.iesb.songs.views.PrincipalActivity
-import br.iesb.songs.views.fragments.FavoritosFragment
-import br.iesb.songs.views.fragments.LocationFragment
-import br.iesb.songs.views.fragments.PesquisaFragment
-import br.iesb.songs.views.fragments.PlaylistFragment
+import br.iesb.songs.views.fragments.principal_fragments.FavoritosFragment
+import br.iesb.songs.views.fragments.principal_fragments.LocationFragment
+import br.iesb.songs.views.fragments.principal_fragments.PesquisaFragment
+import br.iesb.songs.views.fragments.principal_fragments.PlaylistFragment
 
 internal class PagerViewAdapter(
     fm: FragmentManager,
@@ -19,18 +19,32 @@ internal class PagerViewAdapter(
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
-                FavoritosFragment(context, view)
+                FavoritosFragment(
+                    context,
+                    view
+                )
             }
             1 -> {
-                PesquisaFragment(context, view)
+                PesquisaFragment(
+                    context,
+                    view
+                )
             }
             2 -> {
-                PlaylistFragment(context, view)
+                PlaylistFragment(
+                    context,
+                    view
+                )
             }
             3 -> {
-                LocationFragment(context)
+                LocationFragment(
+                    context
+                )
             }
-            else -> FavoritosFragment(context, view)
+            else -> FavoritosFragment(
+                context,
+                view
+            )
         }
     }
 

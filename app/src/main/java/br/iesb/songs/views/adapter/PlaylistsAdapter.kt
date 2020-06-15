@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.iesb.songs.R
 import br.iesb.songs.views.PrincipalActivity
-import br.iesb.songs.views.fragments.DeleteConfirmationDialogFragment
+import br.iesb.songs.views.fragments.dialog_fragment.DeleteConfirmationDialogFragment
 import br.iesb.songs.views.fragments.PlaylistSongsFragment
 import kotlinx.android.synthetic.main.playlist_adapter.view.*
 
@@ -35,7 +35,10 @@ class PlaylistsAdapter(var playlists: MutableList<String>, private val view: Pri
 
     private fun deletePlaylist(name: String) {
         val fragment =
-            DeleteConfirmationDialogFragment(name, this)
+            DeleteConfirmationDialogFragment(
+                name,
+                this
+            )
         val manager1 = view.supportFragmentManager
         val transaction1 = manager1.beginTransaction()
         transaction1.add(fragment, "confirmationFragment")
