@@ -120,7 +120,7 @@ class SelectPlaylistDialogFragment(
                 dismiss()
             }
         } else {
-            Toast.makeText(context, "Essa música já está nos favoritos!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Essa música já está em uma playlist!", Toast.LENGTH_SHORT).show()
         }
     }
 }

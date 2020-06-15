@@ -14,6 +14,7 @@ import br.iesb.songs.R
 import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.views.PrincipalActivity
 import br.iesb.songs.views.adapter.MusicAdapter
+import kotlinx.android.synthetic.main.fragment_pesquisa.*
 import kotlinx.android.synthetic.main.fragment_playlist_songs.*
 
 class PlaylistSongsFragment(
@@ -60,6 +61,13 @@ class PlaylistSongsFragment(
         viewModel.allSongs.observe(viewLifecycleOwner, Observer { musics ->
             adapter?.musicSet = musics.toMutableList()
             adapter?.notifyDataSetChanged()
+
+            if(adapter?.itemCount == 0){
+                textToGoListPlayList.visibility = View.VISIBLE
+            } else{
+                textToGoListPlayList.visibility = View.GONE
+            }
+
         })
 
         viewModel.playlist(playlist)

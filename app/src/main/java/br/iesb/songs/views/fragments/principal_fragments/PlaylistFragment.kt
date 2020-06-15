@@ -13,6 +13,7 @@ import br.iesb.songs.R
 import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.views.PrincipalActivity
 import br.iesb.songs.views.adapter.PlaylistsAdapter
+import kotlinx.android.synthetic.main.fragment_favoritos.*
 import kotlinx.android.synthetic.main.fragment_playlist.*
 
 class PlaylistFragment(context: Context, private val principalView: PrincipalActivity) : Fragment() {
@@ -42,6 +43,13 @@ class PlaylistFragment(context: Context, private val principalView: PrincipalAct
         viewModelD.playlists.observe(viewLifecycleOwner, Observer {playlists ->
             adapter.playlists = playlists.toMutableList()
             adapter.notifyDataSetChanged()
+
+            if(adapter?.itemCount == 0){
+                textToGoPlayList.visibility = View.VISIBLE
+            } else{
+                textToGoPlayList.visibility = View.GONE
+            }
+
         })
 
         viewModelD.showPlaylists()

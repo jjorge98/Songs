@@ -70,6 +70,7 @@
         android:layout_height="wrap_content"
         android:text="Esqueci a Senha"
         android:textAlignment="center"
+        android:textColor="@color/trans_roxo"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/id_volttar_menu_inicial"

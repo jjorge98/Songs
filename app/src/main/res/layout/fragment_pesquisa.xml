@@ -64,4 +64,20 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputSearch" />
+
+    <TextView
+        android:id="@+id/textToGoSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PROCURE POR UMA MÚSICA!"
+        android:textAlignment="center"
+        android:textColor="@color/trans_roxo"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/searchRecyclerView"
+        app:layout_constraintEnd_toStartOf="@+id/searchRecyclerView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/searchRecyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/searchRecyclerView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
