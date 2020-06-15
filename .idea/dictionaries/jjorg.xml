@@ -4,19 +4,26 @@
       <w>adicionada</w>
       <w>adicionar</w>
       <w>ajudar</w>
+      <w>aqui</w>
       <w>artista</w>
+      <w>banco</w>
       <w>bosta</w>
       <w>cadastrar</w>
       <w>cadastre</w>
+      <w>cadastro</w>
       <w>cancelar</w>
+      <w>chama</w>
       <w>chatbot</w>
       <w>cinza</w>
       <w>clarinho</w>
+      <w>colocar</w>
+      <w>confirmação</w>
       <w>criada</w>
       <w>criar</w>
       <w>datasnap</w>
       <w>deezer</w>
       <w>deseja</w>
+      <w>digite</w>
       <w>doesnt</w>
       <w>erro</w>
       <w>escutar</w>
@@ -25,10 +32,13 @@
       <w>favoritar</w>
       <w>favorito</w>
       <w>favoritos</w>
+      <w>função</w>
       <w>gson</w>
       <w>informe</w>
       <w>inicial</w>
+      <w>instância</w>
       <w>interactor</w>
+      <w>latlng</w>
       <w>lista</w>
       <w>localização</w>
       <w>mais</w>
@@ -40,13 +50,20 @@
       <w>novo</w>
       <w>ocorreu</w>
       <w>paylists</w>
+      <w>pega</w>
       <w>pesquisa</w>
       <w>posso</w>
       <w>preencha</w>
+      <w>primeiro</w>
       <w>quer</w>
+      <w>recebe</w>
       <w>recuperar</w>
+      <w>recuperação</w>
+      <w>removendo</w>
+      <w>removida</w>
       <w>rosabb</w>
       <w>roxo</w>
+      <w>salva</w>
       <w>salvar</w>
       <w>selecione</w>
       <w>senha</w>
@@ -55,6 +72,10 @@
       <w>tente</w>
       <w>teste</w>
       <w>tracklist</w>
+      <w>usuário</w>
+      <w>variável</w>
+      <w>vazio</w>
+      <w>último</w>
     </words>
   </dictionary>
 </component>

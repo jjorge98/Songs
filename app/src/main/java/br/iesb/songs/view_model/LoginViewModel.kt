@@ -6,7 +6,7 @@ import br.iesb.songs.interactor.LoginInteractor
 
 class LoginViewModel(val app: Application) : AndroidViewModel(app) {
     //variável que chama o interactor
-    val interactor = LoginInteractor(app.applicationContext)
+    private val interactor = LoginInteractor(app.applicationContext)
 
     fun signOut() {
         interactor.signOut()
@@ -129,8 +129,21 @@ class LoginViewModel(val app: Application) : AndroidViewModel(app) {
                 val text = "Por favor, preencha seu nome!"
                 callback(text)
             } else {
-                val text = response ?: "Ocorreu um erro ao salvar seu nome. Por favor, tente novamente mais tarde"
+                val text = response
+                    ?: "Ocorreu um erro ao salvar seu nome. Por favor, tente novamente mais tarde"
                 callback(text)
+            }
+        }
+    }
+
+    fun verifyName(callback: (String) -> Unit) {
+        interactor.verifyName { name ->
+            if (name != null) {
+                if (name.isEmpty()) {
+                    callback("EMPTY")
+                } else {
+                    callback(name)
+                }
             }
         }
     }

@@ -7,7 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 
 class LoginRepository(context: Context) {
-    //variável que pega a instancia do firebase auth
+    //variável que pega a instância do firebase auth
     private val auth = FirebaseAuth.getInstance()
 
     fun signOut() {
@@ -73,6 +73,12 @@ class LoginRepository(context: Context) {
                 callback(1)
             }
         }
+    }
+
+    fun verifyName(callback: (String?) -> Unit){
+        val name = auth.currentUser?.displayName
+
+        callback(name)
     }
 
     fun updateName(name: String, callback: (result: String?) -> Unit) {

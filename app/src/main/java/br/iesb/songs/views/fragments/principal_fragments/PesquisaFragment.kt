@@ -14,20 +14,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.iesb.songs.R
 import br.iesb.songs.view_model.DeezerViewModel
-import br.iesb.songs.view_model.LoginViewModel
+import br.iesb.songs.view_model.PlaylistViewModel
 import br.iesb.songs.views.PrincipalActivity
 import br.iesb.songs.views.adapter.MusicAdapter
-import kotlinx.android.synthetic.main.fragment_favoritos.*
 import kotlinx.android.synthetic.main.fragment_pesquisa.*
 
 class PesquisaFragment(context: Context, private val principalView: PrincipalActivity) :
     Fragment() {
-    private val viewModel: DeezerViewModel by lazy {
+    private val viewModelD: DeezerViewModel by lazy {
         ViewModelProvider(this).get(DeezerViewModel::class.java)
     }
 
-    private val viewModelL: LoginViewModel by lazy {
-        ViewModelProvider(this).get(LoginViewModel::class.java)
+    private val viewModelP: PlaylistViewModel by lazy {
+        ViewModelProvider(this).get(PlaylistViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -60,7 +59,7 @@ class PesquisaFragment(context: Context, private val principalView: PrincipalAct
                 it,
                 mutableListOf(),
                 activity,
-                viewModel,
+                viewModelP,
                 "SEARCH",
                 null,
                 principalView,
@@ -69,14 +68,14 @@ class PesquisaFragment(context: Context, private val principalView: PrincipalAct
         }
         searchRecyclerView.adapter = adapter
 
-        viewModel.musicSet.observe(viewLifecycleOwner, Observer { music ->
+        viewModelD.musicSet.observe(viewLifecycleOwner, Observer { music ->
             adapter?.musicSet?.clear()
             adapter?.musicSet = music.toMutableList()
             adapter?.notifyDataSetChanged()
 
-            if(adapter?.itemCount == 0){
+            if (adapter?.itemCount == 0) {
                 textToGoSearch.visibility = View.VISIBLE
-            } else{
+            } else {
                 textToGoSearch.visibility = View.GONE
             }
 
@@ -86,7 +85,7 @@ class PesquisaFragment(context: Context, private val principalView: PrincipalAct
     private fun searchList() {
         val find: String = inputSearch.text.toString()
 
-        viewModel.search(find)
+        viewModelD.search(find)
         Toast.makeText(this.context, "Buscando...", Toast.LENGTH_LONG).show()
     }
 }

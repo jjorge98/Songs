@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.iesb.songs.R
 import br.iesb.songs.view_model.DeezerViewModel
 import br.iesb.songs.view_model.LoginViewModel
+import br.iesb.songs.view_model.PlaylistViewModel
 import br.iesb.songs.views.MainActivity
 import br.iesb.songs.views.PrincipalActivity
 import br.iesb.songs.views.adapter.MusicAdapter
@@ -20,12 +21,16 @@ import kotlinx.android.synthetic.main.fragment_favoritos.*
 
 class FavoritosFragment(context: Context, private val principalView: PrincipalActivity) :
     Fragment() {
-    private val viewModel: DeezerViewModel by lazy {
+    private val viewModelD: DeezerViewModel by lazy {
         ViewModelProvider(this).get(DeezerViewModel::class.java)
     }
 
     private val viewModelL: LoginViewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
+    }
+
+    private val viewModelP: PlaylistViewModel by lazy {
+        ViewModelProvider(this).get(PlaylistViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -63,7 +68,7 @@ class FavoritosFragment(context: Context, private val principalView: PrincipalAc
                 it,
                 mutableListOf(),
                 activity,
-                viewModel,
+                viewModelP,
                 "FAVORITE",
                 "favorites",
                 principalView,
@@ -72,14 +77,14 @@ class FavoritosFragment(context: Context, private val principalView: PrincipalAc
         }
         favoritesRecyclerViewFavList.adapter = adapter
 
-        viewModel.allSongs.observe(viewLifecycleOwner, Observer { music ->
+        viewModelP.allSongs.observe(viewLifecycleOwner, Observer { music ->
             adapter?.musicSet?.clear()
             adapter?.musicSet = music.toMutableList()
             adapter?.notifyDataSetChanged()
 
-            if(adapter?.itemCount == 0){
+            if (adapter?.itemCount == 0) {
                 textToGo.visibility = View.VISIBLE
-            } else{
+            } else {
                 textToGo.visibility = View.GONE
             }
 
@@ -87,6 +92,6 @@ class FavoritosFragment(context: Context, private val principalView: PrincipalAc
     }
 
     private fun favoritesList() {
-        viewModel.playlist("favorites")
+        viewModelP.playlist("favorites")
     }
 }

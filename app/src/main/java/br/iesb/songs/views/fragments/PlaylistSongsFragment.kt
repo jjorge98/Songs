@@ -1,8 +1,6 @@
 package br.iesb.songs.views.fragments
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.iesb.songs.R
-import br.iesb.songs.view_model.DeezerViewModel
+import br.iesb.songs.view_model.PlaylistViewModel
 import br.iesb.songs.views.PrincipalActivity
 import br.iesb.songs.views.adapter.MusicAdapter
-import kotlinx.android.synthetic.main.fragment_pesquisa.*
 import kotlinx.android.synthetic.main.fragment_playlist_songs.*
 
 class PlaylistSongsFragment(
@@ -22,8 +19,8 @@ class PlaylistSongsFragment(
     private val principalView: PrincipalActivity
 ) :
     Fragment() {
-    private val viewModel: DeezerViewModel by lazy {
-        ViewModelProvider(this).get(DeezerViewModel::class.java)
+    private val viewModelP: PlaylistViewModel by lazy {
+        ViewModelProvider(this).get(PlaylistViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -48,7 +45,7 @@ class PlaylistSongsFragment(
                 it,
                 mutableListOf(),
                 activity,
-                viewModel,
+                viewModelP,
                 "PLAYLIST",
                 playlist,
                 principalView,
@@ -58,19 +55,19 @@ class PlaylistSongsFragment(
         playlistSongsRecyclerView.layoutManager = LinearLayoutManager(context)
         playlistSongsRecyclerView.adapter = adapter
 
-        viewModel.allSongs.observe(viewLifecycleOwner, Observer { musics ->
+        viewModelP.allSongs.observe(viewLifecycleOwner, Observer { musics ->
             adapter?.musicSet = musics.toMutableList()
             adapter?.notifyDataSetChanged()
 
-            if(adapter?.itemCount == 0){
+            if (adapter?.itemCount == 0) {
                 textToGoListPlayList.visibility = View.VISIBLE
-            } else{
+            } else {
                 textToGoListPlayList.visibility = View.GONE
             }
 
         })
 
-        viewModel.playlist(playlist)
+        viewModelP.playlist(playlist)
     }
 
     private fun dismiss() {

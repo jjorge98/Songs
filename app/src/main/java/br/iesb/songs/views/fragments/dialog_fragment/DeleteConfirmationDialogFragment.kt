@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
-import br.iesb.songs.view_model.DeezerViewModel
+import br.iesb.songs.view_model.PlaylistViewModel
 import br.iesb.songs.views.adapter.PlaylistsAdapter
 import kotlinx.android.synthetic.main.fragment_delete_confirmation_dialog.*
 
@@ -16,8 +16,8 @@ class DeleteConfirmationDialogFragment(
     private val playlist: String,
     private val adapter: PlaylistsAdapter
 ) : DialogFragment() {
-    private val viewModel: DeezerViewModel by lazy {
-        ViewModelProvider(this).get(DeezerViewModel::class.java)
+    private val viewModelP: PlaylistViewModel by lazy {
+        ViewModelProvider(this).get(PlaylistViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -36,12 +36,12 @@ class DeleteConfirmationDialogFragment(
     }
 
     private fun delete() {
-        viewModel.deletePlaylist(playlist)
+        viewModelP.deletePlaylist(playlist)
 
         Handler().postDelayed({
             adapter.playlists.remove(playlist)
             adapter.notifyDataSetChanged()
-        }, 1500)
+        }, 2000)
 
         dismiss()
     }

@@ -5,7 +5,7 @@ import br.iesb.songs.repository.LoginRepository
 
 class LoginInteractor(private val context: Context) {
     //variável que chama o repository
-    val repository = LoginRepository(context)
+    private val repository = LoginRepository(context)
 
     fun signOut() {
         repository.signOut()
@@ -72,5 +72,9 @@ class LoginInteractor(private val context: Context) {
         } else {
             repository.updateName(name, callback)
         }
+    }
+
+    fun verifyName(callback: (String?) -> Unit){
+        repository.verifyName (callback)
     }
 }

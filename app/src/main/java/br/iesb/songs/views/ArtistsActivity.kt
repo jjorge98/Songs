@@ -2,22 +2,26 @@ package br.iesb.songs.views
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.iesb.songs.R
 import br.iesb.songs.view_model.DeezerViewModel
+import br.iesb.songs.view_model.PlaylistViewModel
 import br.iesb.songs.views.adapter.MusicAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_artists.*
 
 class ArtistsActivity : AppCompatActivity() {
-
-    private val viewModel: DeezerViewModel by lazy {
+    private val viewModelD: DeezerViewModel by lazy {
         ViewModelProvider(this).get(DeezerViewModel::class.java)
     }
+
+    private val viewModelP: PlaylistViewModel by lazy {
+        ViewModelProvider(this).get(PlaylistViewModel::class.java)
+    }
+
     private var artist: String? = null
     private var idArtist: String? = null
 
@@ -45,16 +49,13 @@ class ArtistsActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         val adapter =
-            MusicAdapter(this, mutableListOf(), this, viewModel, "SEARCH", null, null, this)
+            MusicAdapter(this, mutableListOf(), this, viewModelP, "SEARCH", null, null, this)
 
         artistSongsRecyclerView.layoutManager = LinearLayoutManager(this.applicationContext)
         artistSongsRecyclerView.adapter = adapter
 
-        viewModel.musicSet.observe(this, Observer { music ->
+        viewModelD.musicSet.observe(this, Observer { music ->
             val newMusic = music.toMutableList()
-            newMusic.forEach {
-                Log.w("TAG", "$it")
-            }
             if (music.isNotEmpty()) {
                 Picasso.get().load(newMusic[0].artistImage).into(artistImage)
             }
@@ -66,7 +67,7 @@ class ArtistsActivity : AppCompatActivity() {
     }
 
     private fun songsList() {
-        viewModel.artist(idArtist?.toInt())
+        viewModelD.artist(idArtist?.toInt())
     }
 
     private fun backListFavoritos() {

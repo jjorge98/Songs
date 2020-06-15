@@ -4,7 +4,6 @@ import android.content.Context
 import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.repository.DeezerRepository
-import java.util.*
 
 class DeezerInteractor(context: Context) {
     private val repository = DeezerRepository(context, context.getString(R.string.url))
@@ -15,56 +14,5 @@ class DeezerInteractor(context: Context) {
 
     fun artist(id: Int?, callback: (music: MutableSet<Music>) -> Unit) {
         repository.artist(id, callback)
-    }
-
-    fun playlist(playlist: String, callback: (musicSet: MutableSet<Music>) -> Unit) {
-        repository.playlist(playlist, callback)
-    }
-
-    fun addPlaylist(music: Music, playlist: String) {
-        repository.addPlaylist(music, playlist)
-    }
-
-    fun removeFromPlaylist(playlist: String, id: Int?) {
-        if (id != null) {
-            repository.removeFromPlaylist(playlist, id)
-        }
-    }
-
-    fun verifyPlaylist(musicId: Int?, playlist: String, callback: (id: Int) -> Unit) {
-        if (musicId != null) {
-            repository.verifyPlaylist(musicId, playlist) {
-                if (it == null) {
-                    callback(0)
-                } else {
-                    callback(it)
-                }
-            }
-        }
-    }
-
-    fun showPlaylist(callback: (String?) -> Unit) {
-        repository.showPlaylists(callback)
-    }
-
-    fun newPlaylist(set: MutableSet<String>, name: String, callback: (String) -> Unit) {
-        if (name.isEmpty()) {
-            callback("EMPTY")
-        } else {
-            run stop@{
-                set.forEach { playlist ->
-                    if (playlist.toUpperCase(Locale.ROOT) == name.toUpperCase(Locale.ROOT)) return@stop callback(
-                        "EQUAL"
-                    )
-                }
-
-                repository.newPlaylist(name)
-                callback("OK")
-            }
-        }
-    }
-
-    fun deletePlaylist(playlist: String) {
-        repository.deletePlaylist(playlist)
     }
 }

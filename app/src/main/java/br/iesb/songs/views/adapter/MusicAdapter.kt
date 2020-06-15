@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
-import br.iesb.songs.view_model.DeezerViewModel
+import br.iesb.songs.view_model.PlaylistViewModel
 import br.iesb.songs.views.ArtistsActivity
 import br.iesb.songs.views.PrincipalActivity
 import br.iesb.songs.views.fragments.dialog_fragment.SelectPlaylistDialogFragment
@@ -27,7 +27,7 @@ class MusicAdapter(
     private val context: Context,
     var musicSet: MutableList<Music>,
     private val activity: FragmentActivity?,
-    private val viewModel: DeezerViewModel,
+    private val viewModelP: PlaylistViewModel,
     private val menuType: String,
     private val playlist: String?,
     principalView: PrincipalActivity?,
@@ -64,7 +64,7 @@ class MusicAdapter(
             }
 
             if (music.id != null) {
-                viewModel.verifyPlaylist(music.id, "favorites") {
+                viewModelP.verifyPlaylist(music.id, "favorites") {
                     verify = it
                 }
             }
@@ -88,17 +88,20 @@ class MusicAdapter(
 
         popup.setOnMenuItemClickListener { itemSelected ->
             if (itemSelected?.itemId == R.id.removeFavorite) {
-                viewModel.removeFromPlaylist("favorites", music.id)
+                Toast.makeText(context, "Removendo música...", Toast.LENGTH_SHORT).show()
+                viewModelP.removeFromPlaylist("favorites", music.id)
 
                 Handler().postDelayed({
                     musicSet.remove(music)
                     notifyDataSetChanged()
+                    Toast.makeText(context, "Música removida com sucesso!", Toast.LENGTH_SHORT)
+                        .show()
                 }, 2000)
 
                 return@setOnMenuItemClickListener true
             } else if (itemSelected?.itemId == R.id.favoriteSong) {
                 if (verify != "exists") {
-                    viewModel.addPlaylist(music, "favorites") { response ->
+                    viewModelP.addPlaylist(music, "favorites") { response ->
                         Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
                     }
                 } else {
@@ -137,11 +140,14 @@ class MusicAdapter(
                 return@setOnMenuItemClickListener true
             } else if (itemSelected?.itemId == R.id.removeFrom) {
                 if (playlist != null) {
-                    viewModel.removeFromPlaylist(playlist, music.id)
+                    Toast.makeText(context, "Removendo música...", Toast.LENGTH_SHORT).show()
+                    viewModelP.removeFromPlaylist(playlist, music.id)
 
                     Handler().postDelayed({
                         musicSet.remove(music)
                         notifyDataSetChanged()
+                        Toast.makeText(context, "Música removida com sucesso!", Toast.LENGTH_SHORT)
+                            .show()
                     }, 2000)
                 }
                 return@setOnMenuItemClickListener true

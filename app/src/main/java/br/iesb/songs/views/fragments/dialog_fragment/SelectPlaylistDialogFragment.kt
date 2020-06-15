@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
-import br.iesb.songs.view_model.DeezerViewModel
+import br.iesb.songs.view_model.PlaylistViewModel
 import br.iesb.songs.views.fragments.NewPlaylistFragment
 import kotlinx.android.synthetic.main.fragment_select_playlist_dialog.*
 
@@ -25,8 +25,8 @@ class SelectPlaylistDialogFragment(
     private lateinit var playlistName: String
     private var verify: String = ""
 
-    private val viewModelD: DeezerViewModel by lazy {
-        ViewModelProvider(this).get(DeezerViewModel::class.java)
+    private val viewModelP: PlaylistViewModel by lazy {
+        ViewModelProvider(this).get(PlaylistViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -51,7 +51,7 @@ class SelectPlaylistDialogFragment(
     }
 
     private fun spinnerFill() {
-        viewModelD.playlists.observe(viewLifecycleOwner, Observer { playlists ->
+        viewModelP.playlists.observe(viewLifecycleOwner, Observer { playlists ->
             if (playlists.isNotEmpty()) {
                 titleSelectPlaylist.visibility = View.VISIBLE
                 spinnerSelectPlaylist.visibility = View.VISIBLE
@@ -73,7 +73,7 @@ class SelectPlaylistDialogFragment(
             createSelectPlaylist.setOnClickListener { newPlaylist(playlists) }
         })
 
-        viewModelD.showPlaylists()
+        viewModelP.showPlaylists()
 
         spinnerSelectPlaylist.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -88,7 +88,7 @@ class SelectPlaylistDialogFragment(
             ) {
                 playlistName = parent?.getItemAtPosition(position).toString()
                 music.id?.let {
-                    viewModelD.verifyPlaylist(it, playlistName) { response ->
+                    viewModelP.verifyPlaylist(it, playlistName) { response ->
                         verify = response
                     }
                 }
@@ -97,30 +97,33 @@ class SelectPlaylistDialogFragment(
     }
 
     private fun newPlaylist(setPlaylists: MutableSet<String>) {
-        val id = if(activeActivity == "principal"){
+        val id = if (activeActivity == "principal") {
             R.id.backPrincipalActivity
         } else {
             R.id.backArtistActivity
         }
 
         manager?.beginTransaction()
-            ?.add(id,
+            ?.add(
+                id,
                 NewPlaylistFragment(
                     setPlaylists,
                     music
-                ), "newPlaylist")
+                ), "newPlaylist"
+            )
             ?.commit()
         this.dismiss()
     }
 
     private fun addPlaylist() {
         if (verify != "exists") {
-            viewModelD.addPlaylist(music, playlistName) { response ->
+            viewModelP.addPlaylist(music, playlistName) { response ->
                 Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
                 dismiss()
             }
         } else {
-            Toast.makeText(context, "Essa música já está em uma playlist!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Essa música já está em uma playlist!", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 }

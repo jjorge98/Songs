@@ -11,13 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
-import br.iesb.songs.view_model.DeezerViewModel
+import br.iesb.songs.view_model.PlaylistViewModel
 import kotlinx.android.synthetic.main.fragment_new_playlist.*
 
-class NewPlaylistFragment(private val setPlaylists: MutableSet<String>, private val music: Music) :
+class NewPlaylistFragment(private val setPlaylists: MutableSet<String>, private val music: Music?) :
     Fragment() {
-    private val viewModelD: DeezerViewModel by lazy {
-        ViewModelProvider(this).get(DeezerViewModel::class.java)
+    private val viewModelP: PlaylistViewModel by lazy {
+        ViewModelProvider(this).get(PlaylistViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -55,12 +55,16 @@ class NewPlaylistFragment(private val setPlaylists: MutableSet<String>, private 
     private fun newPlaylist() {
         val name = nameNewPlaylist.text.toString()
 
-        viewModelD.newPlaylist(setPlaylists, name) { response ->
+        viewModelP.newPlaylist(setPlaylists, name) { response ->
             Toast.makeText(this.context, response[1], Toast.LENGTH_SHORT).show()
 
             if (response[0] == "OK") {
-                viewModelD.addPlaylist(music, name) { responseMusicAdded ->
-                    Toast.makeText(context, responseMusicAdded, Toast.LENGTH_SHORT).show()
+                if (music != null) {
+                    viewModelP.addPlaylist(music, name) { responseMusicAdded ->
+                        Toast.makeText(context, responseMusicAdded, Toast.LENGTH_SHORT).show()
+                        dismiss()
+                    }
+                } else {
                     dismiss()
                 }
             }

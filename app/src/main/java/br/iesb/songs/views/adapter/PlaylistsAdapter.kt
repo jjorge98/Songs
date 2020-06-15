@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.iesb.songs.R
 import br.iesb.songs.views.PrincipalActivity
-import br.iesb.songs.views.fragments.dialog_fragment.DeleteConfirmationDialogFragment
 import br.iesb.songs.views.fragments.PlaylistSongsFragment
+import br.iesb.songs.views.fragments.dialog_fragment.DeleteConfirmationDialogFragment
 import kotlinx.android.synthetic.main.playlist_adapter.view.*
 
 class PlaylistsAdapter(var playlists: MutableList<String>, private val view: PrincipalActivity) :

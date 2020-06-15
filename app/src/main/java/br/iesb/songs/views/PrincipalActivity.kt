@@ -11,6 +11,7 @@ import androidx.viewpager.widget.ViewPager
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
 import br.iesb.songs.views.adapter.PagerViewAdapter
+import br.iesb.songs.views.fragments.UserNameFragment
 import kotlinx.android.synthetic.main.activity_principal.*
 
 class PrincipalActivity : AppCompatActivity() {
@@ -23,6 +24,16 @@ class PrincipalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
+
+        viewModelL.verifyName { verified ->
+            if (verified == "EMPTY") {
+                val manager = supportFragmentManager
+
+                manager.beginTransaction()
+                    .add(R.id.backPrincipalActivity, UserNameFragment("doesntExists"), "userName")
+                    .commit()
+            }
+        }
 
         favoritoBtn.setOnClickListener {
             dismissFragments()

@@ -9,7 +9,7 @@
         android:id="@+id/backNewPlaylist"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:background="#150522"
+        android:background="@color/darkPurple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

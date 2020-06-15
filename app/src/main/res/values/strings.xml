@@ -27,4 +27,9 @@
     <string name="removeFromPlaylist">Remover da playlist</string>
     <string name="title_activity_share_playlist_maps">Map</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="titleUserName">Por favor, nos informe seu primeiro e último nome</string>
+    <string name="textHere">Digite aqui</string>
+
 </resources>
