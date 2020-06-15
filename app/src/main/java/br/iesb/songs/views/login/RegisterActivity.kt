@@ -2,14 +2,16 @@ package br.iesb.songs.views.login
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
 import br.iesb.songs.views.MainActivity
+import br.iesb.songs.views.fragments.UserNameFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -41,8 +43,16 @@ class RegisterActivity : AppCompatActivity() {
         viewModel.register(email, password, confirmaPassword) { result ->
             Toast.makeText(this, result[1], Toast.LENGTH_LONG).show()
             if (result[0] == "OK") {
-                val intentLogin = Intent(this, MainActivity::class.java)
-                startActivity(intentLogin)
+                id_butao_cadastrar.visibility = View.GONE
+                val manager = supportFragmentManager
+
+                manager.beginTransaction()
+                    .add(
+                        R.id.backRegister,
+                        UserNameFragment("doesntExists"),
+                        "userName"
+                    )
+                    .commit()
             }
         }
     }

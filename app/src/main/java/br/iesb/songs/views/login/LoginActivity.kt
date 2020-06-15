@@ -11,6 +11,7 @@ import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
 import br.iesb.songs.views.MainActivity
 import br.iesb.songs.views.PrincipalActivity
+import br.iesb.songs.views.fragments.UserNameFragment
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -40,8 +41,22 @@ class LoginActivity : AppCompatActivity() {
         viewModel.login(email, password) { result ->
             Toast.makeText(this, result[1], Toast.LENGTH_SHORT).show()
             if (result[0] == "OK") {
-                val intentLogin = Intent(this, PrincipalActivity::class.java)
-                startActivity(intentLogin)
+                viewModel.verifyName { verified ->
+                    if (verified == "EMPTY") {
+                        val manager = supportFragmentManager
+
+                        manager.beginTransaction()
+                            .add(
+                                R.id.backLogin,
+                                UserNameFragment("doesntExists"),
+                                "userName"
+                            )
+                            .commit()
+                    } else {
+                        val intentLogin = Intent(this, PrincipalActivity::class.java)
+                        startActivity(intentLogin)
+                    }
+                }
             }
         }
     }

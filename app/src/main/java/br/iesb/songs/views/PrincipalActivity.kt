@@ -25,16 +25,6 @@ class PrincipalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
 
-        viewModelL.verifyName { verified ->
-            if (verified == "EMPTY") {
-                val manager = supportFragmentManager
-
-                manager.beginTransaction()
-                    .add(R.id.backPrincipalActivity, UserNameFragment("doesntExists"), "userName")
-                    .commit()
-            }
-        }
-
         favoritoBtn.setOnClickListener {
             dismissFragments()
             mViewPager.currentItem = 0

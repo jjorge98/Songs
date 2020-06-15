@@ -1,9 +1,9 @@
 package br.iesb.songs.views.fragments
 
 import android.app.Activity
-import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
-import br.iesb.songs.views.fragments.principal_fragments.LocationFragment
+import br.iesb.songs.views.PrincipalActivity
 import kotlinx.android.synthetic.main.fragment_user_name.*
 
 class UserNameFragment(private val type: String) : Fragment() {
@@ -31,7 +31,6 @@ class UserNameFragment(private val type: String) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.w(TAG, "TESTEGERE")
 
         if (type != "exist") {
             closeButton.visibility = View.GONE
@@ -61,14 +60,20 @@ class UserNameFragment(private val type: String) : Fragment() {
     }
 
     private fun dismiss() {
-        context?.let { LocationFragment(it).onResume() }
-        val manager = activity?.supportFragmentManager
-
-        manager?.findFragmentByTag("userName")?.let { it1 ->
-            manager.beginTransaction().remove(
-                it1
-            ).commit()
+        if (type == "doesntExists") {
+            val intentLogin = Intent(context, PrincipalActivity::class.java)
+            startActivity(intentLogin)
         }
+
+        Handler().postDelayed({
+            val manager = activity?.supportFragmentManager
+
+            manager?.findFragmentByTag("userName")?.let { it1 ->
+                manager.beginTransaction().remove(
+                    it1
+                ).commit()
+            }
+        }, 1000)
     }
 
 }

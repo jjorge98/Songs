@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
+import br.iesb.songs.views.fragments.UserNameFragment
 import br.iesb.songs.views.login.LoginActivity
 import br.iesb.songs.views.login.RegisterActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -36,8 +37,22 @@ class MainActivity : AppCompatActivity() {
                 val operation = Intent(this, LoginActivity::class.java)
                 startActivity(operation)
             } else {
-                val intentLogin = Intent(this, PrincipalActivity::class.java)
-                startActivity(intentLogin)
+                viewModelL.verifyName { verified ->
+                    if (verified == "EMPTY") {
+                        val manager = supportFragmentManager
+
+                        manager.beginTransaction()
+                            .add(
+                                R.id.backMain,
+                                UserNameFragment("doesntExists"),
+                                "userName"
+                            )
+                            .commit()
+                    } else {
+                        val intentLogin = Intent(this, PrincipalActivity::class.java)
+                        startActivity(intentLogin)
+                    }
+                }
             }
         }
     }
