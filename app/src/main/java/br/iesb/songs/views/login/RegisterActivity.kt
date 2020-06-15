@@ -34,7 +34,6 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-
     private fun newAccount() {
         val email = id_email_cadastro.text.toString()
         val password = id_senha_cadastrar.text.toString()

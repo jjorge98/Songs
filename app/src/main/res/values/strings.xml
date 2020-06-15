@@ -26,10 +26,14 @@
     <string name="register">CADASTRE-SE</string>
     <string name="removeFromPlaylist">Remover da playlist</string>
     <string name="title_activity_share_playlist_maps">Map</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sharedConfirmationTitle">Deseja fazer uma playlist compartilhada com %1$s?</string>
     <string name="titleUserName">Por favor, nos informe seu primeiro e último nome</string>
     <string name="textHere">Digite aqui</string>
+    <string name="confirm">Confirmar</string>
+    <string name="createPlaylistText">Você não possui nenhuma playlist. Deseja criar uma?</string>
+    <string name="locationRequest">Para usar essa funcionalidade, é necessário permitir a sua localização.\nDeseja permitir?</string>
+    <string name="permissionFavorites">Clique nos botões abaixo para permitir ou negar o compartilhamento das músicas favoritas</string>
+    <string name="deny">Negar</string>
+    <string name="allow">Permitir</string>
 
 </resources>

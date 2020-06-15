@@ -10,10 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
+import br.iesb.songs.data_class.User
 import br.iesb.songs.view_model.LoginViewModel
 import br.iesb.songs.view_model.PlaylistViewModel
+import br.iesb.songs.views.PrincipalActivity
+import br.iesb.songs.views.fragments.dialog_fragment.SharePlaylistsConfirmation
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -25,7 +29,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_location.*
 
-class LocationFragment(context: Context) : Fragment(), OnMapReadyCallback,
+class LocationFragment(context: Context, private val principalView: PrincipalActivity) : Fragment(), OnMapReadyCallback,
     GoogleMap.OnMarkerClickListener {
     //Attributes
     var lastSelectedMark: Marker? = null
@@ -41,6 +45,89 @@ class LocationFragment(context: Context) : Fragment(), OnMapReadyCallback,
         ViewModelProvider(this).get(PlaylistViewModel::class.java)
     }
     //End attributes
+
+    //Overrides
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_location, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        titleLocationFragment.visibility = View.GONE
+        denyShareLocationFragment.visibility = View.GONE
+        allowShareLocationFragment.visibility = View.GONE
+
+        allowShareLocationFragment.setOnClickListener { sharePermission() }
+        denyShareLocationFragment.setOnClickListener { removeSharePermission() }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        permissionButton.setOnClickListener {
+            requestPermission()
+            Handler().postDelayed({
+                if (verifyPermission()) {
+                    permissionGranted()
+                }
+            }, 3000)
+        }
+
+        fusedLocationClient =
+            activity?.let { LocationServices.getFusedLocationProviderClient(it) }!!
+
+        val mapFragment =
+            childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        viewModelP.removeUserMap()
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        mMap.uiSettings.isZoomControlsEnabled = true
+        mMap.setOnMarkerClickListener(this)
+
+        if (!verifyPermission()) {
+            requestPermission()
+
+            Handler().postDelayed({
+                if (verifyPermission()) {
+                    permissionGranted()
+                }
+            }, 4000)
+        } else {
+            permissionGranted()
+        }
+    }
+
+    override fun onMarkerClick(marker: Marker?): Boolean {
+        lastSelectedMark = marker
+        marker?.showInfoWindow()
+
+        if (marker != null) {
+            val sharePlaylist = SharePlaylistsConfirmation(marker.tag as User, principalView)
+
+            val manager = activity?.supportFragmentManager
+
+            val transaction = manager?.beginTransaction()
+            transaction?.add(sharePlaylist, "shareFragment")
+            transaction?.commit()
+        }
+
+        return true
+    }
+    //End overrides
 
     //Map permission
     companion object {
@@ -70,11 +157,13 @@ class LocationFragment(context: Context) : Fragment(), OnMapReadyCallback,
     private fun permissionGranted() {
         permissionButton.visibility = View.GONE
         permissionText.visibility = View.GONE
+        titleLocationFragment.visibility = View.VISIBLE
+        allowShareLocationFragment.visibility = View.VISIBLE
+        denyShareLocationFragment.visibility = View.INVISIBLE
 
         mMap.isMyLocationEnabled = true
 
         getUserLocation { latLng ->
-            saveUserData(latLng)
             mMap.animateCamera(
                 CameraUpdateFactory.newLatLngZoom(
                     latLng,
@@ -85,63 +174,34 @@ class LocationFragment(context: Context) : Fragment(), OnMapReadyCallback,
     }
     //End map permission
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_location, container, false)
-    }
+    private fun sharePermission() {
+        getUserLocation { latLng ->
+            saveUserData(latLng)
+            getAllUsers()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        permissionButton.setOnClickListener {
-            requestPermission()
-            Handler().postDelayed({
-                if (verifyPermission()) {
-                    permissionGranted()
-                }
-            }, 3000)
-        }
-
-        fusedLocationClient =
-            activity?.let { LocationServices.getFusedLocationProviderClient(it) }!!
-
-        val mapFragment =
-            childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-    }
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-
-        mMap.uiSettings.isZoomControlsEnabled = true
-        mMap.setOnMarkerClickListener(this)
-
-        if (!verifyPermission()) {
-            requestPermission()
-
-            Handler().postDelayed({
-                if (verifyPermission()) {
-                    permissionGranted()
-                }
-            }, 4000)
-        } else {
-            permissionGranted()
+            allowShareLocationFragment.visibility = View.INVISIBLE
+            denyShareLocationFragment.visibility = View.VISIBLE
         }
     }
 
-    override fun onMarkerClick(marker: Marker?): Boolean {
-        lastSelectedMark = marker
-        marker?.showInfoWindow()
+    private fun removeSharePermission() {
+        viewModelP.removeUserMap()
 
-        return true
+        Handler().postDelayed({
+            mMap.clear()
+            allowShareLocationFragment.visibility = View.VISIBLE
+        }, 1500)
+
+        denyShareLocationFragment.visibility = View.INVISIBLE
     }
 
-    private fun placeMarkerOnMap(location: LatLng, title: String) {
-        val markerOptions = MarkerOptions().position(location).title(title)
-        mMap.addMarker(markerOptions)
+    private fun placeMarkerOnMap(user: User) {
+        if (user.latitude != null && user.longitude != null && user.name != null && user.uid != null) {
+            val location = LatLng(user.latitude, user.longitude)
+
+            val markerOptions = MarkerOptions().position(location).title(user.name)
+            mMap.addMarker(markerOptions).tag = user
+        }
     }
 
     private fun getUserLocation(callback: (LatLng) -> Unit) {
@@ -162,19 +222,16 @@ class LocationFragment(context: Context) : Fragment(), OnMapReadyCallback,
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        if (verifyPermission()) {
-            getUserLocation { latLng ->
-                saveUserData(latLng)
+    private fun getAllUsers() {
+        viewModelP.allUsersMap.observe(viewLifecycleOwner, Observer { users ->
+            mMap.clear()
+            users.forEach { user ->
+                if (user.latitude != null && user.longitude != null && user.name != null && user.uid != null) {
+                    placeMarkerOnMap(user)
+                }
             }
-        }
-    }
+        })
 
-    override fun onPause() {
-        super.onPause()
-
-        viewModelP.removeUserMap()
+        viewModelP.getAllUsersMap()
     }
 }

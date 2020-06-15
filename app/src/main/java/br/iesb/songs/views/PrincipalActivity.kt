@@ -74,6 +74,7 @@ class PrincipalActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 
         val manager = supportFragmentManager
+
         manager.findFragmentByTag("newPlaylist")?.let { it1 ->
             manager.beginTransaction().remove(
                 it1
@@ -81,6 +82,12 @@ class PrincipalActivity : AppCompatActivity() {
         }
 
         manager.findFragmentByTag("playlistSongs")?.let { it1 ->
+            manager.beginTransaction().remove(
+                it1
+            ).commit()
+        }
+
+        manager.findFragmentByTag("sharedFragment")?.let { it1 ->
             manager.beginTransaction().remove(
                 it1
             ).commit()

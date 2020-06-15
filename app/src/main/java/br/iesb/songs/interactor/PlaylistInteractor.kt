@@ -64,7 +64,15 @@ class PlaylistInteractor(private val context: Context) {
         repository.saveUserMap(user)
     }
 
-    fun removeUserMap(){
+    fun removeUserMap() {
         repository.removeUserMap()
+    }
+
+    fun getAllUsersMap(callback: (User?) -> Unit) {
+        repository.getAllUsersMap(callback)
+    }
+
+    fun sharedFavorites(user: User?, callback: (musicSet: MutableSet<Music>) -> Unit) {
+        repository.sharedFavorites(user, callback)
     }
 }

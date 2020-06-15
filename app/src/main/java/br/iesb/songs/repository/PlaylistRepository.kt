@@ -145,4 +145,55 @@ class PlaylistRepository(context: Context) {
             reference.removeValue()
         }
     }
+
+    fun getAllUsersMap(callback: (User?) -> Unit) {
+        val reference = database.getReference("maps")
+
+        reference.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                //
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val list = p0.children
+
+                list.forEach { userNode ->
+                    val user = userNode.getValue(User::class.java)
+
+                    callback(user)
+                }
+            }
+        })
+    }
+
+    fun sharedFavorites(user: User?, callback: (musicSet: MutableSet<Music>) -> Unit) {
+        val result = mutableSetOf<Music>()
+
+        val reference = if (user == null) {
+            database.getReference("$uid/favorites")
+        } else {
+            database.getReference("${user.uid}/favorites")
+        }
+
+        reference.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                //
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val list = p0.children
+
+                list.forEach { child ->
+                    val music = child.getValue(Music::class.java)
+
+                    if (music != null) {
+                        result.add(music)
+                    }
+
+                }
+
+                callback(result)
+            }
+        })
+    }
 }

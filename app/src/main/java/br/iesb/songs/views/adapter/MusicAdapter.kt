@@ -80,6 +80,8 @@ class MusicAdapter(
 
         if (menuType == "PLAYLIST") {
             inflater.inflate(R.menu.pop_up_playlist, popup.menu)
+        } else if (menuType == "SHARE") {
+            TODO("Criar menu share com apenas uma opção: Adicionar a música a playlist compartilhada")
         } else if (menuType == "FAVORITE") {
             inflater.inflate(R.menu.pop_up_favorite, popup.menu)
         } else {

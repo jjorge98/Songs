@@ -71,7 +71,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/gabriela"
-            android:text="Você não possui nenhuma playlist. Deseja criar uma?"
+            android:text="@string/createPlaylistText"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="21sp"

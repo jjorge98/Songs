@@ -38,7 +38,8 @@ internal class PagerViewAdapter(
             }
             3 -> {
                 LocationFragment(
-                    context
+                    context,
+                    view
                 )
             }
             else -> FavoritosFragment(

@@ -13,6 +13,8 @@ class PlaylistViewModel(val app: Application) : AndroidViewModel(app) {
 
     val allSongs = MutableLiveData<MutableSet<Music>>()
     val playlists = MutableLiveData<MutableSet<String>>()
+    val allUsersMap = MutableLiveData<MutableSet<User>>()
+    val favorites = MutableLiveData<MutableSet<Music>>()
 
     fun newPlaylist(set: MutableSet<String>, name: String, callback: (Array<String>) -> Unit) {
         interactor.newPlaylist(set, name) { response ->
@@ -74,12 +76,29 @@ class PlaylistViewModel(val app: Application) : AndroidViewModel(app) {
     }
 
     fun saveUserMap(name: String, latLng: LatLng) {
-        val user = User(name = name, latLng = latLng)
+        val user = User(name = name, latitude = latLng.latitude, longitude = latLng.longitude)
 
         interactor.saveUserMap(user)
     }
 
     fun removeUserMap() {
         interactor.removeUserMap()
+    }
+
+    fun getAllUsersMap() {
+        val users = mutableSetOf<User>()
+        interactor.getAllUsersMap { user ->
+            if (user != null) {
+                users.add(user)
+            }
+
+            allUsersMap.value = users
+        }
+    }
+
+    fun sharedFavorites(user: User?) {
+        interactor.sharedFavorites(user) { set ->
+            favorites.value = set
+        }
     }
 }
