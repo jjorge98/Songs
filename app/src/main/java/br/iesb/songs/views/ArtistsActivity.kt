@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.iesb.songs.R
 import br.iesb.songs.view_model.DeezerViewModel
+import br.iesb.songs.view_model.LoginViewModel
 import br.iesb.songs.view_model.PlaylistViewModel
 import br.iesb.songs.views.adapter.MusicAdapter
 import com.squareup.picasso.Picasso
@@ -20,6 +21,10 @@ class ArtistsActivity : AppCompatActivity() {
 
     private val viewModelP: PlaylistViewModel by lazy {
         ViewModelProvider(this).get(PlaylistViewModel::class.java)
+    }
+
+    private val viewModelL: LoginViewModel by lazy{
+        ViewModelProvider(this).get(LoginViewModel::class.java)
     }
 
     private var artist: String? = null
@@ -45,6 +50,16 @@ class ArtistsActivity : AppCompatActivity() {
         initRecyclerView()
         songsList()
         BackListaFavoritosFloating.setOnClickListener { backListFavoritos() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModelL.verifyLogin { result ->
+            if (result == 0) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun initRecyclerView() {

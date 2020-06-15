@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
 import br.iesb.songs.view_model.PlaylistViewModel
+import br.iesb.songs.views.fragments.UserNameFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -158,7 +159,15 @@ class LocationFragment(context: Context) : Fragment(), OnMapReadyCallback,
 
     private fun saveUserData(latLng: LatLng) {
         viewModelL.verifyName { name ->
-            viewModelP.saveUserMap(name, latLng)
+            if (name == "EMPTY") {
+                val manager = activity?.supportFragmentManager
+
+                manager?.beginTransaction()
+                    ?.add(R.id.backPrincipalActivity, UserNameFragment("doesntExists"), "userName")
+                    ?.commit()
+            } else {
+                viewModelP.saveUserMap(name, latLng)
+            }
         }
     }
 

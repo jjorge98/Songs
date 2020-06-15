@@ -1,6 +1,8 @@
 package br.iesb.songs.view_model
 
 import android.app.Application
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import br.iesb.songs.interactor.LoginInteractor
 

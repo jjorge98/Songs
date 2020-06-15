@@ -21,13 +21,6 @@ import kotlinx.android.synthetic.main.fragment_favoritos.*
 
 class FavoritosFragment(context: Context, private val principalView: PrincipalActivity) :
     Fragment() {
-    private val viewModelD: DeezerViewModel by lazy {
-        ViewModelProvider(this).get(DeezerViewModel::class.java)
-    }
-
-    private val viewModelL: LoginViewModel by lazy {
-        ViewModelProvider(this).get(LoginViewModel::class.java)
-    }
 
     private val viewModelP: PlaylistViewModel by lazy {
         ViewModelProvider(this).get(PlaylistViewModel::class.java)
@@ -40,16 +33,6 @@ class FavoritosFragment(context: Context, private val principalView: PrincipalAc
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_favoritos, container, false)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModelL.verifyLogin { result ->
-            if (result == 0) {
-                val intent = Intent(this.context, MainActivity::class.java)
-                startActivity(intent)
-            }
-        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
