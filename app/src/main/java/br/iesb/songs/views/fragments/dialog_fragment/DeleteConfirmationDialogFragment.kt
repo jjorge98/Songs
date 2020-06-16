@@ -5,6 +5,7 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
@@ -36,12 +37,14 @@ class DeleteConfirmationDialogFragment(
     }
 
     private fun delete() {
+        Toast.makeText(context, "Excluindo playlist...", Toast.LENGTH_LONG).show()
+
         viewModelP.deletePlaylist(playlist)
 
         Handler().postDelayed({
             adapter.playlists.remove(playlist)
             adapter.notifyDataSetChanged()
-        }, 2000)
+        }, 3000)
 
         dismiss()
     }

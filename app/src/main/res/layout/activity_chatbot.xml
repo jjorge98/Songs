@@ -7,45 +7,51 @@
     android:background="@color/darkPurple"
     tools:context=".views.ChatbotActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:background="@drawable/send_text"
-        android:text="CHATBOT"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="305dp" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/messageList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55dp"
+        android:layout_marginStart="10dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+    </android.support.v7.widget.RecyclerView>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/layout_messageArea"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/received_text"
-        android:text="CHATBOT"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="182dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/id_backMenuInicialFloating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="20dp"
-        android:backgroundTint="@color/trans_roxo"
-        android:src="@drawable/ic_arrow_back"
-        app:fabSize="normal"
+        android:orientation="horizontal"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <EditText
+            android:id="@+id/txtMessage"
+            android:hint="@string/textMessage"
+            android:background="@drawable/input_pesquisa"
+            android:layout_gravity="center"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:maxLines="6"/>
+
+        <ImageView
+            android:id="@+id/send"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="3dp"
+            app:srcCompat="@drawable/white_arrow_send"
+            tools:layout_editor_absoluteX="225dp"
+            tools:layout_editor_absoluteY="153dp" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

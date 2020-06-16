@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/caveat_brush"
-        android:text="CRIE UMA PLAYLIST"
+        android:text="@string/createPlaylist2"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textSize="30sp"

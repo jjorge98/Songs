@@ -19,7 +19,7 @@ class ChatbotActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatbot)
 
-        id_backMenuInicialFloating.setOnClickListener { backListFavoritos() }
+//        id_backMenuInicialFloating.setOnClickListener { backListFavoritos() }
     }
 
     private fun backListFavoritos() {
