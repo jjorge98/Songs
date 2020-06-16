@@ -2,6 +2,7 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/annie_use_your_telescope</item>
+        <item>@font/caveat_brush</item>
         <item>@font/gabriela</item>
     </array>
 </resources>
