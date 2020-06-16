@@ -103,7 +103,6 @@ class LocationFragment(context: Context, private val principalView: PrincipalAct
             //
         }
 
-
         allowShareLocationFragment.visibility = View.VISIBLE
         denyShareLocationFragment.visibility = View.INVISIBLE
     }

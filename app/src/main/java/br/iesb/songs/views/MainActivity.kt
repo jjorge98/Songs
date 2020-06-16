@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.iesb.songs.R
+import br.iesb.songs.view_model.ChatbotViewModel
 import br.iesb.songs.view_model.LoginViewModel
 import br.iesb.songs.views.fragments.UserNameFragment
 import br.iesb.songs.views.login.LoginActivity

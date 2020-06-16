@@ -46,6 +46,8 @@ class SelectPlaylistDialogFragment(
 
         saveSelectPlaylist.setOnClickListener { addPlaylist() }
         cancelSelectPlaylist.setOnClickListener { dismiss() }
+        createSelectPlaylist.setOnClickListener { newPlaylist(mutableSetOf()) }
+
 
         spinnerFill()
     }
@@ -69,6 +71,7 @@ class SelectPlaylistDialogFragment(
                 adapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinnerSelectPlaylist.adapter = adapter
             }
+
 
             createSelectPlaylist.setOnClickListener { newPlaylist(playlists) }
         })
