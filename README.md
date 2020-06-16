@@ -34,7 +34,7 @@
 </ul>
 
 ## COMO RODAR A APLICAÇÃO 
-<p align="justify"> Para abrir uma das amostras do projeto no Android Studio, comece fazendo checkout de uma das ramificações(Branchs) de amostra e abra o diretório raiz no Android Studio.</p>
+<p align="justify"> Para abrir uma das amostras do projeto no Android Studio, comece fazendo checkout de uma da ramificações(Branch) pricipal(master) e abra o diretório raiz no Android Studio.</p>
 
 ### CLONANDO O PROJETO
 
