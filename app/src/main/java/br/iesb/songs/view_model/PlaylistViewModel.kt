@@ -88,7 +88,7 @@ class PlaylistViewModel(val app: Application) : AndroidViewModel(app) {
 
     fun getAllUsersMap(location: Location) {
         val users = mutableSetOf<User>()
-        interactor.getAllUsersMap (location) { user ->
+        interactor.getAllUsersMap(location) { user ->
             users.add(user)
 
             allUsersMap.value = users
@@ -108,20 +108,25 @@ class PlaylistViewModel(val app: Application) : AndroidViewModel(app) {
         callback(text)
     }
 
-    fun userLocationVerify(latLng: LatLng, uid: String, callback: (String) -> Unit){
-        interactor.userLocationVerify(latLng, uid){response ->
-            if(response == "OK"){
+    fun userLocationVerify(latLng: LatLng, uid: String, callback: (String) -> Unit) {
+        interactor.userLocationVerify(latLng, uid) { response ->
+            if (response == "OK") {
                 callback("OK")
-            } else if(response == "NOT FOUND"){
-                val text = "Usuário está offline para funcionalidade, portanto não é possível adicionar na playlist compartilhada!"
+            } else if (response == "NOT FOUND") {
+                val text =
+                    "Usuário está offline para funcionalidade, portanto não é possível adicionar na playlist compartilhada!"
                 callback(text)
-            } else if(response == "OUT OF RANGE"){
-                val text = "Usuário está fora do alcance, portanto não é possível adicionar na playlist compartilhada!"
+            } else if (response == "OUT OF RANGE") {
+                val text =
+                    "Usuário está fora do alcance, portanto não é possível adicionar na playlist compartilhada!"
                 callback(text)
             } else {
-                val text = "Ocorreu um erro ao adicionar na playlist compartilhada. Por favor tente novamente mais tarde!"
+                val text =
+                    "Ocorreu um erro ao adicionar na playlist compartilhada. Por favor tente novamente mais tarde!"
                 callback(text)
             }
         }
+        TODO("Pensar em fazer um novo music adapter para fazer as verificações de localização")
     }
 }
+

@@ -91,7 +91,15 @@ class LocationFragment(context: Context, private val principalView: PrincipalAct
     override fun onPause() {
         super.onPause()
 
-        removeSharePermission()
+        viewModelP.removeUserMap()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        mMap.clear()
+        allowShareLocationFragment.visibility = View.VISIBLE
+        denyShareLocationFragment.visibility = View.INVISIBLE
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -101,6 +109,9 @@ class LocationFragment(context: Context, private val principalView: PrincipalAct
         mMap.setOnMarkerClickListener(this)
 
         if (!verifyPermission()) {
+            allowShareLocationFragment.visibility = View.INVISIBLE
+            denyShareLocationFragment.visibility = View.INVISIBLE
+
             requestPermission()
 
             Handler().postDelayed({
@@ -206,7 +217,7 @@ class LocationFragment(context: Context, private val principalView: PrincipalAct
         }
     }
 
-    fun getUserLocation(callback: (LatLng) -> Unit) {
+    private fun getUserLocation(callback: (LatLng) -> Unit) {
         activity?.let {
             fusedLocationClient.lastLocation.addOnSuccessListener(it) { location ->
                 if (location != null) {
