@@ -97,7 +97,13 @@ class LocationFragment(context: Context, private val principalView: PrincipalAct
     override fun onResume() {
         super.onResume()
 
-        mMap.clear()
+        try {
+            mMap.clear()
+        } catch (e: Exception) {
+            //
+        }
+
+
         allowShareLocationFragment.visibility = View.VISIBLE
         denyShareLocationFragment.visibility = View.INVISIBLE
     }
