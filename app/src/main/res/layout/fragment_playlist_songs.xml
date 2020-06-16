@@ -33,12 +33,13 @@
 
     <TextView
         android:id="@+id/textToGoListPlayList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="405dp"
+        android:layout_height="81dp"
+        android:fontFamily="@font/caveat_brush"
         android:text="@string/addMusicToPlaylist"
         android:textAlignment="center"
-        android:textColor="@color/trans_roxo"
-        android:textSize="20sp"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/playlistSongsRecyclerView"
         app:layout_constraintEnd_toStartOf="@+id/playlistSongsRecyclerView"
