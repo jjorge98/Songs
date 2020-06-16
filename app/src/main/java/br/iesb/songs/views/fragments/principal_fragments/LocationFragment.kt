@@ -29,7 +29,8 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_location.*
 
-class LocationFragment(context: Context, private val principalView: PrincipalActivity) : Fragment(), OnMapReadyCallback,
+class LocationFragment(context: Context, private val principalView: PrincipalActivity) : Fragment(),
+    OnMapReadyCallback,
     GoogleMap.OnMarkerClickListener {
     //Attributes
     var lastSelectedMark: Marker? = null
@@ -84,12 +85,13 @@ class LocationFragment(context: Context, private val principalView: PrincipalAct
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onPause() {
+        super.onPause()
 
-        viewModelP.removeUserMap()
+        removeSharePermission()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -204,7 +206,7 @@ class LocationFragment(context: Context, private val principalView: PrincipalAct
         }
     }
 
-    private fun getUserLocation(callback: (LatLng) -> Unit) {
+    fun getUserLocation(callback: (LatLng) -> Unit) {
         activity?.let {
             fusedLocationClient.lastLocation.addOnSuccessListener(it) { location ->
                 if (location != null) {
@@ -225,6 +227,7 @@ class LocationFragment(context: Context, private val principalView: PrincipalAct
     private fun getAllUsers() {
         viewModelP.allUsersMap.observe(viewLifecycleOwner, Observer { users ->
             mMap.clear()
+
             users.forEach { user ->
                 if (user.latitude != null && user.longitude != null && user.name != null && user.uid != null) {
                     placeMarkerOnMap(user)
@@ -232,6 +235,6 @@ class LocationFragment(context: Context, private val principalView: PrincipalAct
             }
         })
 
-        viewModelP.getAllUsersMap()
+        viewModelP.getAllUsersMap(lastLocation)
     }
 }

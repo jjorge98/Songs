@@ -54,6 +54,7 @@ class FavoritosFragment(context: Context, private val principalView: PrincipalAc
                 viewModelP,
                 "FAVORITE",
                 "favorites",
+                null,
                 principalView,
                 null
             )

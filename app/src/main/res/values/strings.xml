@@ -35,5 +35,6 @@
     <string name="permissionFavorites">Clique nos botões abaixo para permitir ou negar o compartilhamento das músicas favoritas</string>
     <string name="deny">Negar</string>
     <string name="allow">Permitir</string>
+    <string name="addSharedPlaylist">Adicionar a playlist compartilhada</string>
 
 </resources>

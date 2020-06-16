@@ -23,7 +23,7 @@ class ArtistsActivity : AppCompatActivity() {
         ViewModelProvider(this).get(PlaylistViewModel::class.java)
     }
 
-    private val viewModelL: LoginViewModel by lazy{
+    private val viewModelL: LoginViewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
     }
 
@@ -64,7 +64,7 @@ class ArtistsActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         val adapter =
-            MusicAdapter(this, mutableListOf(), this, viewModelP, "SEARCH", null, null, this)
+            MusicAdapter(this, mutableListOf(), this, viewModelP, "SEARCH", null, null, null, this)
 
         artistSongsRecyclerView.layoutManager = LinearLayoutManager(this.applicationContext)
         artistSongsRecyclerView.adapter = adapter

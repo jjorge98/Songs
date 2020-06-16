@@ -81,25 +81,30 @@ class SharedFragment(private val user: User, private val principalView: Principa
     }
 
     private fun initRecyclerView() {
-        val adapter = context?.let {
-            MusicAdapter(
-                it,
-                mutableListOf(),
-                activity,
-                viewModelP,
-                "SHARE",
-                null,
-                principalView,
-                null
-            )
-        }
-        recyclerViewShareFragment.layoutManager = LinearLayoutManager(context)
-        recyclerViewShareFragment.adapter = adapter
+        viewModelL.verifyName { name ->
+            val playlist = "Compartilhada entre $name e ${user.name}"
 
-        viewModelP.favorites.observe(viewLifecycleOwner, Observer { set ->
-            adapter?.musicSet = set.toMutableList()
-            adapter?.notifyDataSetChanged()
-        })
+            val adapter = context?.let {
+                MusicAdapter(
+                    it,
+                    mutableListOf(),
+                    activity,
+                    viewModelP,
+                    "SHARE",
+                    playlist,
+                    user,
+                    principalView,
+                    null
+                )
+            }
+            recyclerViewShareFragment.layoutManager = LinearLayoutManager(context)
+            recyclerViewShareFragment.adapter = adapter
+
+            viewModelP.favorites.observe(viewLifecycleOwner, Observer { set ->
+                adapter?.musicSet = set.toMutableList()
+                adapter?.notifyDataSetChanged()
+            })
+        }
     }
 
     private fun dismiss() {

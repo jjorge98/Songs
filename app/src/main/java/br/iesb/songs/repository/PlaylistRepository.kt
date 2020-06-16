@@ -4,10 +4,7 @@ import android.content.Context
 import br.iesb.songs.data_class.Music
 import br.iesb.songs.data_class.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 
 class PlaylistRepository(context: Context) {
     private val database = FirebaseDatabase.getInstance()
@@ -146,7 +143,7 @@ class PlaylistRepository(context: Context) {
         }
     }
 
-    fun getAllUsersMap(callback: (User?) -> Unit) {
+    fun getAllUsersMap(callback: (User) -> Unit) {
         val reference = database.getReference("maps")
 
         reference.addValueEventListener(object : ValueEventListener {
@@ -160,7 +157,9 @@ class PlaylistRepository(context: Context) {
                 list.forEach { userNode ->
                     val user = userNode.getValue(User::class.java)
 
-                    callback(user)
+                    if (user != null && user.uid != uid) {
+                        callback(user)
+                    }
                 }
             }
         })
@@ -193,6 +192,63 @@ class PlaylistRepository(context: Context) {
                 }
 
                 callback(result)
+            }
+        })
+    }
+
+    fun addSharedPlaylist(music: Music, playlist: String, user: User) {
+        val favorites = database.getReference("$uid/$playlist/${music.id}")
+        val favorites2 = database.getReference("${user.uid}/$playlist/${music.id}")
+        val reference = database.getReference("$uid/playlists")
+        val reference2 = database.getReference("${user.uid}/playlists")
+
+        favorites.setValue(music)
+        favorites2.setValue(music)
+
+        verifyExistence(reference, playlist)
+        verifyExistence(reference2, playlist)
+    }
+
+    private fun verifyExistence(reference: DatabaseReference, playlist: String) {
+        reference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                //
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val list = p0.children
+
+                run stop@{
+                    list.forEach { ds ->
+                        if (ds.getValue(String::class.java) == playlist) return@stop
+                    }
+
+                    reference.push().setValue(playlist)
+                }
+            }
+        })
+    }
+
+    fun userLocationVerify(uid: String, callback: (User?) -> Unit) {
+        val reference = database.getReference("maps/$uid")
+
+        reference.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                //
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val list = p0.children
+
+                run stop@{
+                    list.forEach { userNode ->
+                        val user = userNode.getValue(User::class.java)
+
+                        if (user != null && user.uid != uid) return@stop callback(user)
+                    }
+
+                    callback(null)
+                }
             }
         })
     }

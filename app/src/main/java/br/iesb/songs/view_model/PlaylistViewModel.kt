@@ -1,6 +1,7 @@
 package br.iesb.songs.view_model
 
 import android.app.Application
+import android.location.Location
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import br.iesb.songs.data_class.Music
@@ -85,12 +86,10 @@ class PlaylistViewModel(val app: Application) : AndroidViewModel(app) {
         interactor.removeUserMap()
     }
 
-    fun getAllUsersMap() {
+    fun getAllUsersMap(location: Location) {
         val users = mutableSetOf<User>()
-        interactor.getAllUsersMap { user ->
-            if (user != null) {
-                users.add(user)
-            }
+        interactor.getAllUsersMap (location) { user ->
+            users.add(user)
 
             allUsersMap.value = users
         }
@@ -99,6 +98,30 @@ class PlaylistViewModel(val app: Application) : AndroidViewModel(app) {
     fun sharedFavorites(user: User?) {
         interactor.sharedFavorites(user) { set ->
             favorites.value = set
+        }
+    }
+
+    fun addSharedPlaylist(music: Music, playlist: String, user: User, callback: (String) -> Unit) {
+        interactor.addSharedPlaylist(music, playlist, user)
+
+        val text = "Música \"${music.title}\" adicionada com sucesso."
+        callback(text)
+    }
+
+    fun userLocationVerify(latLng: LatLng, uid: String, callback: (String) -> Unit){
+        interactor.userLocationVerify(latLng, uid){response ->
+            if(response == "OK"){
+                callback("OK")
+            } else if(response == "NOT FOUND"){
+                val text = "Usuário está offline para funcionalidade, portanto não é possível adicionar na playlist compartilhada!"
+                callback(text)
+            } else if(response == "OUT OF RANGE"){
+                val text = "Usuário está fora do alcance, portanto não é possível adicionar na playlist compartilhada!"
+                callback(text)
+            } else {
+                val text = "Ocorreu um erro ao adicionar na playlist compartilhada. Por favor tente novamente mais tarde!"
+                callback(text)
+            }
         }
     }
 }

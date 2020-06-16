@@ -62,6 +62,7 @@ class PesquisaFragment(context: Context, private val principalView: PrincipalAct
                 viewModelP,
                 "SEARCH",
                 null,
+                null,
                 principalView,
                 null
             )

@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import br.iesb.songs.R
 import br.iesb.songs.data_class.Music
+import br.iesb.songs.data_class.User
 import br.iesb.songs.view_model.PlaylistViewModel
 import br.iesb.songs.views.ArtistsActivity
 import br.iesb.songs.views.PrincipalActivity
@@ -30,6 +31,7 @@ class MusicAdapter(
     private val viewModelP: PlaylistViewModel,
     private val menuType: String,
     private val playlist: String?,
+    private val user: User?,
     principalView: PrincipalActivity?,
     artistView: ArtistsActivity?
 ) : RecyclerView.Adapter<MusicAdapter.MusicViewHolder>() {
@@ -81,7 +83,7 @@ class MusicAdapter(
         if (menuType == "PLAYLIST") {
             inflater.inflate(R.menu.pop_up_playlist, popup.menu)
         } else if (menuType == "SHARE") {
-            TODO("Criar menu share com apenas uma opção: Adicionar a música a playlist compartilhada")
+            inflater.inflate(R.menu.pop_up_share_favorites, popup.menu)
         } else if (menuType == "FAVORITE") {
             inflater.inflate(R.menu.pop_up_favorite, popup.menu)
         } else {
@@ -127,7 +129,6 @@ class MusicAdapter(
                 }
                 return@setOnMenuItemClickListener true
             } else if (itemSelected?.itemId == R.id.addPlaylist) {
-
                 val playlistFragment =
                     SelectPlaylistDialogFragment(
                         manager,
@@ -152,6 +153,20 @@ class MusicAdapter(
                             .show()
                     }, 2000)
                 }
+                return@setOnMenuItemClickListener true
+            } else if (itemSelected?.itemId == R.id.addSharedPlaylist) {
+                Toast.makeText(
+                    context,
+                    "Adicionando música a playlist compartilhada...",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                playlist?.let {
+                    viewModelP.addSharedPlaylist(music, it, user as User) { response ->
+                        Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
                 return@setOnMenuItemClickListener true
             } else {
                 val intent = Intent(context.applicationContext, ArtistsActivity::class.java)

@@ -48,6 +48,7 @@ class PlaylistSongsFragment(
                 viewModelP,
                 "PLAYLIST",
                 playlist,
+                null,
                 principalView,
                 null
             )
