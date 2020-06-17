@@ -11,12 +11,12 @@ class ChatbotViewModel(private val app: Application) : AndroidViewModel(app) {
     fun sendText(text: String, email: String, sessionId: String, callback: (String) -> Unit) {
         val request = DialogflowRequest(text, email, sessionId)
 
-        interactor.sendText(request) {response ->
+        interactor.sendText(request) { response ->
             callback(response)
         }
     }
 
-    fun verifyEmpty(text: String, callback: (String) -> Unit){
+    fun verifyEmpty(text: String, callback: (String) -> Unit) {
         interactor.verifyEmpty(text, callback)
     }
 }

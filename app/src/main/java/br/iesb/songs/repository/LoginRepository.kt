@@ -1,8 +1,6 @@
 package br.iesb.songs.repository
 
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 
@@ -75,7 +73,7 @@ class LoginRepository(context: Context) {
         }
     }
 
-    fun verifyName(callback: (String?) -> Unit){
+    fun verifyName(callback: (String?) -> Unit) {
         val name = auth.currentUser?.displayName
 
         callback(name)

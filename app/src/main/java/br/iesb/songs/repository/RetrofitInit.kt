@@ -8,7 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-open class RetrofitInit (context: Context, baseUrl: String){
+open class RetrofitInit(context: Context, baseUrl: String) {
     val retrofit: Retrofit
     private val gson: Gson
 

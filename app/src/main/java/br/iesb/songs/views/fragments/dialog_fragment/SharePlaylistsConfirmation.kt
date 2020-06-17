@@ -37,7 +37,8 @@ class SharePlaylistsConfirmation(
     private fun shareConfirmed() {
         val manager = principalView.supportFragmentManager
 
-        manager.beginTransaction().add(R.id.backPrincipalActivity, SharedFragment(user, principalView), "sharedFragment")
+        manager.beginTransaction()
+            .add(R.id.backPrincipalActivity, SharedFragment(user, principalView), "sharedFragment")
             .commit()
 
         dismiss()

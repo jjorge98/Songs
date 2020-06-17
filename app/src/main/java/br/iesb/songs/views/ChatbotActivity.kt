@@ -2,7 +2,6 @@ package br.iesb.songs.views
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -13,7 +12,6 @@ import br.iesb.songs.views.adapter.MessageAdapter
 import kotlinx.android.synthetic.main.activity_chatbot.*
 import java.util.*
 import kotlin.random.Random
-
 
 class ChatbotActivity : AppCompatActivity() {
     private val viewModelC: ChatbotViewModel by lazy {
@@ -58,7 +56,6 @@ class ChatbotActivity : AppCompatActivity() {
                 val sessionId = data + random
 
                 viewModelC.sendText(message, "song@song.com", sessionId) { chatMessage ->
-                    Log.w("TAG", chatMessage)
                     adapter.addMessage(chatMessage, "GEO")
                 }
             }

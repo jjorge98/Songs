@@ -33,7 +33,7 @@ class LocationFragment(context: Context, private val principalView: PrincipalAct
     OnMapReadyCallback,
     GoogleMap.OnMarkerClickListener {
     //Attributes
-    var lastSelectedMark: Marker? = null
+    private var lastSelectedMark: Marker? = null
 
     private lateinit var mMap: GoogleMap
     private lateinit var lastLocation: Location

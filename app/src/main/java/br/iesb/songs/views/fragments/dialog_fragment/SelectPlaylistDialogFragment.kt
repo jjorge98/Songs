@@ -72,7 +72,6 @@ class SelectPlaylistDialogFragment(
                 spinnerSelectPlaylist.adapter = adapter
             }
 
-
             createSelectPlaylist.setOnClickListener { newPlaylist(playlists) }
         })
 

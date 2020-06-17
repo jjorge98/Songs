@@ -11,7 +11,6 @@ import androidx.viewpager.widget.ViewPager
 import br.iesb.songs.R
 import br.iesb.songs.view_model.LoginViewModel
 import br.iesb.songs.views.adapter.PagerViewAdapter
-import br.iesb.songs.views.fragments.UserNameFragment
 import kotlinx.android.synthetic.main.activity_principal.*
 
 class PrincipalActivity : AppCompatActivity() {

@@ -74,7 +74,7 @@ class LoginInteractor(private val context: Context) {
         }
     }
 
-    fun verifyName(callback: (String?) -> Unit){
-        repository.verifyName (callback)
+    fun verifyName(callback: (String?) -> Unit) {
+        repository.verifyName(callback)
     }
 }

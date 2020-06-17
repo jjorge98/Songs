@@ -102,31 +102,16 @@ class PlaylistViewModel(val app: Application) : AndroidViewModel(app) {
     }
 
     fun addSharedPlaylist(music: Music, playlist: String, user: User, callback: (String) -> Unit) {
-        interactor.addSharedPlaylist(music, playlist, user)
-
-        val text = "Música \"${music.title}\" adicionada com sucesso."
-        callback(text)
-    }
-
-    fun userLocationVerify(latLng: LatLng, uid: String, callback: (String) -> Unit) {
-        interactor.userLocationVerify(latLng, uid) { response ->
+        interactor.addSharedPlaylist(music, playlist, user) { response ->
             if (response == "OK") {
-                callback("OK")
+                val text = "Música \"${music.title}\" adicionada com sucesso."
+                callback(text)
             } else if (response == "NOT FOUND") {
                 val text =
                     "Usuário está offline para funcionalidade, portanto não é possível adicionar na playlist compartilhada!"
                 callback(text)
-            } else if (response == "OUT OF RANGE") {
-                val text =
-                    "Usuário está fora do alcance, portanto não é possível adicionar na playlist compartilhada!"
-                callback(text)
-            } else {
-                val text =
-                    "Ocorreu um erro ao adicionar na playlist compartilhada. Por favor tente novamente mais tarde!"
-                callback(text)
             }
         }
-        TODO("Pensar em fazer um novo music adapter para fazer as verificações de localização")
     }
 }
 

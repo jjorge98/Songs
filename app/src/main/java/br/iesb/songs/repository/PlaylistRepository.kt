@@ -230,9 +230,10 @@ class PlaylistRepository(context: Context) {
     }
 
     fun userLocationVerify(uid: String, callback: (User?) -> Unit) {
-        val reference = database.getReference("maps/$uid")
+        val reference = database.getReference("maps")
+        val query = reference.orderByChild("uid").equalTo(uid)
 
-        reference.addValueEventListener(object : ValueEventListener {
+        query.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 //
             }
@@ -240,13 +241,10 @@ class PlaylistRepository(context: Context) {
             override fun onDataChange(p0: DataSnapshot) {
                 val list = p0.children
 
-                run stop@{
-                    list.forEach { userNode ->
-                        val user = userNode.getValue(User::class.java)
-
-                        if (user != null && user.uid != uid) return@stop callback(user)
-                    }
-
+                try {
+                    val user = list.first().getValue(User::class.java)
+                    callback(user)
+                } catch (e: Exception) {
                     callback(null)
                 }
             }

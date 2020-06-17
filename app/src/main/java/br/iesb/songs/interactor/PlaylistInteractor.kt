@@ -101,27 +101,14 @@ class PlaylistInteractor(private val context: Context) {
         repository.sharedFavorites(user, callback)
     }
 
-    fun addSharedPlaylist(music: Music, playlist: String, user: User) {
-        repository.addSharedPlaylist(music, playlist, user)
-    }
-
-    fun userLocationVerify(latLng: LatLng, uid: String, callback: (String) -> Unit) {
-        repository.userLocationVerify(uid) { user ->
-            if (user == null) {
-                callback("NOT FOUND")
-            } else {
-                if (user.latitude != null && user.longitude != null) {
-                    val newLatLng = LatLng(user.latitude, user.longitude)
-
-                    val distance = distance(latLng, newLatLng)
-
-                    if (distance >= 500) {
-                        callback("OUT OF RANGE")
-                    } else {
-                        callback("OK")
-                    }
+    fun addSharedPlaylist(music: Music, playlist: String, user: User, callback: (String) -> Unit) {
+        user.uid?.let {
+            repository.userLocationVerify(it) { user ->
+                if (user == null) {
+                    callback("NOT FOUND")
                 } else {
-                    callback("ERROR")
+                    repository.addSharedPlaylist(music, playlist, user)
+                    callback("OK")
                 }
             }
         }

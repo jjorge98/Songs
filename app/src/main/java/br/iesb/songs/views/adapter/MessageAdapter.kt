@@ -40,7 +40,7 @@ class MessageAdapter(val context: Context) :
     override fun getItemViewType(position: Int): Int {
         val type = allMessages[position][1]
 
-        return if(type == "GEO"){
+        return if (type == "GEO") {
             VIEW_TYPE_ASSISTANT_MESSAGE
         } else {
             VIEW_TYPE_USER_MESSAGE

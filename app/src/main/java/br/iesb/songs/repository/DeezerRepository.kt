@@ -5,7 +5,6 @@ import MusicListDTO
 import android.content.Context
 import br.iesb.songs.data_class.Music
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,9 +34,7 @@ interface DeezerService {
 
 class DeezerRepository(private val context: Context, url: String) : RetrofitInit(context, url) {
     private val service = retrofit.create(DeezerService::class.java)
-    private val database = FirebaseDatabase.getInstance()
     private val auth = FirebaseAuth.getInstance()
-    private val uid = auth.uid
 
     fun search(find: String, callback: (musicSet: MutableSet<Music>) -> Unit) {
         service.search(find).enqueue(object : Callback<MusicListDTO> {

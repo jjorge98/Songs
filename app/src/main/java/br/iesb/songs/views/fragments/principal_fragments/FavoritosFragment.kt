@@ -1,7 +1,6 @@
 package br.iesb.songs.views.fragments.principal_fragments
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.iesb.songs.R
-import br.iesb.songs.view_model.DeezerViewModel
-import br.iesb.songs.view_model.LoginViewModel
 import br.iesb.songs.view_model.PlaylistViewModel
-import br.iesb.songs.views.MainActivity
 import br.iesb.songs.views.PrincipalActivity
 import br.iesb.songs.views.adapter.MusicAdapter
 import kotlinx.android.synthetic.main.fragment_favoritos.*
