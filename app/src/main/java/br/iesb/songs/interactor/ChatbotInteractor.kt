@@ -10,4 +10,12 @@ class ChatbotInteractor(context: Context) {
     fun sendText(request: DialogflowRequest, callback: (String) -> Unit) {
         repository.sendText(request, callback)
     }
+
+    fun verifyEmpty(text: String, callback: (String) -> Unit){
+        if(text.isEmpty()){
+            callback("EMPTY")
+        } else {
+            callback("OK")
+        }
+    }
 }

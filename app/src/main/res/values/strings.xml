@@ -41,5 +41,6 @@
     <string name="createPlaylist2">CRIE UMA PLAYLIST</string>
     <string name="geo">Geo</string>
     <string name="hi">Hi</string>
+    <string name="songsAssistant">Assistente do Songs</string>
 
 </resources>
