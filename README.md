@@ -15,7 +15,7 @@
 
 ## MENU E FUNCIONALIDADES
 
-<p align="justify"> O aplicativo Songs é inicializado no menu principal, no qual é necessário fazer um cadastro para ter acesso ao aplicativo, conforme <b><a href="https://user-images.githubusercontent.com/48803004/84602193-f1310500-ae5b-11ea-944f-83ab91dbda21.jpeg">Tela Inicial<a></b>. Caso seja necessário, a opção de ajuda estará disponível para compreenção de navegação no aplicativo. </p>
+<p align="justify"> O aplicativo Songs é inicializado no menu principal, no qual é necessário fazer um cadastro para ter acesso ao aplicativo, conforme <b><a href="https://user-images.githubusercontent.com/48803004/84836840-f8e3db80-b00c-11ea-882c-496217116837.jpeg">Tela Inicial<a></b>. Caso seja necessário, a opção de ajuda estará disponível para compreenção de navegação no aplicativo. </p>
     
 <p align="justify">Ao efetuar o Login, o usuário pode verificar sua lista de favoritos, buscar músicas, criar uma playlist e encontrar no mapa usuários que estão escutando a mesma música que você. </p>
 
@@ -28,11 +28,13 @@
 <ul>
    <li><b>Linguagem:</b> Kotlin</li>
    <li><b>Arquitetura:</b> MVVMI (Model – View – View Model - interactor) </li>
-   <li><b>Armazenamento de dados:</b> <a href="https://firebase.google.com/docs/auth"> Firebase Realtime Database </a> </li>   
+   <li><b>Armazenamento de dados:</b> <a href="https://firebase.google.com/docs/auth"> Firebase Realtime Database </a> </li> 
+   <li><b>Chatbot:</b><a href="https://dialogflow.com/docs"> DialogFlow </a></li>
+   <li><b>Publicação do Chatbot:</b><a href="https://signup.heroku.com"> Heroku </a></li>
 </ul>
 
 ## COMO RODAR A APLICAÇÃO 
-<p align="justify"> Para abrir uma das amostras do projeto no Android Studio, comece fazendo checkout de uma das ramificações(Branchs) de amostra e abra o diretório raiz no Android Studio.</p>
+<p align="justify"> Para abrir uma das amostras do projeto no Android Studio, comece fazendo checkout de uma da ramificações(Branch) pricipal(master) e abra o diretório raiz no Android Studio.</p>
 
 ### CLONANDO O PROJETO
 
