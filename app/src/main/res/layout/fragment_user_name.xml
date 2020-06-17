@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/titleUserName"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/caveat_brush"
         android:text="@string/titleUserName"
@@ -26,15 +26,14 @@
 
     <EditText
         android:id="@+id/userName"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:backgroundTint="@android:color/white"
-
         android:ems="10"
         android:fontFamily="@font/caveat_brush"
-        android:hint="NOME"
+        android:hint="@string/name"
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:textColor="@android:color/white"
@@ -49,8 +48,8 @@
 
     <TextView
         android:id="@+id/saveUserName"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
         android:background="@drawable/botoes"

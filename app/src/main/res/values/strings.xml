@@ -42,5 +42,7 @@
     <string name="geo">Geo</string>
     <string name="hi">Hi</string>
     <string name="songsAssistant">Assistente do Songs</string>
+    <string name="yourPlaylistFavorite">Suas playlists de músicas favoritas estão aqui!</string>
+    <string name="name">NOME</string>
 
 </resources>

@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/namePlaylistSongs"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@android:color/white"
@@ -23,7 +23,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playlistSongsRecyclerView"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="527dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

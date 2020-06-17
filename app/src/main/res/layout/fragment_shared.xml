@@ -16,7 +16,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/caveat_brush"
-        android:text="Suas playlists de músicas favoritas estão aqui!"
+        android:text="@string/yourPlaylistFavorite"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="30sp"
